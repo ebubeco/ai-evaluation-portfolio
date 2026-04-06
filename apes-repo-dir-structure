@@ -1,0 +1,64 @@
+apes-evaluation-framework/
+│
+├── README.md
+├── LICENSE
+├── requirements.txt
+├── .gitignore
+│
+├── docs/
+│   ├── system_overview.md
+│   ├── evaluation_methodology.md
+│   ├── failure_taxonomy_guide.md
+│   ├── scoring_engine_spec.md
+│   ├── annotator_personas.md
+│   └── decision_protocol.md
+│
+├── schema/
+│   ├── apes_unified_evaluation_schema_v1.md
+│   ├── annotation_json_schema_v1.json
+│   └── run_output_contract_v1.md
+│
+├── taxonomy/
+│   ├── failure_taxonomy_v1.md
+│   ├── mapping_rules.md
+│   └── tag_definitions.md
+│
+├── scoring/
+│   ├── rubric_definition_v1.md
+│   ├── weighted_scoring_engine_v1.py
+│   ├── penalty_matrix.json
+│   └── decision_thresholds.md
+│
+├── annotators/
+│   ├── strict_annotator_spec.md
+│   ├── balanced_annotator_spec.md
+│   ├── pragmatic_annotator_spec.md
+│   └── ensemble_protocol.md
+│
+├── runs/
+│   ├── run_001.md
+│   ├── run_002.md
+│   ├── run_003.md
+│   ├── run_004.md
+│   └── run_005.md
+│
+├── examples/
+│   ├── annotated_example_run.md
+│   ├── json_example.json
+│   └── failure_classification_examples.md
+│
+├── utils/
+│   ├── schema_validator.py
+│   ├── taxonomy_checker.py
+│   └── scoring_simulator.py
+│
+└── assets/
+    ├── diagrams/
+    │   ├── apes_pipeline.png
+    │   ├── taxonomy_tree.png
+    │   └── scoring_flow.png
+    │
+    └── templates/
+        ├── run_template.md
+        ├── annotation_template.json
+        └── evaluation_report_template.md
