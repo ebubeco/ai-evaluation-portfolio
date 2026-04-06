@@ -1,55 +1,45 @@
 ai-evaluation-portfolio/
-
-├── apes/
-│   ├── apes_schema.md
-│   ├── failure_taxonomy.md
-│   ├── rubric_scoring.md
-│   ├── model_provenance.md
-│   ├── annotation_guidelines.md
-│   ├── edge_case_handling.md
-│   ├── rlhf_evaluation.md
-│   ├── prompt_reliability.md
 │
-├── rubrics/
+├── 0_overview/
+│   ├── README.md
+│   ├── portfolio_summary.md
+│   ├── evaluation_philosophy.md
+│   └── decision_protocol.md
+│
+├── 1_rubrics/
 │   ├── instruction_adherence.md
 │   ├── reasoning_quality.md
 │   ├── factual_accuracy.md
-│   ├── hallucination_detection.md
+│   ├── safety_and_injection.md
+│   └── quick_scoring_guide.md
 │
-├── evaluation-runs/
-│   ├── run_001_baseline.md
-│   ├── run_002_reasoning_nuance.md
+├── 2_failure_patterns/
+│   ├── common_failure_modes.md
+│   ├── hallucination_patterns.md
+│   ├── ambiguity_traps.md
+│   └── edge_cases.md
+│
+├── 3_evaluation_runs/
+│   ├── run_001_instruction_following.md
+│   ├── run_002_reasoning_comparison.md
 │   ├── run_003_hallucination_detection.md
-│   ├── run_004_constraint_evaluation.md
-│   ├── run_005_capstone_ensemble.md
+│   ├── run_004_ambiguity_resolution.md
+│   └── run_005_mixed_real_world_tasks.md
 │
-├── case-studies/
-│   ├── ambiguity-analysis.md
-│   ├── hallucination-analysis.md
-│   ├── prompt-reliability-analysis.md
-│   ├── rlhf-evaluation-analysis.md
+├── 4_case_studies/
+│   ├── preference_ranking_examples.md
+│   ├── failure_analysis_breakdowns.md
+│   └── ambiguity_decision_examples.md
 │
-├── evaluation_engine/
-│   ├── scoring_model.py
-│   ├── taxonomy_mapper.py
-│   ├── aggregation_logic.py
-│   ├── run_validator.py
+├── 5_samples/
+│   ├── task_samples.json
+│   └── annotated_samples.json
 │
-├── datasets/
-│   ├── labeled_samples.json
-│   ├── edge_cases.json
-│   ├── golden_set.json
+├── 6_calibration/
+│   ├── self_vs_expected.md
+│   ├── gold_alignment_report.md
+│   └── error_analysis.md
 │
-├── docs/
-│   ├── apes_overview.md
-│   ├── portfolio_summary.md
-│   ├── methodology.md
-│   ├── evaluation_philosophy.md
-│
-├── assets/
-│   ├── diagrams/
-│   ├── charts/
-│   ├── sample_outputs/
-│
-├── README.md
-└── requirements.txt
+└── assets/
+    ├── annotated_examples/
+    └── before_after_comparisons/
