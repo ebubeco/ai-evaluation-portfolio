@@ -49,11 +49,11 @@ Focuses on:
 # 2. Evaluation Architecture
 
 Each response is evaluated across **3 independent axes**:
-FINAL SCORE = f(RQ, HD, EC)
-Where:
-- RQ = Reasoning Quality Score
-- HD = Hallucination Severity Score
-- EC = Epistemic Calibration Score
+> FINAL SCORE = f(RQ, HD, EC)
+> Where:
+> - RQ = Reasoning Quality Score
+> - HD = Hallucination Severity Score
+> - EC = Epistemic Calibration Score
 
 ---
 
