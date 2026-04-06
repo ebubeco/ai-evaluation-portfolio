@@ -1,4 +1,4 @@
-# run_004_ambiguity_resolution.md
+# Run 004 - Ambiguity Resolution
 
 **Version:** 004  
 **System Type:** Ambiguity Resolution Evaluation Framework  
