@@ -1,283 +1,450 @@
-failure_taxonomy.md (Ontology of Errors)
 
-This document defines the canonical error space for APES. It is a controlled taxonomy used to classify model failures into mutually intelligible, machine-mappable categories with explicit severity semantics.
+failure-taxonomy.md
 
-It is designed to support:
+APES Failure Ontology v2.0 (Causal–Process–Outcome Model)
 
-deterministic annotation
 
-rubric-to-failure mapping
+---
 
-automated scoring pipelines
+1. PURPOSE
 
-RLHF alignment diagnostics
+This taxonomy defines a strict, hierarchical, and causally structured ontology of model failures for use in evaluation systems.
+
+It is designed to ensure:
+
+Orthogonality (minimal overlap)
+
+Causal traceability
+
+Annotation consistency
+
+Direct mapping to scoring rubrics (APES Schema)
 
 
 
 ---
 
-1. TAXONOMY DESIGN PRINCIPLES
+2. DESIGN PRINCIPLES
 
-1.1 Exhaustiveness (bounded)
+2.1 Causal Separation Principle
 
-The taxonomy aims to cover all observable failure modes in LLM outputs without becoming unbounded. New failure types must be introduced only through versioned updates.
+All failures are classified into:
 
-1.2 Orthogonality
+CAUSE failures → why the model failed
 
-Each primary class is defined to minimize conceptual overlap. Where overlap is unavoidable, multi-label assignment is allowed but normalized during aggregation.
+PROCESS failures → how the model failed
 
-1.3 Observability constraint
-
-A failure category must be:
-
-detectable from output text (or metadata)
-
-not dependent on latent model internals
+OUTCOME failures → what the model produced incorrectly
 
 
 
 ---
 
-2. PRIMARY FAILURE CLASSES (LEVEL 1)
+2.2 Single-Primary Attribution Rule
 
-2.1 Instruction Adherence Failure (IAF)
+Each failure instance MUST have:
 
-Failure to correctly execute explicit or implicit instructions.
+exactly one primary class
 
-Subtypes
-
-IAF-01: Constraint Ignorance
-
-ignores explicit constraints (format, length, structure)
+optional secondary tags (non-scoring)
 
 
-IAF-02: Partial Compliance
 
-completes task but omits required components
+---
 
+2.3 Grounding Principle
 
-IAF-03: Instruction Misinterpretation
+All factual judgments are defined relative to:
 
-follows wrong interpretation of prompt intent
-
-
-IAF-04: Over-Refusal
-
-refuses valid instruction unnecessarily
+> A specified ground truth source (external KB, prompt context, or retrieval system)
 
 
 
 
 ---
 
-2.2 Reasoning Failure (RF)
+2.4 Observability Constraint
 
-Failures in logical structure, inference, or argument coherence.
+Only observable outputs or derivable traces are valid for annotation.
 
-Subtypes
 
-RF-01: Logical Contradiction
+---
 
-RF-02: Invalid Deduction
+3. TOP-LEVEL ONTOLOGY
 
-RF-03: Unsupported Conclusion
+FAILURE
+ ├── CAUSAL_FAILURE
+ ├── PROCESS_FAILURE
+ └── OUTCOME_FAILURE
 
-RF-04: Circular Reasoning
 
-RF-05: Step Collapse (missing intermediate logic)
+---
+
+4. CAUSAL FAILURE LAYER (WHY IT FAILED)
+
+These are upstream drivers of incorrect behavior.
+
+
+---
+
+4.1 Instruction Misinterpretation (CI-1)
+
+Definition:
+
+Model incorrectly parses, prioritizes, or follows task instructions.
+
+Operational signal:
+
+ignored constraints
+
+misread task objective
+
+incorrect task framing
+
+
+Excludes:
+
+inability to execute reasoning (PROCESS)
 
 
 
 ---
 
-2.3 Factual Accuracy Failure (FAF)
+4.2 Contextual Misalignment (CI-2)
 
-Incorrect, outdated, or unverifiable claims.
+Definition:
 
-Subtypes
+Model fails to correctly integrate relevant context into task execution.
 
-FAF-01: Incorrect Entity
+Signal:
 
-FAF-02: Outdated Information
+missing context dependencies
 
-FAF-03: Misattribution
+irrelevant context usage
 
-FAF-04: Fabricated Fact (Hallucinated Fact)
-
-FAF-05: Contextual Misalignment (fact correct but irrelevant contextually)
+partial context collapse
 
 
 
 ---
 
-2.4 Hallucination Failure (HF)
+4.3 Goal Drift (CI-3)
 
-Generation of information not grounded in known or provided context.
+Definition:
 
-Subtypes
+Model shifts objective away from original task intent.
 
-HF-01: Entity Fabrication
+Signal:
 
-HF-02: Citation Fabrication
+introduces unrelated goals
 
-HF-03: Event Fabrication
-
-HF-04: Confident False Assertion
-
-HF-05: Source Non-Existence Claim
+self-directed expansion of task scope
 
 
-> Note: HF is a superset intersecting FAF, but is separated due to severity weighting differences.
+
+---
+
+5. PROCESS FAILURE LAYER (HOW IT FAILED)
+
+These represent internal reasoning or transformation breakdowns.
+
+
+---
+
+5.1 Logical Inconsistency (PR-1)
+
+Definition:
+
+Violation of formal or informal logical coherence.
+
+Signal:
+
+contradiction within response
+
+invalid inference steps
+
+non sequitur transitions
+
+
+
+---
+
+5.2 Reasoning Collapse (PR-2)
+
+Definition:
+
+Failure to maintain structured multi-step reasoning.
+
+Signal:
+
+skipped steps
+
+incomplete derivation chains
+
+broken causal reasoning
+
+
+
+---
+
+5.3 Planning Failure (PR-3)
+
+Definition:
+
+Inability to construct or follow a valid solution strategy.
+
+Signal:
+
+disorganized response structure
+
+missing intermediate steps
+
+inefficient or invalid decomposition
+
+
+
+---
+
+5.4 Attention Fragmentation (PR-4)
+
+Definition:
+
+Failure in maintaining relevant focus across input constraints.
+
+Signal:
+
+topic drift mid-response
+
+inconsistent entity tracking
+
+
+
+---
+
+6. OUTCOME FAILURE LAYER (WHAT WAS PRODUCED)
+
+These are directly observable output-level errors.
+
+
+---
+
+6.1 Factual Error (OU-1)
+
+Definition:
+
+Statement contradicts verified ground truth.
+
+Grounding Rule:
+
+Must be validated against:
+
+external knowledge base OR
+
+prompt-provided truth context
+
+
+
+---
+
+6.2 Hallucination (OU-2)
+
+Definition:
+
+Generation of information with no grounding in:
+
+prompt context
+
+external knowledge
+
+retrieval system
+
+
+Key distinction:
+
+> Hallucination is ungrounded generation, not merely incorrect information.
 
 
 
 
 ---
 
-2.5 Constraint Violation Failure (CVF)
+6.3 Constraint Violation (OU-3)
 
-Violations of structural or formal requirements.
+Definition:
 
-Subtypes
+Failure to satisfy explicit task constraints.
 
-CVF-01: Format Violation
+Examples:
 
-CVF-02: Length Violation
+format violations
 
-CVF-03: Output Structure Drift
+length violations
 
-CVF-04: Missing Required Sections
-
-CVF-05: Ordering Violation
+missing required sections
 
 
 
 ---
 
-2.6 Safety / Policy Failure (SPF)
+6.4 Instruction Non-Compliance (OU-4)
 
-Violations of safety constraints or restricted content rules.
+Definition:
 
-Subtypes
+Direct contradiction or omission of explicit instructions.
 
-SPF-01: Disallowed Content Generation
 
-SPF-02: Sensitive Data Leakage
+---
 
-SPF-03: Harm-Enabling Instructions
+6.5 Incomplete Output (OU-5)
 
-SPF-04: Policy Boundary Evasion
+Definition:
 
-SPF-05: Unsafe Normalization of Risky Content
+Partial fulfillment of required task output.
+
+Signal:
+
+missing required components
+
+truncated reasoning or answer
 
 
 
 ---
 
-3. SEVERITY MODEL
+7. CROSS-LAYER RELATIONSHIPS (CRITICAL ADDITION)
 
-Each failure instance is assigned a severity score:
+Failures are not independent; causal propagation is defined as:
 
-Severity ∈ {0.25, 0.5, 0.75, 1.0}
+CAUSAL → PROCESS → OUTCOME
 
-Mapping Rules
 
-Severity	Interpretation
+---
 
-0.25	Minor deviation, negligible impact
-0.5	Moderate degradation of output quality
-0.75	Strong failure affecting usability
-1.0	Critical failure, output invalid or harmful
+Example propagation chain:
+
+CI-1 (misinterpret instruction) → PR-3 (bad planning) → OU-3 (constraint violation)
 
 
 
 ---
 
-4. MULTI-LABEL RULES
+8. FAILURE COMPATIBILITY RULES
 
-A single output may contain multiple failure tags.
+8.1 Primary Assignment Rule
 
-Example:
-
-Instruction failure + hallucination + constraint violation
-
-
-Normalization rule:
-
-Final score aggregation must apply:
-
-de-duplication within semantic clusters
-
-weighted severity aggregation
-
-
-
----
-
-5. FAILURE INTERACTION MODEL
-
-Certain failure types amplify others:
-
-5.1 Hallucination × Factual Error Coupling
-
-hallucination increases FAF severity weight by ×1.25
-
-
-5.2 Instruction Failure × Constraint Violation
-
-treated as compounded structural failure
-
-
-5.3 Reasoning Failure → Factual Drift
-
-RF often propagates into FAF downstream
-
-
-
----
-
-6. FAILURE VECTOR REPRESENTATION
-
-Each annotated output is represented as a structured vector:
+Each failure instance MUST have:
 
 {
-  "instruction_adherence": 0.8,
-  "reasoning_failure": 0.4,
-  "factual_error": 0.6,
-  "hallucination": 0.75,
-  "constraint_violation": 0.2,
-  "safety_failure": 0.0
+  "primary_type": "one of CAUSAL | PROCESS | OUTCOME",
+  "primary_code": "CI-1 | PR-2 | OU-1"
 }
 
-This vector is later consumed by:
 
-rubric_scoring.md
+---
 
-scoring_model.py
+8.2 Secondary Tags Rule (Non-scoring)
 
-aggregation_logic.py
+Secondary tags allowed but:
+
+must NOT affect scoring
+
+must NOT override primary classification
 
 
 
 ---
 
-7. VERSIONING RULE
+8.3 No Multi-Primary Rule
 
-This taxonomy is version-controlled:
+A single failure cannot belong to multiple primary categories.
 
-APES-Failure-Taxonomy v1.0
 
-Any modification must:
+---
 
-introduce delta changes only
+9. FORMAL DISTINCTION MATRIX
 
-preserve backward compatibility for run_001–run_005 mapping
+Category	Definition Basis	Observability
+
+CAUSAL	Why failure occurred	Indirect inference
+PROCESS	Internal reasoning breakdown	Partial trace inference
+OUTCOME	Final output error	Direct observation
 
 
 
 ---
 
-8. CORE DESIGN INTENT
+10. ANNOTATION GUIDELINES
 
-> “Failure is not binary correctness—it is structured degradation across multiple cognitive dimensions.”
+10.1 Deterministic Labeling Priority
+
+If ambiguity exists:
+
+1. Prefer OUTCOME classification
+
+
+2. Then PROCESS
+
+
+3. Then CAUSAL (least observable)
+
+
+
+
+---
+
+10.2 Evidence Requirement Rule
+
+Every annotation MUST include:
+
+text span evidence OR
+
+structured inference justification
+
+
+
+---
+
+10.3 Confidence Scoring
+
+{
+  "confidence": 0.0 - 1.0,
+  "evidence_strength": 0.0 - 1.0
+}
+
+
+---
+
+11. DESIGN GUARANTEES (WHAT THIS FIXES)
+
+This version resolves expert critiques:
+
+✔ Eliminates overlap ambiguity
+
+→ strict CAUSAL/PROCESS/OUTCOME separation
+
+✔ Introduces causal modeling
+
+→ not just labels, but dependency structure
+
+✔ Improves annotation consistency
+
+→ deterministic selection rules
+
+✔ Enables evaluation automation
+
+→ directly mappable to APES schema
+
+✔ Removes flat taxonomy problem
+
+→ full hierarchical ontology
+
+
+---
+
+12. SYSTEM POSITIONING
+
+This taxonomy is now:
+
+> A causally structured, annotation-consistent failure ontology designed for automated LLM evaluation pipelines.
+
 
