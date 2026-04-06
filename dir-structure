@@ -1,5 +1,5 @@
 ai-evaluation-portfolio/
-│
+
 ├── apes/
 │   ├── apes_schema.md
 │   ├── failure_taxonomy.md
@@ -7,6 +7,14 @@ ai-evaluation-portfolio/
 │   ├── model_provenance.md
 │   ├── annotation_guidelines.md
 │   ├── edge_case_handling.md
+│   ├── rlhf_evaluation.md
+│   ├── prompt_reliability.md
+│
+├── rubrics/
+│   ├── instruction_adherence.md
+│   ├── reasoning_quality.md
+│   ├── factual_accuracy.md
+│   ├── hallucination.md
 │
 ├── runs/
 │   ├── run_001_baseline.md
@@ -14,6 +22,9 @@ ai-evaluation-portfolio/
 │   ├── run_003_hallucination_detection.md
 │   ├── run_004_constraint_evaluation.md
 │   ├── run_005_capstone_ensemble.md
+│
+├── case-studies/
+│   ├── ambiguity-analysis.md
 │
 ├── evaluation_engine/
 │   ├── scoring_model.py
