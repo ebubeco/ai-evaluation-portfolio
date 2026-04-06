@@ -16,7 +16,7 @@ ai-evaluation-portfolio/
 │   ├── factual_accuracy.md
 │   ├── hallucination.md
 │
-├── runs/
+├── evaluation-runs/
 │   ├── run_001_baseline.md
 │   ├── run_002_reasoning_nuance.md
 │   ├── run_003_hallucination_detection.md
