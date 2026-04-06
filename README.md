@@ -63,4 +63,4 @@ Surface-level quality checks catch obvious errors. The failures that actually ma
 
 **Email:** <charlesgigz7@gmail.com>  
 **X:** [@ebubeco](https://x.com/ebubeco)  
-**Portfolio:** [https://ebubeco-ai-eval.vercel.app]
+**Portfolio:** [ebubeco-ai-eval](https://ebubeco-ai-eval.vercel.app)
