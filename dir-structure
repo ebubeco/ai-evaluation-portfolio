@@ -1,3 +1,6 @@
+````markdown
+# 📁 ai-evaluation-portfolio
+
 ```
 ai-evaluation-portfolio/
 │
@@ -45,18 +48,17 @@ ai-evaluation-portfolio/
 │   └── error_analysis.md
 │
 ├── 7_domain_specializations/
-│   │
-│   ├── code_review/                       
+│   ├── code_review/
 │   │   ├── code_evaluation_rubric.md
 │   │   ├── code_failure_patterns.md
 │   │   └── run_001_code_review.md
 │   │
-│   ├── multimodal/                       
+│   ├── multimodal/
 │   │   ├── visual_reasoning_rubric.md
 │   │   ├── multimodal_failure_patterns.md
 │   │   └── run_001_multimodal.md
 │   │
-│   └── audio_video/                       
+│   └── audio_video/
 │       ├── av_evaluation_rubric.md
 │       ├── av_failure_patterns.md
 │       └── run_001_av.md
@@ -68,12 +70,20 @@ ai-evaluation-portfolio/
 └── index.html
 ```
 
----
+## Totals
 
-**TOTALS**
+| Metric       | Count |
+|--------------|-------|
+| Folders      | 12    |
+| Files        | 41    |
+| Root files   | 1     |
 
-| | |
-|---|---|
-| Folders | 12 |
-| Files | 41 |
-| Root files | 1 |
+## Activation Sequence
+
+| Phase   | Action                        | Status        |
+|---------|-------------------------------|---------------|
+| Phase 1 | Complete run_001 → run_003    | 🔴 Not started |
+| Phase 2 | Activate code_review          | 🔴 Locked      |
+| Phase 3 | Activate multimodal           | 🔴 Locked      |
+| Phase 4 | Activate audio_video          | 🔴 Locked      |
+````
