@@ -1,0 +1,49 @@
+# Run 000 — Standard Evaluation Template (Baseline Schema)
+
+**Version:** 000  
+**Type:** Evaluation Template / Schema Definition  
+**Purpose:** Establish a universal baseline structure for all evaluation runs in the RLHF Evaluation Suite  
+
+---
+
+# Overview
+
+Run 000 defines the **standard format, structure, and evaluation flow** used across all subsequent runs (Run 001–006+).
+
+It does not test model performance directly.
+
+Instead, it serves as the **canonical evaluation blueprint** to ensure consistency, comparability, and readability across the entire suite.
+
+---
+
+# Core Objective
+
+To enforce a unified evaluation format so that:
+
+- all runs follow the same structural logic  
+- outputs are comparable across tasks  
+- evaluation remains human-readable and consistent  
+- rubric scoring is standardized  
+
+---
+
+# Standard Evaluation Structure
+
+Every evaluation run in this suite should follow this format:
+
+---
+
+## 1. Task Definition
+
+- Clearly define the evaluation task
+- Specify objective of the run
+- State any constraints or conditions
+
+---
+
+## 2. Prompt Input
+
+Provide the evaluation prompt:
+
+```text
+[Insert prompt here]
