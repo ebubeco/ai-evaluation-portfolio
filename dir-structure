@@ -19,6 +19,7 @@ ai-evaluation-portfolio/
 │   ├── failure_taxonomy_guide.md
 │   ├── hallucination_patterns.md
 │   ├── ambiguity_traps.md
+│   ├── common_failure_modes.md
 │   └── edge_cases.md
 │
 ├── 3_evaluation_runs/
