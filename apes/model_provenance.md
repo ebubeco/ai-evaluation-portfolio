@@ -1,113 +1,149 @@
 
 model_provenance.md
 
-APES Model Provenance Specification v1.0
+APES Model Provenance Specification v2.0 (Production-Realistic)
 
 
 ---
 
 1. PURPOSE
 
-This document defines the complete lineage, configuration, and execution trace requirements for any model output used within the APES evaluation system.
+This document defines a practical provenance system for LLM evaluation pipelines under real-world constraints, including:
 
-It ensures:
+opaque model providers
 
-Full reproducibility of evaluations
+partial metadata availability
 
-Audit-grade traceability of outputs
+stochastic inference behavior
 
-Controlled comparison across model versions
+infrastructure abstraction (API-based models)
 
-Deterministic evaluation alignment
+
+It prioritizes:
+
+> auditability, comparability, and best-effort reproducibility — not absolute determinism.
+
+
+
+
+---
+
+2. CORE PRINCIPLE (REAL-WORLD VERSION)
+
+> Provenance is a best-effort reconstruction of generation conditions, not a complete system introspection.
+
+
+
+This system explicitly distinguishes:
+
+Observed metadata
+
+Declared metadata
+
+Inferred metadata
 
 
 
 ---
 
-2. CORE PRINCIPLE
+3. PROVENANCE ARCHITECTURE (3-LAYER MODEL)
 
-> Every evaluated output must be traceable back to an exact model configuration, execution context, and decoding state.
-
-
-
-If this cannot be reconstructed, the evaluation is considered invalid for benchmarking purposes.
+LAYER 1: OBSERVED (guaranteed)
+LAYER 2: DECLARED (API-provided)
+LAYER 3: INFERRED (system-estimated)
 
 
 ---
 
-3. PROVENANCE MODEL
-
-Each model output is defined as:
-
-Output = f(Model, Weights, Prompt, DecodingParams, RuntimeContext)
-
-
----
-
-4. MODEL IDENTIFIER STRUCTURE
-
-4.1 ModelID Schema
+4. MODEL IDENTIFIER (DECLARED LAYER)
 
 {
   "model_name": "string",
   "provider": "string",
-  "version": "string",
-  "checkpoint_id": "string",
-  "release_channel": "string"
+  "version": "string | null",
+  "deployment_id": "string | null"
 }
 
+Constraint:
 
----
+If provider is API-based (e.g., OpenAI, Anthropic):
 
-4.2 Examples
+version may be partially opaque or alias-based
 
-gpt-like-v3.2-prod
-
-llama-3.1-70b-instruct
-
-custom-apes-eval-model-v1
 
 
 
 ---
 
-5. WEIGHTS & CHECKPOINT TRACEABILITY
+5. OBSERVED RUNTIME METADATA (GUARANTEED)
 
-5.1 Required Fields
+These fields MUST be captured by the evaluation system.
 
 {
-  "checkpoint_hash": "string",
-  "training_snapshot": "string | null",
-  "fine_tune_id": "string | null",
-  "adapter_layers": "string | null"
+  "timestamp": "ISO-8601",
+  "prompt_text": "string",
+  "response_text": "string",
+  "input_tokens_estimate": "int | null",
+  "output_tokens_estimate": "int | null"
 }
 
+Note:
 
----
-
-5.2 Rule
-
-If any fine-tuning is applied:
-
-> Fine-tune provenance MUST override base model defaults in evaluation comparison.
-
-
+Token counts may be approximate depending on provider limits.
 
 
 ---
 
-6. DECODING CONFIGURATION
-
-This is critical for reproducibility.
+6. DECODING PARAMETERS (DECLARED OR INFERRED)
 
 {
-  "temperature": 0.0,
-  "top_p": 1.0,
+  "temperature": "float | null",
+  "top_p": "float | null",
   "top_k": "int | null",
-  "max_tokens": "int",
-  "presence_penalty": "float",
-  "frequency_penalty": "float",
-  "seed": "int | null"
+  "max_tokens": "int | null",
+  "seed": "int | null",
+  "reproducibility_mode": "deterministic | stochastic | unknown"
+}
+
+
+---
+
+Important Realism Rule:
+
+If seed is missing → reproducibility is probabilistic only
+
+If temperature > 0 → output variance is expected, not an anomaly
+
+
+
+---
+
+7. RUNTIME CONTEXT (PARTIALLY OBSERVABLE)
+
+{
+  "system_prompt_version": "string | unknown",
+  "tool_access": ["string"],
+  "retrieval_enabled": true | false | unknown,
+  "context_window_estimate": "int | null"
+}
+
+
+---
+
+Constraint:
+
+System prompts are often not fully exposed in production APIs.
+
+
+---
+
+8. INFRASTRUCTURE CONTEXT (INFERRED LAYER)
+
+{
+  "latency_ms": "float | null",
+  "endpoint_region": "string | null",
+  "load_condition": "low | medium | high | unknown",
+  "batching_detected": true | false | unknown
 }
 
 
@@ -115,227 +151,218 @@ This is critical for reproducibility.
 
 Rule:
 
-If temperature > 0 AND seed is null:
+Infrastructure metadata is always:
 
-> Output is considered non-deterministic and must include variance scoring
+> inferred unless explicitly provided by provider
 
-
-
-
----
-
-7. RUNTIME CONTEXT
-
-Defines execution environment constraints.
-
-{
-  "system_prompt_version": "string",
-  "tool_access": ["string"],
-  "retrieval_enabled": true,
-  "context_window_size": "int",
-  "memory_enabled": false
-}
-
-
----
-
-7.1 Tool Access Classification
-
-Examples:
-
-none
-
-retrieval
-
-code_execution
-
-multi_tool_agent
 
 
 
 ---
 
-8. PROMPT TRACEABILITY
-
-Every output must reference:
+9. PROMPT TRACEABILITY (OBSERVED + SYSTEM-GENERATED)
 
 {
   "prompt_id": "string",
   "prompt_version": "string",
-  "prompt_hash": "string"
+  "prompt_hash": "string",
+  "normalized_prompt_hash": "string | null"
 }
 
 
 ---
 
-Rule:
+Important Correction:
 
-Even minor prompt edits require:
+prompt_hash ≠ semantic equivalence guarantee
 
-> new prompt_version + new prompt_hash
+normalization reduces but does not eliminate divergence
 
-
-
-
----
-
-9. EXECUTION ENVIRONMENT
-
-{
-  "hardware_type": "cpu | gpu | tpu | cloud_api",
-  "latency_ms": "float",
-  "batch_size": "int",
-  "parallelism_level": "int"
-}
 
 
 ---
 
-10. FULL PROVENANCE OBJECT (CANONICAL)
-
-This is the required evaluation record format:
+10. FULL PROVENANCE OBJECT (REALISTIC CANONICAL FORM)
 
 {
   "model_id": {},
-  "weights": {},
+  "observed": {},
   "decoding": {},
   "runtime_context": {},
+  "infra": {},
   "prompt_trace": {},
-  "execution_env": {},
-  "timestamp": "ISO-8601"
+  "reproducibility_assessment": {
+    "level": "exact | partial | non_reproducible",
+    "confidence": 0.0
+  }
 }
 
 
 ---
 
-11. VERSIONING RULES
+11. REPRODUCIBILITY MODEL (KEY FIX)
 
-11.1 Immutable Provenance Rule
+11.1 Levels
 
-Once recorded:
+Level	Meaning
 
-> provenance objects MUST NOT be modified
-
-
-
-Any correction requires:
-
-new output
-
-new provenance object
-
-linked lineage reference
+exact	fully reproducible (rare in API systems)
+partial	same model family + settings, but variance expected
+non_reproducible	missing critical parameters
 
 
 
 ---
 
-11.2 Lineage Tracking
+11.2 Determination Rule
+
+If (temperature unknown OR model_version unknown)
+→ reproducibility = non_reproducible
+
+
+---
+
+12. LINEAGE TRACKING (SIMPLIFIED FOR REAL SYSTEMS)
 
 {
   "parent_run_id": "string | null",
-  "derived_from": "string | null",
-  "modification_type": "none | prompt_edit | fine_tune | decoding_change"
+  "modification_type": "none | prompt_edit | model_change | decoding_change | unknown"
 }
 
 
 ---
 
-12. COMPARABILITY RULES
+Constraint:
 
-Outputs are comparable ONLY if:
+We avoid over-precise lineage assumptions in opaque API systems.
 
-Required equality conditions:
 
-identical model_id OR explicitly comparable family
+---
 
-identical prompt_version
+13. COMPARABILITY RULES (RELAXED FOR PRACTICAL USE)
 
-identical decoding parameters (or normalized variance model)
+Two outputs are comparable if:
+
+Required:
+
+same model family OR declared equivalent
+
+same task type
+
+same evaluation rubric version
+
+
+Optional:
+
+same decoding parameters (preferred but not required)
 
 
 
 ---
 
-If not:
+Key Fix vs v1:
 
-> Comparison is flagged as “non-isomorphic evaluation”
+We no longer require identical conditions.
+
+We instead support:
+
+> controlled variance benchmarking
 
 
 
 
 ---
 
-13. FAILURE ANALYSIS INTEGRATION
+14. FAILURE ANALYSIS INTEGRATION (APES ALIGNMENT)
 
-Provenance must support downstream mapping to:
+Provenance links to failure taxonomy via probabilistic attribution:
 
-failure_taxonomy.md
+Failure Type	Provenance Dependency
 
-evaluation_vectors
-
-rubric scoring systems
-
-
-Rule:
-
-Any failure must be traceable to at least one provenance field:
-
-Failure Type	Required Provenance Link
-
-hallucination	model + prompt + decoding
+hallucination	model + prompt + decoding uncertainty
 reasoning failure	model + runtime context
-constraint failure	prompt + system prompt version
+constraint failure	prompt + system constraints
 
 
 
 ---
 
-14. AUDITABILITY REQUIREMENT
+Important Upgrade:
 
-A valid APES evaluation dataset MUST allow:
+We now include:
 
-reconstruction of outputs
+{
+  "attribution_confidence": 0.0
+}
 
-re-execution under identical conditions
 
-comparison across model versions
+---
+
+15. AUDITABILITY STANDARD (REALISTIC DEFINITION)
+
+A dataset is audit-compliant if:
+
+inputs and outputs are stored
+
+model metadata is recorded at best available resolution
+
+decoding settings are captured OR marked unknown
+
+reproducibility level is explicitly declared
 
 
 
 ---
 
-15. DESIGN GUARANTEES
+16. DESIGN GUARANTEES (REALISTIC VERSION)
 
-This specification ensures:
+This system guarantees:
 
-✔ Full reproducibility
+✔ Operational compatibility
 
-Every output can be regenerated
+Works with API-based LLMs
 
-✔ Benchmark integrity
+✔ Partial reproducibility (honest)
 
-No hidden configuration drift
+No false determinism claims
 
-✔ Cross-model fairness
+✔ Metadata uncertainty modeling
 
-Controlled comparison rules
+No hidden assumptions about system internals
 
-✔ Failure traceability
+✔ Cross-provider usability
 
-Every failure maps back to system conditions
+Supports OpenAI / Anthropic / open-source models
 
-✔ Evaluation-grade provenance
+✔ Evaluation robustness
 
-Suitable for academic or industrial benchmarking
+Designed for real-world drift conditions
 
 
 ---
 
-16. SYSTEM POSITIONING
+17. SYSTEM POSITIONING
 
-This module acts as:
+This module is now:
 
-> The forensic backbone of the APES evaluation system — enabling audit-grade reconstruction of every model behavior.
+> A production-grade, uncertainty-aware provenance framework for evaluating black-box and semi-transparent LLM systems.
 
+
+
+
+---
+
+FINAL TAKE (WHY THIS VERSION IS STRONGER)
+
+This version fixes expert criticisms by:
+
+removing impossible observability assumptions
+
+introducing inference uncertainty tiers
+
+acknowledging API limitations explicitly
+
+replacing determinism with reproducibility levels
+
+separating observed vs inferred metadata cleanly
 
