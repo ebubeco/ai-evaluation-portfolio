@@ -10,11 +10,12 @@ ai-evaluation-portfolio/
 │   ├── instruction_adherence.md
 │   ├── reasoning_quality.md
 │   ├── factual_accuracy.md
-│   ├── safety_and_injection.md
+│   ├── hallucination_detection.md
 │   └── quick_scoring_guide.md
 │
 ├── 2_failure_patterns/
-│   ├── common_failure_modes.md
+│   ├── failure_taxonomy.md
+│   ├── failure_taxonomy_guide.md
 │   ├── hallucination_patterns.md
 │   ├── ambiguity_traps.md
 │   └── edge_cases.md
@@ -27,9 +28,11 @@ ai-evaluation-portfolio/
 │   └── run_005_mixed_real_world_tasks.md
 │
 ├── 4_case_studies/
-│   ├── preference_ranking_examples.md
-│   ├── failure_analysis_breakdowns.md
-│   └── ambiguity_decision_examples.md
+│   ├── rlhf_evaluation.md
+│   ├── hallucination_analysis.md
+│   ├── ambiguity_analysis.md
+│   ├── prompt_reliability.md
+│   └── failure_analysis_breakdowns.md
 │
 ├── 5_samples/
 │   ├── task_samples.json
@@ -40,6 +43,8 @@ ai-evaluation-portfolio/
 │   ├── gold_alignment_report.md
 │   └── error_analysis.md
 │
-└── assets/
-    ├── annotated_examples/
-    └── before_after_comparisons/
+├── assets/
+│   ├── annotated_examples/
+│   └── before_after_comparisons/
+│
+└── index.html                             ← stays in root for Vercel
