@@ -5,17 +5,37 @@ ai-evaluation-portfolio/
 │   ├── failure_taxonomy.md
 │   ├── rubric_scoring.md
 │   ├── model_provenance.md
+│   ├── annotation_guidelines.md
+│   ├── edge_case_handling.md
 │
 ├── runs/
-│   ├── run_001.md
-│   ├── run_002.md
-│   ├── run_003.md
-│   ├── run_004.md
-│   ├── run_005_capstone.md
+│   ├── run_001_baseline.md
+│   ├── run_002_reasoning_nuance.md
+│   ├── run_003_hallucination_detection.md
+│   ├── run_004_constraint_evaluation.md
+│   ├── run_005_capstone_ensemble.md
+│
+├── evaluation_engine/
+│   ├── scoring_model.py
+│   ├── taxonomy_mapper.py
+│   ├── aggregation_logic.py
+│   ├── run_validator.py
+│
+├── datasets/
+│   ├── labeled_samples.json
+│   ├── edge_cases.json
+│   ├── golden_set.json
 │
 ├── docs/
 │   ├── apes_overview.md
 │   ├── portfolio_summary.md
+│   ├── methodology.md
+│   ├── evaluation_philosophy.md
+│
+├── assets/
+│   ├── diagrams/
+│   ├── charts/
+│   ├── sample_outputs/
 │
 ├── README.md
-└── assets/ 
+└── requirements.txt
