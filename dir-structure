@@ -25,6 +25,9 @@ ai-evaluation-portfolio/
 │
 ├── case-studies/
 │   ├── ambiguity-analysis.md
+│   ├── hallucination-analysis.md
+│   ├── prompt-reliability-analysis.md
+│   ├── rlhf-evaluation-analysis.md
 │
 ├── evaluation_engine/
 │   ├── scoring_model.py
