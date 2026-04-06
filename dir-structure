@@ -14,7 +14,7 @@ ai-evaluation-portfolio/
 │   ├── instruction_adherence.md
 │   ├── reasoning_quality.md
 │   ├── factual_accuracy.md
-│   ├── hallucination.md
+│   ├── hallucination_detection.md
 │
 ├── evaluation-runs/
 │   ├── run_001_baseline.md
