@@ -1,3 +1,4 @@
+```
 ai-evaluation-portfolio/
 │
 ├── 0_overview/
@@ -43,8 +44,36 @@ ai-evaluation-portfolio/
 │   ├── gold_alignment_report.md
 │   └── error_analysis.md
 │
+├── 7_domain_specializations/
+│   │
+│   ├── code_review/                       
+│   │   ├── code_evaluation_rubric.md
+│   │   ├── code_failure_patterns.md
+│   │   └── run_001_code_review.md
+│   │
+│   ├── multimodal/                       
+│   │   ├── visual_reasoning_rubric.md
+│   │   ├── multimodal_failure_patterns.md
+│   │   └── run_001_multimodal.md
+│   │
+│   └── audio_video/                       
+│       ├── av_evaluation_rubric.md
+│       ├── av_failure_patterns.md
+│       └── run_001_av.md
+│
 ├── assets/
 │   ├── annotated_examples/
 │   └── before_after_comparisons/
 │
-└── index.html                             ← stays in root for Vercel
+└── index.html
+```
+
+---
+
+**TOTALS**
+
+| | |
+|---|---|
+| Folders | 12 |
+| Files | 41 |
+| Root files | 1 |
