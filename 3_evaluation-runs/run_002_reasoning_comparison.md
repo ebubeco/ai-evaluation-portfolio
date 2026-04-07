@@ -1,345 +1,298 @@
-# Run 002 — Reasoning Quality Evaluation (Unified Rubric)
+# Run 002 — Reasoning Quality Evaluation
 
-**Evaluator:** Unified Reasoning Benchmark (Claude + Hybrid Rubric)  
+**Evaluator:** Ebubechukwu Okeke  
 **Date:** 2026-04-06  
-**Mode:** Pairwise + dimensional scoring (RQ-first, CA-second)  
-**Standard:** Constraint-aware, fallacy-sensitive, partial-credit allowed  
+**Task Type:** Reasoning Quality Assessment  
+**Difficulty:** Mixed (Intermediate → Advanced)  
+**Mode:** Pairwise comparison + weighted scoring  
 
 ---
 
-# Core Evaluation Rules
+## 1. Purpose
 
-## Priority Order
-1. Constraint usage (highest signal)
-2. Logical validity / structure
-3. Fallacy presence or absence
-4. Conclusion accuracy (secondary to RQ unless CA = 1)
+This run evaluates how well models construct, justify, and apply reasoning across different problem types.
 
----
-
-## RQ Scale (Unified)
-
-| Score | Meaning |
-|------|--------|
-| 5 | Rigorous: correct structure, full constraint usage, no logical gaps |
-| 4 | Sound: minor gap or assumption but valid reasoning path |
-| 3 | Adequate: partial reasoning, incomplete or weak linkage |
-| 2 | Weak: major reasoning gaps, but some relevant structure |
-| 1 | Invalid: broken logic, contradiction, or no real reasoning |
+Focus areas:
+- Logical correctness and structure  
+- Proper use of problem constraints  
+- Detection and avoidance of reasoning errors  
+- Alignment between reasoning and final answer  
+- Handling of partial validity  
 
 ---
 
-## CA Scale
+## 2. Rubric Reference
 
-| Score | Meaning |
-|------|--------|
-| 3 | Correct |
-| 2 | Partially correct |
-| 1 | Incorrect |
+**Primary:** `1_rubrics/reasoning_quality.md`  
+**Supporting:** `2_failure_patterns/common_failure_modes.md`  
 
 ---
 
-# Task 002-A — Quantitative Reasoning
+## 3. Scoring Framework
 
-### Prompt
-A store marks up items by 40% over wholesale cost, then applies a 25% discount.  
-Is final price higher or lower than wholesale, and by what percent?
+Each response is evaluated across five dimensions:
 
----
+| Dimension | Weight |
+|----------|--------|
+| Reasoning Quality | 0.35 |
+| Conclusion Accuracy | 0.25 |
+| Constraint Usage | 0.15 |
+| Clarity | 0.15 |
+| Error Detection / Handling | 0.10 |
 
-## Response A
-
-> Final price is higher by 5%.  
-> Example: $100 → $140 → $105, so +5%.
-
----
-
-## Response B
-
-> 40% − 25% = 15%, so net is 15% increase, but discount is applied on higher price so final is lower.
+**Key Rule:**  
+Reasoning Quality is the primary signal.  
+A correct answer with flawed reasoning is scored lower than a well-reasoned but slightly imperfect answer.
 
 ---
 
-## Evaluation — Response A
+## 4. Task 002-A — Quantitative Reasoning
 
-### Reasoning Trace
-- Uses concrete baseline ($100) → valid simplification
-- Correct multiplicative reasoning: 1.4 × 0.75 = 1.05
-- Correct comparison to baseline
-- Correct percentage difference
-- Fully constraint-consistent
-
-### Constraint Usage
-✔ Full
-
-### Failure Analysis
-None
-
-### Scores
-- **RQ: 5 / 5**
-- **CA: 3 / 3**
-
-### Notes
-Clean proportional reasoning with correct multiplicative structure.
+### Prompt  
+A store marks up items by 40% and then applies a 25% discount.  
+Is the final price higher or lower than the original price, and by how much?
 
 ---
 
-## Evaluation — Response B
-
-### Reasoning Trace
-- Incorrect assumption: additive percentage combination (40 − 25)
-- Applies invalid linear logic to multiplicative changes
-- Internal contradiction:
-  - claims net +15%
-  - then claims final is lower
-- No correct model of compounding
-
-### Constraint Usage
-✖ None explicitly used
-
-### Failure Types
-- Invalid arithmetic transformation
-- Internal contradiction
-- Incorrect model selection (additive vs multiplicative)
-
-### Scores
-- **RQ: 1 / 5**
-- **CA: 1 / 3**
+### Response A  
+Final price is higher by 5%.  
+Example: $100 → $140 → $105.
 
 ---
 
-## Verdict
-**Winner: Response A (dominant)**  
-Clear correctness + valid reasoning structure.
+### Response B  
+40% minus 25% equals 15%, so the final price is 15% higher.
 
 ---
 
-# Task 002-B — Causal Reasoning
+### Evaluation
 
-### Prompt
-Remote work introduced → productivity +12% → is causation valid?
+#### Response A
+- Uses correct multiplicative reasoning (1.4 × 0.75 = 1.05)  
+- Applies concrete example for validation  
+- No logical gaps  
 
----
-
-## Response A
-
-> Conclusion is premature. Likely post hoc fallacy.  
-> Alternative explanations: hiring, seasonality, tooling changes.  
-> Need control group or confounding controls.
+**Score: 0.95**
 
 ---
 
-## Response B
+#### Response B
+- Applies incorrect additive model (40 − 25)  
+- Fails to account for compounding  
+- Produces incorrect conclusion  
 
-> Remote work likely caused it. Productivity benefits are well documented. Timing makes it most logical explanation.
+**Failure Type:** Invalid arithmetic model  
 
----
-
-## Evaluation — Response A
-
-### Reasoning Trace
-- Identifies post hoc fallacy correctly
-- Generates multiple alternative hypotheses (not generic)
-- Specifies causal identification requirements
-- Does not overclaim causality
-- Proper epistemic caution
-
-### Constraint Usage
-✔ Full (uses temporal structure + ambiguity)
-
-### Scores
-- **RQ: 5 / 5**
-- **CA: 3 / 3**
+**Score: 0.25**
 
 ---
 
-## Evaluation — Response B
+### Verdict  
+**Winner: Response A**  
+**Confidence:** High  
 
-### Reasoning Trace
-- Assumes causation from correlation
-- Uses vague authority (“well documented”) without specifics
-- Relies on temporal adjacency as justification
-- Repeats fallacy under different wording
-
-### Failure Types
-- Post hoc fallacy
-- Unsupported generalization
-- Lack of alternative hypotheses
-
-### Constraint Usage
-✖ Ignored confounders
-
-### Scores
-- **RQ: 1 / 5**
-- **CA: 1 / 3**
+**Why:** Correct model selection and validation vs fundamental reasoning error.
 
 ---
 
-## Verdict
-**Winner: Response A (dominant)**
+## 5. Task 002-B — Causal Reasoning
+
+### Prompt  
+A company introduces remote work. Productivity rises the next month.  
+Did remote work cause the increase?
 
 ---
 
-# Task 002-C — Statistical / Conditional Reasoning
-
-### Prompt
-70% of trial patients improve → does that mean 70% chance for an individual?
+### Response A  
+Not necessarily. This assumes causation from timing alone. Other factors like hiring, tools, or seasonality could explain the increase.
 
 ---
 
-## Response A
-
-> Not valid inference. Population frequency ≠ individual probability.  
-> Issues: publication bias, cohort mismatch, heterogeneity.  
-> Proper framing: conditional probability based on similarity to cohort.
+### Response B  
+Yes. Remote work improves productivity, and the timing supports it.
 
 ---
 
-## Response B
+### Evaluation
 
-> Mostly valid. That’s how probability works.  
-> 70% is best estimate; variation is normal.
+#### Response A
+- Correctly identifies correlation ≠ causation  
+- Provides alternative explanations  
+- Maintains appropriate uncertainty  
 
----
-
-## Evaluation — Response A
-
-### Reasoning Trace
-- Correctly identifies population → individual inference error
-- Explains heterogeneity across patients
-- Includes publication bias (extra sophistication)
-- Provides correct reformulation
-- Proper distinction between frequency and probability
-
-### Constraint Usage
-✔ Full statistical context handled
-
-### Scores
-- **RQ: 5 / 5**
-- **CA: 3 / 3**
+**Score: 0.92**
 
 ---
 
-## Evaluation — Response B
+#### Response B
+- Commits post hoc fallacy  
+- Uses vague justification (“well known”)  
+- No alternative hypotheses  
 
-### Reasoning Trace
-- Treats frequency as direct probability without conditions
-- Dismisses variability as minor instead of structural issue
-- Some Bayesian intuition is partially correct but misapplied
-- No mechanistic critique
+**Failure Type:** Causal fallacy (post hoc)  
 
-### Partial Validity Rule Applied
-- Base rate intuition = partially valid insight
-- Misapplication = major reasoning flaw
-
-### Scores
-- **RQ: 2 / 5**
-- **CA: 1 / 3**
+**Score: 0.30**
 
 ---
 
-## Verdict
-**Winner: Response A**
+### Verdict  
+**Winner: Response A**  
+**Confidence:** High  
+
+**Why:** Proper causal reasoning vs unsupported assumption.
 
 ---
 
-# Task 002-D — Diagnostic Reasoning
+## 6. Task 002-C — Statistical Reasoning
 
-### Prompt
-Laptop slow for 2 weeks, no installs, restart ineffective → diagnose.
-
----
-
-## Response A
-
-> Likely causes: background process, storage near full, hardware degradation.  
-> Steps: check Task Manager, disk usage, disk health, OS updates.
+### Prompt  
+A drug works for 70% of patients. A doctor tells a patient:  
+“You have a 70% chance of recovery.” Is this valid?
 
 ---
 
-## Response B
-
-> Probably virus or startup programs.  
-> Run antivirus, disable startup apps, reset PC if needed.
+### Response A  
+Not exactly. That number reflects group outcomes. Individual results depend on personal factors.
 
 ---
 
-## Evaluation — Response A
-
-### Reasoning Trace
-- Correctly uses constraints:
-  - no installs → reduces software change likelihood
-  - restart ineffective → persistent issue
-- Generates structured differential diagnosis
-- Orders steps from least to most invasive
-- Diagnostic logic coherent and constraint-aware
-
-### Constraint Usage
-✔ Full
-
-### Scores
-- **RQ: 5 / 5**
-- **CA: 3 / 3**
+### Response B  
+Yes. That’s the best estimate available.
 
 ---
 
-## Evaluation — Response B
+### Evaluation
 
-### Reasoning Trace
-- Ignores key constraints
-- Uses generic troubleshooting template
-- No link between symptoms and diagnosis
-- Over-aggressive escalation (factory reset) without justification
+#### Response A
+- Distinguishes population vs individual probability  
+- Identifies heterogeneity  
+- Provides correct interpretation  
 
-### Failure Types
-- Constraint omission (critical)
-- Generic reasoning
-- Weak diagnostic grounding
-
-### Scores
-- **RQ: 1 / 5**
-- **CA: 2 / 3**
+**Score: 0.93**
 
 ---
 
-## Verdict
-**Winner: Response A (dominant)**
+#### Response B
+- Recognizes base rate but misapplies it  
+- Ignores conditional variation  
+- Overgeneralizes probability  
+
+**Failure Type:** Population-to-individual inference error  
+
+**Score: 0.45**
 
 ---
 
-# Overall Summary
+### Verdict  
+**Winner: Response A**  
+**Confidence:** High  
 
-| Task | Winner | RQ-A | CA-A | RQ-B | CA-B |
-|------|--------|------|------|------|------|
-| 002-A | A | 5 | 3 | 1 | 1 |
-| 002-B | A | 5 | 3 | 1 | 1 |
-| 002-C | A | 5 | 3 | 2 | 1 |
-| 002-D | A | 5 | 3 | 1 | 2 |
+**Why:** Correct statistical interpretation vs oversimplification.
 
 ---
 
-# Key Improvements in This Version
+## 7. Task 002-D — Diagnostic Reasoning
 
-## 1. Fixed over-precision bias
-- RQ boundaries now explicitly defined with constraint rules
-
-## 2. Added partial validity handling
-- Prevents collapsing all flawed reasoning into RQ=1
-
-## 3. Strengthened constraint tracking
-- Explicit pass/fail signal for each response
-
-## 4. Reduced evaluator overreach
-- No unnecessary philosophical interpretation
-- No speculative scoring justification
+### Prompt  
+A laptop is slow for two weeks. No new software installed. Restart didn’t fix it.  
+What are likely causes and next steps?
 
 ---
 
-# Final Verdict
+### Response A  
+Possible causes include background processes, storage limits, or overheating.  
+Check system usage, disk health, and temperature logs.
 
-**This evaluation favors structured, constraint-aware reasoning over:
-- pattern-based answers
-- heuristic guesses
-- ungrounded authority claims**
+---
 
-**Dominant winner across all tasks: Response A (consistently rigorous reasoning).**
+### Response B  
+Likely a virus. Run antivirus and reset the system if needed.
+
+---
+
+### Evaluation
+
+#### Response A
+- Uses constraints to narrow causes  
+- Provides structured diagnostic steps  
+- Avoids premature conclusions  
+
+**Score: 0.94**
+
+---
+
+#### Response B
+- Ignores key constraints  
+- Jumps to single cause  
+- Escalates too quickly (reset)  
+
+**Failure Type:** Constraint omission + premature conclusion  
+
+**Score: 0.40**
+
+---
+
+### Verdict  
+**Winner: Response A**  
+**Confidence:** High  
+
+**Why:** Structured diagnosis vs generic guesswork.
+
+---
+
+## 8. Aggregate Results
+
+| Task | Winner | A Score | B Score |
+|------|--------|--------|--------|
+| 002-A | A | 0.95 | 0.25 |
+| 002-B | A | 0.92 | 0.30 |
+| 002-C | A | 0.93 | 0.45 |
+| 002-D | A | 0.94 | 0.40 |
+
+---
+
+## 9. Key Insights
+
+### 1. Model B Failure Pattern
+Consistent issues across tasks:
+- Uses intuitive but incorrect shortcuts  
+- Ignores constraints  
+- Overgeneralizes without justification  
+- Defaults to confident but weak reasoning  
+
+---
+
+### 2. Model A Strength Pattern
+- Applies correct reasoning models  
+- Uses constraints effectively  
+- Maintains logical consistency  
+- Handles uncertainty appropriately  
+
+---
+
+### 3. Evaluation Insight
+
+> The most common reasoning failure is not lack of knowledge —  
+> it is the use of the wrong reasoning model.
+
+Examples:
+- Additive vs multiplicative thinking  
+- Correlation vs causation  
+- Population vs individual inference  
+
+---
+
+## 10. Final Takeaway
+
+Strong reasoning is defined by:
+
+- Correct model selection  
+- Logical consistency  
+- Constraint awareness  
+- Alignment between reasoning and conclusion  
+
+A response that **sounds right but reasons incorrectly** is more dangerous than one that is uncertain but logically sound.
+
+---
+
+*This run demonstrates how reasoning quality — not just correctness — determines evaluation outcomes in real-world AI assessment.*
