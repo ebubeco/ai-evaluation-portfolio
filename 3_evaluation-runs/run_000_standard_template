@@ -1,49 +1,250 @@
+
 # Run 000 — Standard Evaluation Template (Baseline Schema)
 
-**Version:** 000  
-**Type:** Evaluation Template / Schema Definition  
-**Purpose:** Establish a universal baseline structure for all evaluation runs in the RLHF Evaluation Suite  
+**Version:** 000
+**Type:** Reference Document — Evaluation Schema Definition
+**Purpose:** Define the universal structure used across all
+evaluation runs in this suite
+
+> This file defines the evaluation schema used across all runs.
+> It is a reference document, not an evaluation run.
+> Start with `run_001_instruction_following.md` to see the
+> schema applied to real tasks.
 
 ---
 
-# Overview
+## Overview
 
-Run 000 defines the **standard format, structure, and evaluation flow** used across all subsequent runs (Run 001–006+).
+Run 000 establishes the **canonical evaluation format** used
+across all subsequent runs (001–006+).
 
-It does not test model performance directly.
+It does not evaluate model performance.
 
-Instead, it serves as the **canonical evaluation blueprint** to ensure consistency, comparability, and readability across the entire suite.
-
----
-
-# Core Objective
-
-To enforce a unified evaluation format so that:
-
-- all runs follow the same structural logic  
-- outputs are comparable across tasks  
-- evaluation remains human-readable and consistent  
-- rubric scoring is standardized  
+It exists to ensure:
+- All runs follow identical structural logic
+- Outputs are comparable across tasks and difficulty levels
+- Rubric scoring is applied consistently
+- Decision traces are readable and defensible
 
 ---
 
-# Standard Evaluation Structure
+## Standard Run Structure
 
-Every evaluation run in this suite should follow this format:
-
----
-
-## 1. Task Definition
-
-- Clearly define the evaluation task
-- Specify objective of the run
-- State any constraints or conditions
+Every evaluation run follows this exact structure:
 
 ---
 
-## 2. Prompt Input
+### Header Block
 
-Provide the evaluation prompt:
+```
+# Run 00X — [Task Type] Evaluation
 
-```text
-[Insert prompt here]
+**Evaluator:** Ebubechukwu Okeke
+**Date:** [YYYY-MM-DD]
+**Task Type:** [Instruction Following / Reasoning / Hallucination
+               Detection / Ambiguity Resolution / Mixed]
+**Difficulty:** [Basic / Intermediate / Advanced]
+**Mode:** Pairwise comparison + rubric scoring
+```
+
+---
+
+### Section 1 — Purpose
+
+State what this run evaluates and why it matters.
+
+Example:
+> This run evaluates a model's ability to follow explicit
+> multi-constraint instructions across varying complexity levels.
+
+---
+
+### Section 2 — Rubric Reference
+
+List which rubrics from `1_rubrics/` apply to this run.
+
+Example:
+```
+Primary: instruction_adherence.md
+Secondary: reasoning_quality.md
+```
+
+---
+
+### Section 3 — Task Block
+
+Each run contains one or more tasks. Each task follows this format:
+
+```markdown
+## Task 00X-[A/B/C] — [Task Name]
+
+### Prompt
+[Full prompt exactly as given — no paraphrasing]
+
+### Response A
+[Full model response — no truncation]
+
+### Response B
+[Full model response — no truncation]
+```
+
+**Rules:**
+- Prompts must be complete and unmodified
+- Responses must be reproduced in full
+- No summarizing or paraphrasing of either
+
+---
+
+### Section 4 — Evaluation Block
+
+Each response is evaluated independently before comparison.
+
+```markdown
+### Evaluation — Response A
+
+| Criterion | Score | Observation |
+|-----------|-------|-------------|
+| [Primary rubric] | X/5 | [Specific finding] |
+| [Secondary rubric] | X/5 | [Specific finding] |
+
+**Failures identified:**
+- [Failure type] — [Description] — [Severity: Critical/Moderate/Minor]
+
+**Score summary:** X/5
+```
+
+Same structure repeated for Response B.
+
+**Rules:**
+- Evaluate each response independently
+- Do not allow one response to influence scoring of the other
+- Every failure must be classified by type and severity
+- Observations must reference specific content, not general impressions
+
+---
+
+### Section 5 — Comparison Table
+
+```markdown
+| Criterion | Winner | Margin |
+|-----------|--------|--------|
+| [Criterion] | A / B | High / Medium / Low |
+```
+
+**Rules:**
+- List every criterion evaluated
+- Assign a winner per criterion
+- Margin reflects confidence in that criterion decision
+
+---
+
+### Section 6 — Verdict
+
+```markdown
+**Winner:** [A or B]
+**Confidence:** [High / Medium / Low]
+**Decisive factor:** [Single most important reason for decision]
+
+**Justification:**
+[2–4 sentences. Must reference specific failures or strengths.
+Must name the criterion that determined the outcome.
+Must be reproducible — another evaluator following the same
+rubric should reach the same conclusion.]
+```
+
+**Rules:**
+- One winner only — no draws
+- Justification must be criterion-grounded, not impression-based
+- Decisive factor must be a single named reason
+
+---
+
+### Section 7 — Evaluator Notes
+
+```markdown
+## Evaluator Notes
+
+**Observed pattern:** [What this task revealed about model behavior]
+**Calibration insight:** [What this run teaches about scoring consistency]
+**Edge case flags:** [Any ambiguity or borderline decisions encountered]
+```
+
+---
+
+## Scoring Standards
+
+All scores use a 0–5 scale as defined in `1_rubrics/`.
+
+| Score | Meaning |
+|-------|---------|
+| 5 | Full compliance — no failures |
+| 4 | Strong — minor non-critical deviation only |
+| 3 | Partial — notable gap but core task met |
+| 2 | Weak — major failure present |
+| 1 | Non-compliant — core requirement unmet |
+| 0 | Complete failure — no valid output |
+
+---
+
+## Failure Classification
+
+All failures must be classified using this system:
+
+| Severity | Definition |
+|----------|------------|
+| Critical | Directly violates core instruction or contains fabricated content |
+| Moderate | Notable gap that affects quality but not core validity |
+| Minor | Small issue with no significant impact on usability |
+
+**Override rule:**
+> Any Critical failure caps the overall score at ≤ 2 regardless
+> of performance on other criteria.
+
+---
+
+## Verdict Rules
+
+| Condition | Rule |
+|-----------|------|
+| One response has Critical failure, other does not | Non-critical response wins |
+| Both have Critical failures | Response with fewer Critical failures wins |
+| No Critical failures on either | Compare Moderate failures, then Minor |
+| All criteria equal | Compare on primary rubric only |
+| Still tied | Flag as borderline — document reasoning fully |
+
+---
+
+## Consistency Principles
+
+These principles apply to every run in the suite:
+
+1. **Instructions define correctness** — rubric, not impression
+2. **Fluency is never a primary criterion** — grounding and
+   adherence always take priority
+3. **Evaluate independently** — score each response before comparing
+4. **Document failures explicitly** — type, location, severity
+5. **Justify with specifics** — reference exact content,
+   not general quality
+
+---
+
+## Folder Reference
+
+| Folder | Purpose |
+|--------|---------|
+| `1_rubrics/` | Scoring criteria for each evaluation dimension |
+| `2_failure_patterns/` | Failure classification and detection guides |
+| `3_evaluation_runs/` | All evaluation runs using this schema |
+| `4_case_studies/` | Deep analysis of specific evaluation scenarios |
+| `6_calibration/` | Self-assessment and consistency tracking |
+
+---
+
+## Status
+
+✔ Schema defined
+✔ All section formats specified
+✔ Scoring standards locked
+✔ Failure classification system embedded
+✔ Verdict rules established
+✔ Ready for use across runs 001–006+
