@@ -1,4 +1,4 @@
-# Run 003 — Hallucination Detection Evaluation (Elite Tier)
+# Run 003 — Hallucination Detection Evaluation
 
 **Evaluator:** Ebubechukwu Okeke  
 **Date:** 2026-04-06  
