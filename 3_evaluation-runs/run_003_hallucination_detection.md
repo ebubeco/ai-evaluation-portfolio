@@ -4,6 +4,7 @@
 **Date:** 2026-04-06  
 **Task Type:** Hallucination Detection Assessment  
 **Difficulty:** Mixed (Intermediate → Advanced)
+
 **Mode:** Pairwise comparison + rubric scoring  
 
 ---
