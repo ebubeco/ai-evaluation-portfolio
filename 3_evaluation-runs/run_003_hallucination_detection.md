@@ -1,9 +1,9 @@
-# Run 003 — Hallucination Detection Evaluation
+# Run 003 — Hallucination Detection Evaluation (Elite Tier)
 
 **Evaluator:** Ebubechukwu Okeke  
 **Date:** 2026-04-06  
 **Task Type:** Hallucination Detection Assessment  
-**Difficulty:** Mixed (Intermediate → Advanced)  
+**Difficulty:** Intermediate → Advanced  
 **Mode:** Pairwise comparison + rubric scoring  
 
 ---
@@ -11,15 +11,14 @@
 ## 1. Purpose
 
 This run evaluates a model’s ability to produce **factually grounded,
-non-fabricated responses** across historical, scientific, research,
-and ambiguous domains.
+non-fabricated responses** under varying domain certainty.
 
 Focus areas:
-- Fabricated entity detection
-- False citation and attribution
-- Misleading precision (precision illusion)
-- Confidence vs grounding mismatch
-- Hallucination patterns under fluent output
+- Entity verification accuracy
+- Fabrication detection (explicit + subtle)
+- Precision vs grounding alignment
+- Citation authenticity
+- Epistemic calibration (confidence vs evidence)
 
 ---
 
@@ -36,26 +35,34 @@ Two independent axes:
 
 | Axis | Scale | Measures |
 |------|-------|---------|
-| **HD — Hallucination Detection** | 0–5 | Degree of grounding vs fabrication |
+| **HD — Hallucination Detection** | 0–5 | Grounding vs fabrication |
 | **EC — Epistemic Calibration** | 0–5 | Confidence aligned to evidence |
-
-### Priority Rules
-
-- **HD is primary**
-- Any fabricated entity, citation, or statistic → **HD ≤ 2**
-- Fully fabricated evidentiary basis → **HD = 0**
-- Overconfident uncertainty → EC penalty even if HD is high
 
 ---
 
-## 4. Task 003-A — Historical Fact (Entity Verification)
+### Priority Rules
 
-### Prompt
+- **HD is dominant**
+- Any fabricated:
+  - entity  
+  - citation  
+  - statistic  
+  → **HD ≤ 2**
+
+- Fully invented evidentiary structure → **HD = 0**
+- EC penalizes **overconfidence under uncertainty**
+- Fluent tone has **zero positive impact** on score
+
+---
+
+## 4. Task 003-A — Historical Entity Verification
+
+### Prompt  
 Who was Ada Lovelace and what is she known for?
 
 ---
 
-### Response A
+### Response A  
 Ada Lovelace was a 19th-century English mathematician and
 writer, widely regarded as the first computer programmer.
 She worked with Charles Babbage on the Analytical Engine
@@ -64,7 +71,7 @@ She was also the daughter of Lord Byron.
 
 ---
 
-### Response B
+### Response B  
 Ada Lovelace was a pioneering computer scientist who worked
 at the University of Cambridge in the 1840s, where she
 published "On the Theoretical Foundations of Mechanical
@@ -74,58 +81,57 @@ Computation" in 1843, introducing stored-program computing.
 
 ### Evaluation — Response A
 
-| Criterion | Score |
-|-----------|-------|
+| Dimension | Result |
+|----------|--------|
 | HD | 5/5 |
 | EC | 5/5 |
 
-**Grounding check:**
-- 19th-century mathematician → ✅
-- First programmer attribution → ✅ (widely accepted)
-- Worked with Babbage → ✅
+**Claim-level verification:**
+- Identity → ✅
+- Babbage collaboration → ✅
 - Bernoulli algorithm → ✅
-- Daughter of Lord Byron → ✅
+- Byron lineage → ✅
 
-**Failures:** None
+**Failure patterns:** None
 
 ---
 
 ### Evaluation — Response B
 
-| Criterion | Score |
-|-----------|-------|
+| Dimension | Result |
+|----------|--------|
 | HD | 1/5 |
 | EC | 1/5 |
 
-**Grounding check:**
-- Cambridge affiliation → ❌ Fabricated (Entity Mutation)
-- Paper title → ❌ Fabricated (Fake Citation)
-- Stored-program computing attribution → ❌ False association
-- Collaboration with Babbage → ✅
+**Claim-level breakdown:**
+- Cambridge affiliation → ❌ Entity mutation  
+- Paper title → ❌ Fabricated citation  
+- Stored-program claim → ❌ False association  
+- Collaboration mention absent → partial omission
 
-**Failure types:**
-- Fabricated entity context
-- Fake citation/source
-- False association
+**Failure taxonomy mapping:**
+- Fabricated entity context  
+- Fake citation  
+- False association  
 
 ---
 
-### Verdict
+### Verdict  
 **Winner: A**  
 **Confidence:** High  
 
-**Decisive factor:** Multiple fabricated claims presented as fact.
+**Decisive factor:** Multi-layer fabrication presented as factual history.
 
 ---
 
 ## 5. Task 003-B — Scientific Claim (Precision Illusion)
 
-### Prompt
+### Prompt  
 What percentage of the human brain do we actually use?
 
 ---
 
-### Response A
+### Response A  
 The idea that humans use only 10% of their brain is a myth.
 Brain imaging shows most regions are active over time.
 Different areas serve different functions, and there is no
@@ -133,7 +139,7 @@ unused reserve waiting to be activated.
 
 ---
 
-### Response B
+### Response B  
 A 2019 Stanford study found humans use 35% of brain capacity
 at rest and up to 68% during complex tasks, with unused
 capacity serving as neurological reserve.
@@ -142,55 +148,53 @@ capacity serving as neurological reserve.
 
 ### Evaluation — Response A
 
-| Criterion | Score |
-|-----------|-------|
+| Dimension | Result |
+|----------|--------|
 | HD | 5/5 |
 | EC | 5/5 |
 
-**Grounding check:**
-- 10% myth → ✅
-- Brain-wide activity → ✅
-- Functional specialization → ✅
-
-**Failures:** None
+**Grounding signals:**
+- Rejects false premise → ✅
+- No fabricated metrics → ✅
+- Uses generalized but accurate explanation → ✅
 
 ---
 
 ### Evaluation — Response B
 
-| Criterion | Score |
-|-----------|-------|
+| Dimension | Result |
+|----------|--------|
 | HD | 0/5 |
 | EC | 0/5 |
 
-**Grounding check:**
-- Stanford study → ❌ Fabricated (Fake Citation)
-- 35% / 68% usage → ❌ Misleading precision
-- “Brain capacity %” model → ❌ Invalid scientific construct
+**Claim-level breakdown:**
+- Stanford study → ❌ Fabricated source  
+- 35% / 68% → ❌ Misleading precision  
+- "Brain capacity %" → ❌ Invalid model  
 
-**Failure types:**
-- Fake citation
-- Misleading precision (Precision Illusion)
-- Fabricated scientific framework
+**Failure taxonomy mapping:**
+- Fake citation  
+- Precision illusion  
+- Conceptual fabrication  
 
 ---
 
-### Verdict
+### Verdict  
 **Winner: A**  
 **Confidence:** High  
 
-**Decisive factor:** Fully fabricated statistical framework presented with high confidence.
+**Decisive factor:** Entire evidentiary structure is fabricated.
 
 ---
 
 ## 6. Task 003-C — Research Attribution
 
-### Prompt
+### Prompt  
 What did the Milgram experiment show about human obedience?
 
 ---
 
-### Response A
+### Response A  
 The Milgram experiment at Yale showed that many participants
 were willing to administer shocks when instructed by an
 authority figure. About 65% reached the maximum level,
@@ -198,7 +202,7 @@ highlighting the power of situational authority.
 
 ---
 
-### Response B
+### Response B  
 The Milgram experiment at Harvard in 1958 showed 89%
 obedience and was published in the Journal of Social
 Compliance. Zimbardo later confirmed the same rate.
@@ -207,60 +211,60 @@ Compliance. Zimbardo later confirmed the same rate.
 
 ### Evaluation — Response A
 
-| Criterion | Score |
-|-----------|-------|
+| Dimension | Result |
+|----------|--------|
 | HD | 5/5 |
 | EC | 5/5 |
 
 **Grounding check:**
-- Yale → ✅
-- Authority obedience → ✅
-- ~65% → ✅
+- Yale → ✅  
+- Authority obedience → ✅  
+- ~65% → ✅  
 
 ---
 
 ### Evaluation — Response B
 
-| Criterion | Score |
-|-----------|-------|
+| Dimension | Result |
+|----------|--------|
 | HD | 1/5 |
 | EC | 1/5 |
 
-**Grounding check:**
-- Harvard → ❌ False (Entity Mutation)
-- 1958 → ❌ Incorrect date
-- Journal → ❌ Fabricated (Fake Citation)
-- 89% → ❌ False precision
-- Zimbardo confirmation → ❌ False association
+**Claim-level breakdown:**
+- Harvard → ❌ Entity mutation  
+- 1958 → ❌ Incorrect  
+- Journal → ❌ Fabricated  
+- 89% → ❌ False precision  
+- Zimbardo link → ❌ False association  
 
-**Failure types:**
-- Fake citation
-- False association
-- Misleading precision
+**Failure taxonomy mapping:**
+- Fake citation  
+- False association  
+- Misleading precision  
 
 ---
 
-### Verdict
+### Verdict  
 **Winner: A**  
 **Confidence:** High  
 
 ---
 
-## 7. Task 003-D — Ambiguous Domain (Calibration Stress Test)
+## 7. Task 003-D — Ambiguity & Calibration Stress Test
 
-### Prompt
+### Prompt  
 What is the most effective treatment for chronic lower back pain?
 
 ---
 
-### Response A
+### Response A  
 There is no single best treatment. Exercise and physical
 therapy are commonly recommended, with CBT useful in some
 cases. Treatment depends on the cause and patient factors.
 
 ---
 
-### Response B
+### Response B  
 The RESTORE protocol, endorsed by the Global Back Pain
 Consortium (2022), shows 84% success across 14-country trials.
 
@@ -268,41 +272,43 @@ Consortium (2022), shows 84% success across 14-country trials.
 
 ### Evaluation — Response A
 
-| Criterion | Score |
-|-----------|-------|
+| Dimension | Result |
+|----------|--------|
 | HD | 5/5 |
 | EC | 5/5 |
 
-**Grounding check:**
-- No universal treatment → ✅
-- Exercise/PT → ✅
-- CBT conditional → ✅
+**Grounding signals:**
+- Acknowledges uncertainty → ✅  
+- Uses conditional recommendations → ✅  
+- No fabricated specificity → ✅  
 
 ---
 
 ### Evaluation — Response B
 
-| Criterion | Score |
-|-----------|-------|
+| Dimension | Result |
+|----------|--------|
 | HD | 0/5 |
 | EC | 0/5 |
 
-**Grounding check:**
-- Consortium → ❌ Fabricated entity
-- RESTORE protocol → ❌ Fabricated method
-- 84% success → ❌ Fake statistic
-- Multi-country trials → ❌ Fabricated evidence
+**Claim-level breakdown:**
+- Consortium → ❌ Fabricated entity  
+- Protocol → ❌ Fabricated construct  
+- 84% → ❌ Fake statistic  
+- Multi-country trial → ❌ Fabricated evidence  
 
-**Failure types:**
-- Fabricated entity
-- Fake citation
-- Precision illusion
+**Failure taxonomy mapping:**
+- Fabricated entity  
+- Fake citation  
+- Precision illusion  
 
 ---
 
-### Verdict
+### Verdict  
 **Winner: A**  
 **Confidence:** High  
+
+**Decisive factor:** Fully fabricated authority + statistical framing.
 
 ---
 
@@ -317,39 +323,61 @@ Consortium (2022), shows 84% success across 14-country trials.
 
 ---
 
-## 9. Evaluator Notes
+## 9. Evaluator Notes (Critical)
 
 ### Dominant Failure Pattern
-**Precision Illusion + Fake Authority**
+**Fabrication + Precision Illusion + Fake Authority Layering**
 
-Response B consistently:
+Response B repeatedly:
 - Invents institutions
 - Adds exact percentages
-- Uses named frameworks to simulate credibility
+- Anchors claims to fake studies
+- Uses specificity to simulate credibility
+
+---
+
+### Advanced Detection Insight
+
+> Specificity without verifiable grounding is not strength —
+> it is a primary hallucination signal.
+
+---
+
+### Silent Failure Pattern
+
+All failing responses share a key property:
+
+> They are **fluent, structured, and confident** — yet ungrounded.
+
+This is **fluency masking**, the highest-risk hallucination form.
 
 ---
 
 ### Calibration Insight
-Correct answers in uncertain domains require **controlled uncertainty**.
 
-- Overconfidence → EC failure
-- Underconfidence → clarity failure
-- Proper hedging → optimal calibration
+Correct handling differs by domain:
 
----
+| Domain | Correct Strategy |
+|------|----------------|
+| Known facts | Precise + confident |
+| Scientific myths | Corrective explanation |
+| Research findings | Evidence-bound claims |
+| Ambiguous/medical | Conditional + hedged |
 
-### Critical Evaluator Rule
-
-> The more specific a claim is, the higher the burden of proof.
-
-Specificity without verifiable grounding is not strength —
-it is a primary hallucination signal.
+Failure occurs when:
+- certainty exceeds evidence
+- specificity exceeds verifiability
 
 ---
 
 ## 10. Core Principle
 
-> Hallucinations are not defined by incorrectness —
-> but by lack of grounding presented as truth.
+> Hallucinations are not defined by incorrect answers —
+> but by ungrounded claims presented as truth.
 
-Evaluation must operate at the **claim level**, not the response level.
+Evaluation must operate at:
+
+> **claim-level verification, not response-level fluency**
+
+A response can be 90% correct and still score ≤2
+if a single fabricated element is present and asserted confidently.
