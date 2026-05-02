@@ -1,0 +1,87 @@
+
+ai-evaluation-portfolio/
+│
+├── 0_overview/
+│   ├── README.md
+│   ├── portfolio_summary.md
+│   ├── evaluation_philosophy.md
+│   └── decision_protocol.md
+│
+├── 1_rubrics/
+│   ├── instruction_adherence.md
+│   ├── reasoning_quality.md
+│   ├── factual_accuracy.md
+│   ├── hallucination_detection.md
+│   └── quick_scoring_guide.md
+│
+├── 2_failure_patterns/
+│   ├── failure_taxonomy.md
+│   ├── failure_taxonomy_guide.md
+│   ├── hallucination_patterns.md
+│   ├── ambiguity_traps.md
+│   ├── common_failure_modes.md
+│   └── edge_cases.md
+│
+├── 3_evaluation_runs/
+│   ├── run_001_instruction_following.md
+│   ├── run_002_reasoning_comparison.md
+│   ├── run_003_hallucination_detection.md
+│   ├── run_004_ambiguity_resolution.md
+│   └── run_005_mixed_real_world_tasks.md
+│
+├── 4_case_studies/
+│   ├── rlhf_evaluation.md
+│   ├── hallucination_analysis.md
+│   ├── ambiguity_analysis.md
+│   ├── prompt_reliability.md
+│   └── failure_analysis_breakdowns.md
+│
+├── 5_samples/
+│   ├── task_samples.json
+│   └── annotated_samples.json
+│
+├── 6_calibration/
+│   ├── self_vs_expected.md
+│   ├── gold_alignment_report.md
+│   └── error_analysis.md
+│
+├── 7_domain_specializations/
+│   ├── code_review/
+│   │   ├── code_evaluation_rubric.md
+│   │   ├── code_failure_patterns.md
+│   │   └── run_001_code_review.md
+│   │
+│   ├── multimodal/
+│   │   ├── visual_reasoning_rubric.md
+│   │   ├── multimodal_failure_patterns.md
+│   │   └── run_001_multimodal.md
+│   │
+│   └── audio_video/
+│       ├── av_evaluation_rubric.md
+│       ├── av_failure_patterns.md
+│       └── run_001_av.md
+│
+├── assets/
+│   ├── annotated_examples/
+│   └── before_after_comparisons/
+│
+└── index.html
+
+
+## Totals
+
+| Metric       | Count |
+|--------------|-------|
+| Folders      | 12    |
+| Files        | 41    |
+| Root files   | 1     |
+
+## Activation Sequence
+
+| Phase   | Action                        | Status        |
+|---------|-------------------------------|---------------|
+| Phase 1 | Complete run_001 → run_003    | 🔴 Not started |
+| Phase 2 | Activate code_review          | 🔴 Locked      |
+| Phase 3 | Activate multimodal           | 🔴 Locked      |
+| Phase 4 | Activate audio_video          | 🔴 Locked      |
+````

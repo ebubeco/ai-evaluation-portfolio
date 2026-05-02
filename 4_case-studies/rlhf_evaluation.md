@@ -1,0 +1,250 @@
+# RLHF Evaluation — Response Ranking & Diagnostic Analysis
+
+**Evaluator:** Ebubechukwu Okeke  
+**Domain:** General Knowledge / Factual Reasoning  
+**Task Type:** Preference Ranking + Failure Diagnostics  
+**Date:** 2024  
+**Status:** Complete  
+
+---
+
+## 1. Problem Definition
+
+The user submitted a prompt requiring factual accuracy, reasoning clarity, and instruction adherence. Two model responses were generated. The evaluation objective is twofold:
+
+1. Identify which response better satisfies user intent (preference ranking)
+2. Perform structured diagnostic analysis of reasoning quality, factual accuracy, and failure modes
+
+This evaluation is designed to avoid superficial judgments based on length, confidence, or fluency, and instead enforce rubric-grounded reasoning about model behavior.
+
+---
+
+## 2. User Prompt
+
+> "Can you explain why some vaccines require multiple doses to be effective, and others only need one?"
+
+---
+
+## 3. Response A
+
+Vaccines work by training your immune system to recognise a pathogen. Some vaccines, like the flu shot, only need one dose because the immune system responds strongly enough to a single exposure. Others, like the COVID-19 mRNA vaccines, require two doses because the first dose primes the immune system and the second one boosts the response to a level that provides durable protection.
+
+The number of doses also depends on the vaccine platform. Live-attenuated vaccines, which use a weakened form of the pathogen, often require fewer doses because they mimic natural infection more closely. Inactivated vaccines tend to require more doses because the immune stimulus is weaker.
+
+Additionally, some vaccines require boosters years later because immunity naturally wanes over time. This is different from a multi-dose primary series, boosters are about maintaining protection, not building it in the first place.
+
+---
+
+## 4. Response B
+
+The reason some vaccines need multiple doses comes down to how the immune system learns. When you get a vaccine, your body produces antibodies and memory cells. For some vaccines, one exposure is enough to create strong, lasting immunity. For others, the immune response from a single dose isn't robust enough, so a second, or sometimes third, dose is needed to reinforce the signal.
+
+---
+
+## 5. Phase 1 — Preference Ranking
+
+### Final Decision: Response A is superior
+
+### Justification (High-Level)
+
+Response A provides:
+- More complete coverage of vaccine mechanisms
+- Correct distinction between vaccine types
+- Inclusion of booster vs primary series differentiation
+- Higher factual density and explanatory completeness
+
+Response B is:
+- Conceptually correct but under-specified
+- Lacks mechanistic depth
+- Omits vaccine platform differences
+- Provides a simplified general explanation without structure
+
+Therefore, Response A better satisfies the user’s informational intent.
+
+---
+
+## 6. Phase 2 — Rubric-Based Diagnostic Evaluation
+
+### 6.1 Instruction Adherence
+
+- Response A: Fully aligned with prompt requirements
+- Response B: Partially aligned (answers question but lacks completeness)
+
+Score:
+- A: 5/5
+- B: 3.5/5
+
+---
+
+### 6.2 Factual Accuracy
+
+Both responses are broadly accurate. However:
+
+- Response A provides more precise immunological framing (live-attenuated vs inactivated vaccines)
+- Response B remains high-level and omits critical distinctions
+
+Score:
+- A: 5/5
+- B: 4/5
+
+---
+
+### 6.3 Reasoning Quality
+
+- Response A: Multi-layered causal reasoning (dose priming, boosting, platform differences, immunity waning)
+- Response B: Single-layer abstraction (immune “learning” metaphor)
+
+Score:
+- A: 5/5
+- B: 3/5
+
+---
+
+### 6.4 Completeness
+
+- Response A: High completeness (primary series + boosters + vaccine types)
+- Response B: Partial coverage only
+
+Score:
+- A: 5/5
+- B: 3/5
+
+---
+
+### 6.5 Hallucination Detection
+
+- Neither response contains explicit hallucinated facts
+- Response A is more detailed but remains within accepted biomedical explanations
+
+Conclusion:
+- No hallucination detected
+- No unsupported claims identified
+
+---
+
+### 6.6 Ambiguity Handling
+
+- Response A reduces ambiguity by distinguishing categories clearly
+- Response B introduces mild ambiguity by oversimplifying immune response mechanisms
+
+Conclusion:
+- A demonstrates better ambiguity resolution
+
+---
+
+## 7. Failure Mode Mapping
+
+### Response B — Identified Weaknesses
+
+Mapped to taxonomy:
+
+- **hallucination_patterns.md:** Not triggered
+- **ambiguity_traps.md:** Overgeneralized immune response framing
+- **common_failure_modes.md:** Under-specification / low informational density
+
+Root Cause:
+> Preference for simplicity over structured explanation
+
+---
+
+## 8. Final Evaluation Summary
+
+| Dimension | Winner |
+|----------|--------|
+| Instruction Adherence | A |
+| Factual Depth | A |
+| Reasoning Quality | A |
+| Completeness | A |
+| Clarity | A |
+
+### Final Verdict:
+> Response A is the superior response due to higher informational completeness, better structured reasoning, and stronger alignment with user intent.
+
+---
+
+## 9. Evaluation Notes
+
+This evaluation demonstrates a typical RLHF divergence pattern:
+
+- Both responses are factually acceptable
+- Performance gap is driven primarily by:
+  - depth of decomposition
+  - structural completeness
+  - explanatory layering
+
+This is not a hallucination problem — it is a **reasoning depth and completeness variance problem**.>
+> Factors that influence this include the type of vaccine (mRNA, live-attenuated, inactivated, subunit), the specific pathogen, and how long immunity is expected to last. Some vaccines also require boosters every few years, though technically those are different from the initial dosing schedule.
+>
+> It's worth noting that "effectiveness" also depends on what threshold you're measuring against. A single dose might offer partial protection. The schedule is designed to reach a clinically meaningful protection level.
+
+---
+
+## Evaluation Criteria
+
+| Criterion | Weight | Notes |
+|---|---|---|
+| Factual accuracy | High | Errors here are disqualifying |
+| Instruction-following | High | Did it answer what was actually asked? |
+| Reasoning quality | High | Is the explanation internally consistent? |
+| Clarity and usability | Medium | Would a real user walk away understanding? |
+| Safety / appropriateness | Medium | No harmful health misinformation |
+
+---
+
+## Ranking
+
+**1st: Response A**  
+**2nd: Response B**
+
+---
+
+## Justification
+
+**Response A is the better response — but not by a wide margin, and for specific reasons.**
+
+Response A does something Response B does not: it explains the *mechanism* behind multi-dose schedules rather than just restating the question in different words. The distinction between "priming" and "boosting" is accurate and gives the user a real conceptual handle on the question. The section on live-attenuated vs. inactivated vaccine platforms is directly relevant and factually sound. The final paragraph about waning immunity and the difference between a primary series and a booster is a genuine value-add, it pre-empts a follow-up question a curious reader would naturally have.
+
+Response B is not wrong, but it stays at a higher level of abstraction throughout. The phrase "reinforce the signal" is vague in a way that doesn't help the user understand the actual immunological process. The point about the "effectiveness threshold" in the final paragraph is technically interesting but comes across as a hedge rather than a useful clarification, it introduces ambiguity without resolving it. For a general knowledge question like this, that's a step backwards.
+
+One thing worth noting: Response B does acknowledge that partial protection from a single dose is real. That's a nuance Response A glosses over. This is a minor gap in A, but not large enough to change the ranking.
+
+**Neither response contains hallucinations.** Both align with established vaccinology. Neither makes safety-relevant errors.
+
+---
+
+## Key Issues Identified
+
+**In Response B:**
+
+- Vague mechanistic language ("reinforce the signal") that describes without explaining
+- The final point about effectiveness thresholds is accurate but poorly contextualised, reads more like a caveat than insight
+- Slightly weaker instruction-following: the user asked *why* dosing varies, and B spends more time on *what varies* than the causal reason
+
+**In Response A:**
+
+- Minor gap: doesn't acknowledge that a single dose often provides partial (not zero) protection, a common misconception this response could have corrected
+- Slightly more confident tone than the content fully warrants on the "why only one dose" claim for flu vaccines, the reality is more complex
+
+---
+
+## Failure Mode
+
+Abstraction without mechanism.
+
+Response B remains at a descriptive level, using language that gestures toward explanation ("reinforce the signal") without grounding it in a concrete process. This creates the impression of understanding without actually transferring it.
+
+This failure mode is common in model outputs that are trained to maintain fluency and coverage. When uncertain, the model defaults to higher-level phrasing rather than committing to a mechanistic explanation.
+
+In evaluation, this distinction matters. A response can be correct in content but still underperform in usefulness if it fails to resolve the user's underlying question.
+
+---
+
+## Final Verdict
+
+**Response A preferred.** It earns its confidence with mechanistic explanation rather than restating the question at a higher register. Response B reads like a competent overview. Response A reads like someone who actually understands the immunology.
+
+The gap isn't dramatic, but in a high-volume evaluation context, this is exactly the kind of difference that matters. Both responses would pass a surface-level quality check. Only one of them teaches something.
+
+---
+
+*Evaluator note: This prompt sits in the zone where model responses tend to converge on similar surface-level correctness. The real evaluation work happens at the reasoning layer, not at the fact-checking layer. Raters who only verify facts on this type of prompt will miss the quality gap entirely.*

@@ -1,810 +1,1753 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Ebube Okeke — AI Evaluation &amp; QA Specialist</title>
-<meta name="description" content="AI Evaluation &amp; QA Specialist — RLHF ranking, hallucination detection, adversarial testing, multimodal evaluation. 1,200+ tasks · 99%+ accuracy · 0 escalations."/>
-<meta name="author" content="Ebubechukwu Okeke"/>
-<meta property="og:title" content="Ebube Okeke — AI Evaluation &amp; QA Specialist"/>
-<meta property="og:description" content="I find what models lie about. AI evaluation, RLHF, hallucination detection, adversarial testing."/>
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://ebubeco-ai-eval.vercel.app"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Ebube Okeke — AI Evaluation &amp; QA Specialist"/>
-<meta name="twitter:description" content="AI evaluation specialist. 1,200+ tasks · 99%+ accuracy · 0 audit escalations."/>
-<link rel="canonical" href="https://ebubeco-ai-eval.vercel.app"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=IBM+Plex+Mono:wght@400;500&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="/shared.css"/>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Ebubechukwu Okeke","jobTitle":"AI Evaluation & QA Specialist","email":"charlesgigz7@gmail.com","url":"https://ebubeco-ai-eval.vercel.app","sameAs":["https://www.linkedin.com/in/ebubeco","https://github.com/ebubeco"],"knowsAbout":["RLHF","AI Evaluation","Hallucination Detection","Adversarial Testing","Multimodal Evaluation","Data Quality","NLP"]}
-</script>
-<style>
-/* INDEX ONLY */
-#hero{min-height:100vh;display:flex;align-items:center;position:relative;padding:88px 0 72px;overflow:hidden;background:radial-gradient(ellipse 80% 70% at 50% -10%,rgba(0,221,184,.05) 0%,transparent 65%);}
-.hero-wrap{max-width:1080px;margin:0 auto;padding:0 56px;width:100%;}
-.hero-eye{font-family:var(--mono);font-size:9px;color:var(--teal);letter-spacing:.25em;text-transform:uppercase;display:flex;align-items:center;gap:14px;margin-bottom:28px;opacity:0;animation:up .6s .1s ease both;}
-.hero-eye::before{content:'';display:block;width:32px;height:1px;background:var(--teal);}
-.hero-h1{font-family:var(--serif);font-size:clamp(48px,6.5vw,96px);font-weight:700;line-height:.98;letter-spacing:-.03em;margin-bottom:36px;opacity:0;animation:up .6s .25s ease both;}
-.hero-h1 em{font-style:italic;color:var(--teal);}
-.hero-h1 .hero-h1-2{display:block;font-size:clamp(36px,4.5vw,72px);color:var(--muted);font-weight:700;margin-top:8px;}
-.hero-below{display:flex;gap:48px;align-items:flex-start;margin-bottom:40px;opacity:0;animation:up .6s .4s ease both;flex-wrap:wrap;}
-.hero-thesis{flex:1;min-width:260px;}
-.hero-thesis-box{border-left:2px solid var(--teal);padding:16px 20px;background:var(--teal-glow);}
-.hero-thesis-tag{font-family:var(--mono);font-size:8px;color:var(--teal);letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px;}
-.hero-thesis-text{font-size:14px;color:var(--text);line-height:1.75;}
-.hero-thesis-text strong{color:var(--teal);}
-.hero-metrics{display:flex;gap:28px;flex-wrap:wrap;}
-.hm{display:flex;flex-direction:column;gap:3px;}
-.hm-val{font-family:var(--mono);font-size:24px;font-weight:500;color:var(--text);letter-spacing:-.02em;}
-.hm-label{font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;}
-.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:up .6s .55s ease both;}
-.hero-hire-grid{margin-top:44px;opacity:0;animation:up .6s .65s ease both;}
-.hire-label{font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px;}
-.hire-tags{display:flex;flex-wrap:wrap;gap:8px;}
-.hire-tag{font-family:var(--mono);font-size:9px;color:var(--muted);border:1px solid var(--border);padding:5px 12px;letter-spacing:.05em;cursor:pointer;text-decoration:none;transition:border-color .15s,color .15s,background .15s;}
-.hire-tag:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-dim);}
-.hero-scroll{position:absolute;bottom:36px;left:56px;font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.15em;text-transform:uppercase;display:flex;align-items:center;gap:12px;opacity:0;animation:up .6s .8s ease both;}
-.hero-scroll::before{content:'';width:24px;height:1px;background:var(--dim);}
-.speed-proof{background:var(--teal-dim);border:1px solid var(--teal-mid);padding:11px 18px;display:inline-flex;align-items:center;gap:12px;margin-top:20px;font-family:var(--mono);font-size:10px;color:var(--muted);}
-.speed-num{font-size:14px;color:var(--teal);font-weight:500;}
-/* EVALUATION LOOP */
-#loop-wrap{display:flex;gap:0;border:1px solid var(--border);overflow:hidden;min-height:420px;}
-#loopNav{width:200px;flex-shrink:0;border-right:1px solid var(--border);background:var(--surface);}
-.loop-step{padding:14px 20px;border-bottom:1px solid var(--border);cursor:pointer;display:flex;flex-direction:column;gap:3px;transition:background .15s;}
-.loop-step:hover{background:var(--faint);}
-.loop-step.active{background:var(--teal-dim);border-left:2px solid var(--teal);}
-.ls-num{font-family:var(--mono);font-size:9px;color:var(--dim);}
-.ls-name{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.03em;}
-.loop-step.active .ls-name{color:var(--teal);}
-#loopDetail{flex:1;padding:32px 40px;overflow-y:auto;}
-.ld-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:16px;}
-.ld-title{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--text);line-height:1.3;}
-.ld-badge{font-family:var(--mono);font-size:8px;color:var(--teal);border:1px solid var(--teal-mid);padding:4px 10px;background:var(--teal-dim);white-space:nowrap;}
-.ld-trigger-tag{font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.05em;margin-bottom:18px;}
-.ld-trigger-tag span{color:var(--amber);}
-.ld-desc{font-size:14px;color:var(--muted);line-height:1.9;margin-bottom:20px;}
-.ld-desc strong{color:var(--text);font-weight:500;}
-.ld-rule{font-family:var(--mono);font-size:11px;color:var(--text);background:var(--faint);border:1px solid var(--border2);padding:12px 16px;margin-bottom:20px;line-height:1.6;}
-.ld-rule em{color:var(--teal);font-style:normal;}
-.ld-signal-label{font-family:var(--mono);font-size:8px;color:var(--dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:9px;}
-.ld-signal{display:flex;flex-wrap:wrap;gap:6px;}
-.signal-tag{font-family:var(--mono);font-size:9px;color:var(--muted);border:1px solid var(--border);padding:3px 9px;background:var(--faint);}
-/* EDGE CASES */
-.edge-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
-.edge-cell{padding:22px 24px;border:1px solid var(--border);background:var(--card);transition:border-color .2s;}
-.edge-cell:hover{border-color:var(--teal-mid);}
-.ec-type{font-family:var(--mono);font-size:8px;color:var(--teal);letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px;}
-.ec-head{font-size:14px;color:var(--text);font-weight:500;margin-bottom:8px;}
-.ec-desc{font-size:12px;color:var(--muted);line-height:1.75;}
-/* CASE STUDIES */
-.case-grid{display:flex;flex-direction:column;gap:1px;background:var(--border);}
-.case{background:var(--bg);padding:32px 36px;display:grid;grid-template-columns:1fr 1fr;gap:40px;border-top:1px solid var(--border);transition:background .2s;}
-.case:hover{background:var(--faint);}
-.case-id{font-family:var(--mono);font-size:8px;color:var(--dim);letter-spacing:.15em;margin-bottom:12px;}
-.case-type-badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:8px;color:var(--teal);border:1px solid var(--teal-mid);padding:3px 9px;background:var(--teal-dim);margin-bottom:14px;}
-.case-name{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--text);margin-bottom:14px;line-height:1.3;}
-.case-badges{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px;}
-.case-badge{font-family:var(--mono);font-size:8px;color:var(--muted);border:1px solid var(--border);padding:2px 8px;}
-.case-impact{display:flex;align-items:center;gap:8px;margin-top:12px;}
-.ci-label{font-family:var(--mono);font-size:8px;color:var(--dim);letter-spacing:.1em;}
-.ci-val{font-family:var(--mono);font-size:13px;color:var(--teal);font-weight:500;}
-.case-right{display:flex;flex-direction:column;gap:16px;}
-.cr-label{font-family:var(--mono);font-size:8px;color:var(--dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:6px;}
-.cr-text{font-size:12px;color:var(--muted);line-height:1.75;}
-.cr-text strong{color:var(--text);font-weight:500;}
-.case-decision{font-family:var(--mono);font-size:10px;color:var(--text);background:var(--faint);border-left:2px solid var(--teal);padding:10px 14px;line-height:1.65;}
-.case-downstream{font-family:var(--mono);font-size:9px;color:var(--muted);background:rgba(0,221,184,.04);border:1px solid var(--teal-mid);padding:8px 12px;line-height:1.6;margin-top:4px;}
-.case-downstream::before{content:'✔ IMPACT · ';color:var(--teal);font-weight:500;}
-/* SKILLS */
-.sk-grid{display:flex;flex-wrap:wrap;gap:12px;}
-.sk-tag{font-family:var(--mono);font-size:10px;color:var(--muted);border:1px solid var(--border);padding:7px 14px;letter-spacing:.04em;transition:border-color .15s,color .15s;}
-.sk-tag:hover,.sk-tag.lit{border-color:var(--teal);color:var(--teal);}
-/* CREDENTIALS */
-.cred-block{display:grid;grid-template-columns:1fr auto;align-items:start;gap:20px;padding:22px 0;border-bottom:1px solid var(--border);}
-.cred-block:last-child{border-bottom:none;}
-.cb-org{font-size:14px;color:var(--text);font-weight:500;margin-bottom:4px;}
-.cb-role{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:2px;}
-.cb-dates{font-family:var(--mono);font-size:9px;color:var(--dim);}
-.cb-status{font-family:var(--mono);font-size:8px;letter-spacing:.08em;padding:4px 10px;white-space:nowrap;}
-.cb-status.v{background:var(--teal-dim);color:var(--teal);border:1px solid var(--teal-mid);}
-.cb-status.a{background:rgba(34,168,102,.08);color:var(--green);border:1px solid rgba(34,168,102,.2);}
-.cb-status.c{background:rgba(61,142,255,.08);color:var(--blue);border:1px solid rgba(61,142,255,.2);}
-/* MICRO1 BLOCK */
-.micro1-block{display:flex;align-items:center;gap:24px;padding:24px 28px;border:1px solid var(--teal-mid);background:var(--teal-dim);margin-bottom:40px;}
-.micro1-img{width:80px;height:80px;object-fit:contain;border:1px solid var(--teal-mid);}
-.micro1-eyebrow{font-family:var(--mono);font-size:8px;color:var(--teal);letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px;}
-.micro1-title{font-size:15px;color:var(--text);font-weight:500;margin-bottom:4px;}
-.micro1-desc{font-size:12px;color:var(--muted);line-height:1.65;}
-/* TIERS */
-.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
-.tier-block{background:var(--bg);padding:32px 28px;position:relative;transition:background .2s;}
-.tier-block.active{background:var(--faint);}
-.tier-active-tag{position:absolute;top:0;left:0;right:0;font-family:var(--mono);font-size:8px;color:var(--teal);background:var(--teal-dim);border-bottom:1px solid var(--teal-mid);padding:5px 14px;letter-spacing:.15em;text-transform:uppercase;}
-.tier-label{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.1em;margin-bottom:20px;margin-top:20px;}
-.tier-block:not(.active) .tier-label{margin-top:0;}
-.tier-heading{font-family:var(--serif);font-size:28px;font-weight:700;color:var(--text);line-height:1;}
-.tier-sub{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--muted);font-style:italic;margin-bottom:16px;}
-.tier-rule{font-size:12px;color:var(--muted);line-height:1.75;margin-bottom:18px;padding-top:16px;border-top:1px solid var(--border);}
-.tier-items{list-style:none;display:flex;flex-direction:column;gap:7px;}
-.tier-items li{font-family:var(--mono);font-size:10px;color:var(--muted);padding-left:12px;position:relative;line-height:1.55;}
-.tier-items li::before{content:'·';position:absolute;left:0;color:var(--teal);}
-/* CONTACT */
-#contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
-.contact-data{display:flex;flex-direction:column;gap:12px;margin-top:28px;}
-.contact-item{display:flex;gap:12px;align-items:flex-start;}
-.ci-icon{font-family:var(--mono);font-size:9px;color:var(--teal);padding-top:2px;width:16px;flex-shrink:0;}
-.ci-val{font-size:13px;color:var(--text);}
-.ci-val a{color:var(--teal);text-decoration:none;}
-.fit-filter{border:1px solid var(--border);padding:22px 24px;background:var(--card);margin-top:28px;}
-.ff-label{font-family:var(--mono);font-size:8px;color:var(--teal);letter-spacing:.15em;text-transform:uppercase;margin-bottom:14px;}
-.ff-rows{display:flex;flex-direction:column;gap:9px;}
-.ff-row{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;color:var(--muted);}
-.ff-row::before{content:'✓';color:var(--teal);font-size:11px;width:14px;}
-.contact-form{display:flex;flex-direction:column;gap:12px;}
-.form-field{display:flex;flex-direction:column;gap:5px;}
-.form-label{font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;}
-.form-input,.form-select,.form-textarea{background:var(--surface);border:1px solid var(--border2);color:var(--text);font-family:var(--sans);font-size:13px;padding:10px 13px;outline:none;transition:border-color .15s;width:100%;}
-.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--teal-mid);}
-.form-select{cursor:pointer;}
-.form-textarea{resize:vertical;min-height:100px;font-family:var(--sans);}
-.form-submit{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--teal);color:#0A0A0C;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:13px 26px;border:none;cursor:pointer;transition:background .18s;width:100%;}
-.form-submit:hover{background:#00FFD4;}
-.form-note{font-family:var(--mono);font-size:9px;color:var(--dim);text-align:center;}
-.social-links{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;}
-.social-link{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:9px;color:var(--muted);text-decoration:none;border:1px solid var(--border);padding:6px 12px;letter-spacing:.05em;transition:border-color .15s,color .15s;}
-.social-link:hover{border-color:var(--teal);color:var(--teal);}
-/* SYSTEM OWNERSHIP LINE */
-.hero-ownership{font-size:15px;color:var(--muted);line-height:1.7;max-width:500px;margin-bottom:36px;padding-left:16px;border-left:2px solid var(--teal);opacity:0;animation:up .6s .33s ease both;}
-/* PROOF STRIP */
-.proof-strip{display:flex;flex-wrap:wrap;border:1px solid var(--teal-mid);background:var(--teal-dim);margin-top:28px;opacity:0;animation:up .6s .62s ease both;}
-.ps-item{display:flex;align-items:center;gap:9px;padding:10px 22px;font-family:var(--mono);font-size:9px;color:var(--text);letter-spacing:.04em;border-right:1px solid var(--teal-mid);}
-.ps-item:last-child{border-right:none;}
-.ps-check{color:var(--teal);font-size:12px;flex-shrink:0;}
-/* START HERE */
-.sh-block{display:flex;align-items:flex-start;gap:40px;padding:28px 32px;border:1px solid var(--border);background:var(--card);}
-.sh-eyebrow{font-family:var(--mono);font-size:9px;color:var(--teal);letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;padding-top:4px;min-width:72px;}
-.sh-links{display:flex;flex-direction:column;flex:1;}
-.sh-link{display:flex;align-items:flex-start;gap:14px;padding:13px 0;border-bottom:1px solid var(--border);text-decoration:none;color:var(--muted);font-size:13px;line-height:1.65;transition:color .15s;}
-.sh-link:last-child{border-bottom:none;padding-bottom:0;}
-.sh-link:hover{color:var(--text);}
-.sh-link strong{color:var(--text);}
-.sh-arrow{font-family:var(--mono);font-size:14px;color:var(--teal);flex-shrink:0;}
-/* WHY IT MATTERS */
-.why-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-bottom:20px;}
-.why-card{padding:26px 24px;background:var(--bg);}
-.wc-icon{font-size:16px;margin-bottom:14px;}
-.wc-head{font-size:13px;color:var(--text);font-weight:500;margin-bottom:9px;line-height:1.4;}
-.wc-text{font-size:12px;color:var(--muted);line-height:1.8;}
-.why-highlight{display:flex;align-items:center;gap:0;border:1px solid var(--teal-mid);overflow:hidden;}
-.wh-left{padding:24px 32px;background:var(--teal-dim);flex:1;}
-.wh-label{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:6px;}
-.wh-label em{color:var(--teal);font-style:italic;}
-.wh-right{padding:24px 32px;background:var(--faint);border-left:1px solid var(--teal-mid);display:flex;flex-direction:column;gap:7px;min-width:280px;}
-.wh-row{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;color:var(--muted);}
-.wh-row::before{content:'✔';color:var(--teal);font-size:11px;}
-@media(max-width:900px){.why-cards{grid-template-columns:1fr;}.why-highlight{flex-direction:column;}.wh-right{border-left:none;border-top:1px solid var(--teal-mid);min-width:unset;}.sh-block{flex-direction:column;gap:16px;}}
-/* CV SECTION */
-.cv-embed-wrap{border:1px solid var(--border);background:var(--card);overflow:hidden;}
-.cv-embed-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--surface);border-bottom:1px solid var(--border);}
-.cv-embed-label{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.06em;}
-.cv-iframe{width:100%;height:600px;border:none;display:block;}
-/* AI KNOWLEDGE BASE */
-.kb-wrap{display:flex;flex-direction:column;gap:20px;}
-.kb-top{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;}
-.kb-left{display:flex;flex-direction:column;gap:14px;}
-.kb-prompt-label{font-family:var(--mono);font-size:8px;color:var(--dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px;}
-.kb-chips{display:flex;flex-wrap:wrap;gap:7px;}
-.kb-chip{font-family:var(--mono);font-size:9px;color:var(--muted);border:1px solid var(--border);background:transparent;padding:7px 13px;cursor:pointer;letter-spacing:.03em;transition:border-color .15s,color .15s,background .15s;text-align:left;}
-.kb-chip:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-dim);}
-.kb-right{display:flex;flex-direction:column;gap:12px;}
-.kb-textarea{width:100%;background:var(--surface);border:1px solid var(--border2);color:var(--text);font-family:var(--sans);font-size:14px;padding:14px 16px;outline:none;resize:vertical;min-height:120px;transition:border-color .15s;line-height:1.65;box-sizing:border-box;}
-.kb-textarea::placeholder{color:var(--dim);}
-.kb-textarea:focus{border-color:var(--teal-mid);}
-.kb-submit{background:var(--teal);color:#0A0A0C;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:13px 28px;border:none;cursor:pointer;transition:background .18s;align-self:flex-end;}
-.kb-submit:hover:not(:disabled){background:#00FFD4;}
-.kb-submit:disabled{background:var(--border2);color:var(--dim);cursor:not-allowed;}
-.kb-hint{font-family:var(--mono);font-size:8px;color:var(--dim);letter-spacing:.04em;}
-.kb-response{background:var(--surface);border:1px solid var(--teal-mid);padding:28px 32px;position:relative;}
-.kb-res-eyebrow{font-family:var(--mono);font-size:8px;color:var(--teal);letter-spacing:.15em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
-.kb-res-eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--teal);}
-.kb-res-content{display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;}
-.kb-res-card{font-size:13px;color:var(--text);line-height:1.8;}
-.kb-res-model{font-family:var(--mono);font-size:8px;color:var(--teal);letter-spacing:.08em;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
-.kb-res-model::before{content:'';display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--teal);}
-.kb-res-footer{display:flex;align-items:center;justify-content:flex-end;margin-top:20px;padding-top:14px;border-top:1px solid var(--border);}
-.kb-clear{font-family:var(--mono);font-size:9px;color:var(--dim);background:none;border:none;cursor:pointer;transition:color .15s;padding:0;}
-.kb-clear:hover{color:var(--muted);}
-.kb-thinking{display:flex;gap:5px;align-items:center;padding:8px 0;}
-.kb-thinking span{display:block;width:6px;height:6px;background:var(--teal);border-radius:50%;animation:kb-pulse .9s ease-in-out infinite;}
-.kb-thinking span:nth-child(2){animation-delay:.15s;}
-.kb-thinking span:nth-child(3){animation-delay:.3s;}
-@keyframes kb-pulse{0%,80%,100%{opacity:.15;transform:scale(.8);}40%{opacity:1;transform:scale(1);}}
-@media(max-width:900px){.kb-top{grid-template-columns:1fr;}}
-@media(max-width:900px){
-  .hero-wrap{padding:0 24px;}
-  .hero-scroll{left:24px;}
-  .case{grid-template-columns:1fr;}
-  #contact .wrap{grid-template-columns:1fr;}
-  #loop-wrap{flex-direction:column;}
-  #loopNav{width:100%;border-right:none;border-bottom:1px solid var(--border);display:flex;flex-wrap:wrap;}
-  .loop-step{flex:1;min-width:80px;}
-  #loopDetail{padding:20px;}
-  .tier-grid{grid-template-columns:1fr;}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ebube Okeke · AI Evaluation Specialist</title>
+  <meta name="description"
+    content="AI Evaluation Specialist — RLHF, hallucination detection, adversarial prompt design. 1,200+ tasks, 99%+ accuracy.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@300;400;500&family=Epilogue:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+  <style>
+    :root {
+      --bg: #0B0B0D;
+      --surface: #111116;
+      --lift: #18181F;
+      --border: #222230;
+      --border2: #2E2E3D;
+      --text: #E6E6F0;
+      --muted: #5A5A72;
+      --dim: #3A3A4E;
+      --teal: #00E5C3;
+      --teal-dim: rgba(0, 229, 195, 0.08);
+      --teal-mid: rgba(0, 229, 195, 0.22);
+      --amber: #F5A623;
+      --red: #FF4D6A;
+      --blue: #4D9EFF;
+      --green: #27AE60;
+      --mono: 'IBM Plex Mono', monospace;
+      --serif: 'Playfair Display', serif;
+      --sans: 'Epilogue', sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.65;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, .55) 100%);
+      pointer-events: none;
+      z-index: 9990;
+    }
+
+    #cur {
+      position: fixed;
+      z-index: 9999;
+      pointer-events: none;
+      width: 12px;
+      height: 12px;
+      border: 1.5px solid var(--teal);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width .18s, height .18s, background .18s;
+    }
+
+    #cur.hot {
+      width: 44px;
+      height: 44px;
+      background: var(--teal-dim);
+    }
+
+    #cur-dot {
+      position: fixed;
+      z-index: 9999;
+      pointer-events: none;
+      width: 4px;
+      height: 4px;
+      background: var(--teal);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 500;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      background: rgba(11, 11, 13, .88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tb-id {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--teal);
+      letter-spacing: .06em;
+    }
+
+    .tb-nav {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .tb-nav a {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: color .18s;
+    }
+
+    .tb-nav a:hover {
+      color: var(--teal);
+    }
+
+    .tb-pill {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--teal);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border: 1px solid var(--teal-mid);
+      padding: 5px 12px;
+      background: var(--teal-dim);
+    }
+
+    .tb-pulse {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: .4;
+        transform: scale(.8);
+      }
+    }
+
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      grid-template-rows: 1fr auto;
+      padding-top: 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 20% 50%, rgba(0, 229, 195, .04) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 80% 20%, rgba(77, 158, 255, .04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-main {
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .h-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--teal);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: up .6s .05s forwards;
+    }
+
+    .h-eyebrow::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--teal);
+      flex-shrink: 0;
+    }
+
+    .h1 {
+      font-family: var(--serif);
+      font-size: clamp(54px, 6vw, 92px);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -.02em;
+      color: var(--text);
+      opacity: 0;
+      animation: up .8s .18s forwards;
+    }
+
+    .h1 .accent {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--teal), var(--blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .h-sub {
+      margin-top: 28px;
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.85;
+      opacity: 0;
+      animation: up .8s .32s forwards;
+    }
+
+    .h-sub strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .h-thesis {
+      margin-top: 36px;
+      padding: 20px 24px;
+      border-left: 2px solid var(--teal);
+      background: var(--teal-dim);
+      font-family: var(--serif);
+      font-size: 17px;
+      font-style: italic;
+      color: var(--text);
+      max-width: 480px;
+      line-height: 1.6;
+      opacity: 0;
+      animation: up .8s .44s forwards;
+    }
+
+    .h-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 44px;
+      opacity: 0;
+      animation: up .8s .56s forwards;
+    }
+
+    .cta-p {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--teal);
+      color: #0B0B0D;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+      clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+    }
+
+    .cta-p:hover {
+      background: #00FFD8;
+      transform: translateY(-2px);
+    }
+
+    .cta-s {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: transparent;
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      text-decoration: none;
+      border: 1px solid var(--border2);
+      transition: border-color .2s, color .2s;
+    }
+
+    .cta-s:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    .hero-metrics {
+      padding: 60px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+      opacity: 0;
+      animation: fadeIn 1s .7s forwards;
+    }
+
+    .m-item {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .m-item:last-child {
+      border-bottom: none;
+    }
+
+    .m-val {
+      font-family: var(--serif);
+      font-size: 52px;
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1;
+      letter-spacing: -.02em;
+    }
+
+    .m-val sup {
+      font-size: 22px;
+      color: var(--teal);
+      font-style: italic;
+      vertical-align: super;
+    }
+
+    .m-lbl {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    .m-bar {
+      height: 2px;
+      background: var(--border);
+      margin-top: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .m-bar-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--teal), var(--blue));
+      animation: grow 1.5s 1s ease-out forwards;
+      width: 0;
+    }
+
+    @keyframes grow {
+      to {
+        width: var(--w, 100%);
+      }
+    }
+
+    .hero-strip {
+      grid-column: 1/-1;
+      border-top: 1px solid var(--border);
+      padding: 16px 60px;
+      display: flex;
+      gap: 48px;
+      align-items: center;
+      background: var(--surface);
+      overflow-x: auto;
+    }
+
+    .hs-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .hs-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .hs-dot.g {
+      background: var(--green);
+    }
+
+    .hs-dot.a {
+      background: var(--amber);
+    }
+
+    .hs-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .06em;
+    }
+
+    .sec {
+      padding: 100px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .sec-dark {
+      background: var(--surface);
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+
+    .sec-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 40px;
+      margin-bottom: 64px;
+      flex-wrap: wrap;
+    }
+
+    .sec-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--teal);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .sec-tag::before {
+      content: attr(data-n);
+      color: var(--dim);
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(30px, 3.5vw, 50px);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.1;
+    }
+
+    h2 em {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    .sec-note {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 420px;
+      margin-top: 12px;
+      line-height: 1.75;
+    }
+
+    #evidence .ev-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .ev-cell {
+      background: var(--bg);
+      padding: 40px 36px;
+      transition: background .2s;
+    }
+
+    .ev-cell:hover {
+      background: var(--lift);
+    }
+
+    .ev-num {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--teal);
+      letter-spacing: .12em;
+      margin-bottom: 16px;
+    }
+
+    .ev-claim {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+
+    .ev-proof {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .ev-proof strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .ev-widget {
+      margin-top: 20px;
+      padding: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    .ev-widget-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--dim);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .ev-widget-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .ev-widget-row:last-child {
+      border-bottom: none;
+    }
+
+    .ev-widget-row .warn {
+      color: var(--red);
+    }
+
+    .ev-widget-row .ok {
+      color: var(--green);
+    }
+
+    #work .cases {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .case {
+      border: 1px solid var(--border);
+      border-bottom: none;
+      display: grid;
+      grid-template-columns: 220px 1fr 200px;
+      transition: background .2s;
+    }
+
+    .case:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .case:hover {
+      background: var(--lift);
+    }
+
+    .c-meta {
+      padding: 36px 28px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .c-type {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--teal);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .c-name {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .c-id {
+      margin-top: auto;
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--dim);
+      letter-spacing: .08em;
+    }
+
+    .c-body {
+      padding: 36px;
+      border-right: 1px solid var(--border);
+    }
+
+    .c-section {
+      margin-bottom: 20px;
+    }
+
+    .c-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .c-section-lbl {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--muted);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .c-section-lbl::before {
+      content: '';
+      width: 12px;
+      height: 1px;
+      background: var(--border2);
+    }
+
+    .c-section-txt {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .c-section-txt strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .c-right {
+      padding: 36px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .c-badge {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .08em;
+      padding: 6px 12px;
+      border: 1px solid var(--border2);
+      color: var(--muted);
+      background: var(--surface);
+    }
+
+    .c-badge.hi {
+      border-color: var(--teal-mid);
+      color: var(--teal);
+      background: var(--teal-dim);
+    }
+
+    .c-impact {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .c-impact-lbl {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--dim);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .c-impact-val {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--teal);
+    }
+
+    #skills .sk-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .sk-block {
+      background: var(--bg);
+      padding: 28px 24px;
+      transition: background .2s;
+    }
+
+    .sk-block:hover {
+      background: var(--lift);
+    }
+
+    .sk-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--teal);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sk-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .sk-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      background: var(--surface);
+      transition: border-color .18s, color .18s;
+      cursor: default;
+    }
+
+    .sk-tag:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    #credentials {
+      padding: 80px 0;
+    }
+
+    .cred-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .cred-block {
+      background: var(--surface);
+      padding: 32px 28px;
+      transition: background .2s;
+    }
+
+    .cred-block:hover {
+      background: var(--lift);
+    }
+
+    .cred-logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .cred-role {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .cred-status {
+      margin-top: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .06em;
+    }
+
+    .cred-status.v {
+      color: var(--green);
+    }
+
+    .cred-status.a {
+      color: var(--amber);
+    }
+
+    .cred-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    #edge {
+      padding: 100px 0;
+      background: radial-gradient(ellipse 50% 80% at 0% 50%, rgba(0, 229, 195, .03) 0%, transparent 60%), var(--surface);
+    }
+
+    .edge-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .edge-cell {
+      background: var(--surface);
+      padding: 40px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: background .2s;
+    }
+
+    .edge-cell:hover {
+      background: var(--lift);
+    }
+
+    .edge-cell::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--border2);
+      transition: background .3s;
+    }
+
+    .edge-cell:hover::after {
+      background: var(--teal);
+    }
+
+    .edge-icon {
+      font-family: var(--mono);
+      font-size: 20px;
+      color: var(--teal);
+      margin-bottom: 16px;
+    }
+
+    .edge-title {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .edge-text {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    #contact {
+      padding: 100px 0 80px;
+    }
+
+    .contact-shell {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .contact-left {
+      background: var(--surface);
+      padding: 60px 56px;
+    }
+
+    .contact-left h2 {
+      margin-bottom: 20px;
+    }
+
+    .contact-left p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    .cf-row {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+
+    .cf-row:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .cf-key {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .cf-val {
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .cf-val a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: color .18s, border-color .18s;
+    }
+
+    .cf-val a:hover {
+      color: var(--teal);
+      border-color: var(--teal);
+    }
+
+    .contact-right {
+      background: var(--bg);
+      padding: 60px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .avail-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--teal);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .avail-tag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+      animation: pulse 2s infinite;
+    }
+
+    .contact-right h3 {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .contact-right h3 em {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    .contact-right p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 36px;
+    }
+
+    .contact-scope {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+
+    .cs-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .cs-item::before {
+      content: '→';
+      color: var(--teal);
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg);
+    }
+
+    .ft-left {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--dim);
+    }
+
+    .ft-right {
+      display: flex;
+      gap: 24px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .ft-right a {
+      color: var(--dim);
+      text-decoration: none;
+      transition: color .18s;
+    }
+
+    .ft-right a:hover {
+      color: var(--teal);
+    }
+
+    @keyframes up {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.on {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    ::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border2);
+    }
+
+    @media(max-width:900px) {
+      #topbar {
+        padding: 0 20px;
+      }
+
+      .tb-nav {
+        display: none;
+      }
+
+      #hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-main {
+        padding: 80px 24px 48px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .hero-metrics {
+        padding: 40px 24px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .m-item {
+        padding: 16px 24px 16px 0;
+        border-right: 1px solid var(--border);
+        border-bottom: none;
+      }
+
+      .m-item:last-child {
+        border-right: none;
+      }
+
+      .hero-strip {
+        padding: 16px 24px;
+        gap: 24px;
+      }
+
+      .wrap {
+        padding: 0 24px;
+      }
+
+      #evidence .ev-grid,
+      .sk-grid,
+      .edge-row,
+      .cred-row {
+        grid-template-columns: 1fr;
+      }
+
+      .case {
+        grid-template-columns: 1fr;
+      }
+
+      .c-meta,
+      .c-body {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .contact-shell {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        padding: 20px 24px;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div id="cur"></div>
-<div id="cur-dot"></div>
 
-<header id="topbar">
-  <a class="tb-id" href="index.html">EBO // EVAL</a>
-  <nav><ul class="tb-nav">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="system.html">System</a></li>
-    <li><a href="artifacts.html">Artifacts</a></li>
-    <li><a href="cv.html">CV</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul></nav>
-  <div class="tb-right">
-    <div class="tb-pill"><div class="tb-pulse"></div>Available · Remote</div>
-    <button id="theme-toggle" title="Toggle light/dark mode">☀</button>
-  </div>
-</header>
+  <div id="cur"></div>
+  <div id="cur-dot"></div>
 
-<section id="hero">
-  <div class="hero-wrap">
-    <div class="hero-eye">AI Evaluation &amp; QA Specialist · Remote Global</div>
-    <h1 class="hero-h1">
-      I find what models<br><em>lie</em> about.
-      <span class="hero-h1-2">Then document exactly why.</span>
-    </h1>
-    <div class="hero-ownership">I design evaluation systems that identify model failures under ambiguity and constraint — and prevent them from corrupting training data.</div>
-    <div class="hero-below">
-      <div class="hero-thesis">
-        <div class="hero-thesis-box">
-          <div class="hero-thesis-tag">The One Test</div>
-          <div class="hero-thesis-text">
-            Give me a single evaluation task. I will tell you:
-            <strong>what the model was supposed to do</strong>, what it actually did,
-            why the gap matters, and what downstream effect it produces.
-            In one paragraph. Decision visible in the first sentence.
+  <nav id="topbar">
+    <div class="tb-id">ebube.okeke / ai-eval</div>
+    <ul class="tb-nav">
+      <li><a href="#evidence">Methodology</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#credentials">Platforms</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="tb-pill">
+      <div class="tb-pulse"></div>Open to hire
+    </div>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-main">
+      <div class="h-eyebrow">AI Evaluation Specialist · Lagos, Nigeria · B.Tech CS</div>
+      <h1 class="h1">I find what<br>models <span class="accent">lie</span><br>about.</h1>
+      <p class="h-sub">
+        RLHF evaluation, hallucination detection, adversarial prompt design.<br>
+        <strong>1,200+ tasks. 50,000+ data points. 99%+ accuracy.</strong><br>
+        Verified by Micro1 across three evaluation domains.
+      </p>
+      <div class="h-thesis">"Evaluation is a reasoning audit, not a scoring exercise. The failure that matters isn't the
+        one a model shows you. It's the one it hides."</div>
+      <div class="h-ctas">
+        <a href="mailto:charlesgigz7@gmail.com" class="cta-p">Hire Me ↗</a>
+        <a href="#work" class="cta-s">See Documented Work</a>
+      </div>
+    </div>
+    <div class="hero-metrics">
+      <div class="m-item">
+        <div class="m-val">1,200<sup>+</sup></div>
+        <div class="m-lbl">Evaluation tasks</div>
+        <div class="m-bar">
+          <div class="m-bar-fill" style="--w:92%"></div>
+        </div>
+      </div>
+      <div class="m-item">
+        <div class="m-val">50K<sup>+</sup></div>
+        <div class="m-lbl">Data points validated</div>
+        <div class="m-bar">
+          <div class="m-bar-fill" style="--w:100%"></div>
+        </div>
+      </div>
+      <div class="m-item">
+        <div class="m-val">99<sup>%+</sup></div>
+        <div class="m-lbl">Accuracy maintained</div>
+        <div class="m-bar">
+          <div class="m-bar-fill" style="--w:99%"></div>
+        </div>
+      </div>
+      <div class="m-item">
+        <div class="m-val">0</div>
+        <div class="m-lbl">Audit escalations</div>
+        <div class="m-bar">
+          <div class="m-bar-fill" style="--w:100%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-strip">
+      <div class="hs-item">
+        <div class="hs-dot g"></div><span class="hs-label">Micro1.ai — Verified</span>
+      </div>
+      <div class="hs-item">
+        <div class="hs-dot a"></div><span class="hs-label">Outlier — Active</span>
+      </div>
+      <div class="hs-item">
+        <div class="hs-dot a"></div><span class="hs-label">Scale AI — Active</span>
+      </div>
+      <div class="hs-item">
+        <div class="hs-dot a"></div><span class="hs-label">Mercor — Active</span>
+      </div>
+      <div class="hs-item">
+        <div class="hs-dot a"></div><span class="hs-label">OneForma — Active</span>
+      </div>
+      <div class="hs-item">
+        <div class="hs-dot a"></div><span class="hs-label">Upwork — Active</span>
+      </div>
+      <div class="hs-item">
+        <div class="hs-dot a"></div><span class="hs-label">LinkedIn — Active</span>
+      </div>
+      <div class="hs-item" style="margin-left:auto;"><span class="hs-label" style="color:var(--teal);">FUTO · B.Tech
+          Computer Science · 2020–2025</span></div>
+    </div>
+  </section>
+
+  <section id="evidence" class="sec">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-left">
+          <div class="sec-tag" data-n="01 ─">Evaluation Methodology</div>
+          <h2>How I <em>actually</em><br>evaluate models.</h2>
+          <p class="sec-note">Four diagnostic frameworks I apply consistently, with live indicators showing what most
+            evaluators miss.</p>
+        </div>
+      </div>
+      <div class="ev-grid reveal">
+        <div class="ev-cell">
+          <div class="ev-num">DIAG-01 / Hallucination Forensics</div>
+          <div class="ev-claim">A hallucination is a reasoning artifact, not a random error.</div>
+          <div class="ev-proof">When a model fabricates data, it exposes how it handles uncertainty. I classify by
+            failure mode not just flag it, and document the reasoning path that produced the error. This gives teams
+            <strong>actionable patterns for fine-tuning</strong>, not just rejection counts.
           </div>
-        </div>
-        <div class="speed-proof">
-          Reviewed <span class="speed-num" id="speed-counter">0</span> outputs —
-          rejected 17 for hidden constraint violations in 12 minutes
-        </div>
-      </div>
-      <div class="hero-metrics">
-        <div class="hm"><span class="hm-val">1,200+</span><span class="hm-label">Eval Tasks</span></div>
-        <div class="hm"><span class="hm-val">50K+</span><span class="hm-label">Data Points</span></div>
-        <div class="hm"><span class="hm-val">99%+</span><span class="hm-label">Accuracy</span></div>
-        <div class="hm"><span class="hm-val">0</span><span class="hm-label">Audit Escalations</span></div>
-      </div>
-    </div>
-    <div class="hero-ctas">
-      <a href="#contact" class="cta-p">Hire me →</a>
-      <a href="system.html" class="cta-s">See the system →</a>
-      <a href="artifacts.html" class="cta-s">Review work samples →</a>
-    </div>
-    <div class="proof-strip">
-      <div class="ps-item"><span class="ps-check">✔</span> 1,200+ evaluation tasks completed</div>
-      <div class="ps-item"><span class="ps-check">✔</span> 99%+ accuracy across datasets</div>
-      <div class="ps-item"><span class="ps-check">✔</span> 30+ failure patterns identified</div>
-      <div class="ps-item"><span class="ps-check">✔</span> Vetted by Micro1</div>
-    </div>
-    <div class="hero-hire-grid">
-      <div class="hire-label">Hire me for</div>
-      <div class="hire-tags">
-        <a href="#contact" class="hire-tag">RLHF / Preference Ranking</a>
-        <a href="#contact" class="hire-tag">Hallucination Detection</a>
-        <a href="#contact" class="hire-tag">Adversarial Red-Teaming</a>
-        <a href="#contact" class="hire-tag">Multimodal Evaluation</a>
-        <a href="#contact" class="hire-tag">Cross-Cultural QA</a>
-        <a href="#contact" class="hire-tag">Data Pipeline QC</a>
-        <a href="#contact" class="hire-tag">Annotation Auditing</a>
-        <a href="#contact" class="hire-tag">Rubric Design</a>
-      </div>
-    </div>
-    <div class="hero-scroll">Scroll to explore</div>
-  </div>
-</section>
-
-<section class="sec" id="start-here" style="padding-top:0;padding-bottom:28px;">
-  <div class="wrap">
-    <div class="sh-block reveal">
-      <div class="sh-eyebrow">Start Here</div>
-      <div class="sh-links">
-        <a href="#work" class="sh-link">
-          <span class="sh-arrow">→</span>
-          <span><strong>See how I detect hallucinations</strong> — Case Study CASE-002: 30+ failure patterns documented</span>
-        </a>
-        <a href="artifacts.html" class="sh-link">
-          <span class="sh-arrow">→</span>
-          <span><strong>See real evaluation outputs</strong> — Annotated work samples across 5 evaluation domains</span>
-        </a>
-        <a href="system.html" class="sh-link">
-          <span class="sh-arrow">→</span>
-          <span><strong>See my evaluation system</strong> — Full 8-step loop, failure taxonomy, and calibration principles</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="loop">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <div class="sec-tag" data-n="01">Evaluation System</div>
-        <h2>The 8-step<br><em>evaluation loop</em></h2>
-        <p class="sec-note">Every output evaluated through the same reproducible system. No impressionism, no anchor bias, no rubric theatre.</p>
-      </div>
-      <a href="system.html" class="cta-s">Full system documentation →</a>
-    </div>
-    <div id="loop-wrap" class="reveal">
-      <div id="loopNav">
-        <div class="loop-step active"><span class="ls-num">01</span><span class="ls-name">Anchor</span></div>
-        <div class="loop-step"><span class="ls-num">02</span><span class="ls-name">Instruction Check</span></div>
-        <div class="loop-step"><span class="ls-num">03</span><span class="ls-name">Reality Check</span></div>
-        <div class="loop-step"><span class="ls-num">04</span><span class="ls-name">Logic Check</span></div>
-        <div class="loop-step"><span class="ls-num">05</span><span class="ls-name">Ambiguity Check</span></div>
-        <div class="loop-step"><span class="ls-num">06</span><span class="ls-name">Root Cause</span></div>
-        <div class="loop-step"><span class="ls-num">07</span><span class="ls-name">The Call</span></div>
-        <div class="loop-step"><span class="ls-num">08</span><span class="ls-name">Write It</span></div>
-      </div>
-      <div id="loopDetail"></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec sec-dark" id="edge">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <div class="sec-tag" data-n="02">Edge-Case Taxonomy</div>
-        <h2>Failure modes<br>I <em>test for</em></h2>
-      </div>
-    </div>
-    <div class="edge-grid reveal">
-      <div class="edge-cell"><div class="ec-type">Instruction Hierarchy</div><div class="ec-head">Operator-Layer Constraint Override</div><div class="ec-desc">System context rules violated by user-turn instructions. Often invisible to single-pass raters — the constraint is buried, the response is fluent.</div></div>
-      <div class="edge-cell"><div class="ec-type">Hallucination</div><div class="ec-head">Compatible ≠ Entailed Fabrication</div><div class="ec-desc">Claims contextually plausible but not grounded in the prompt. Confident framing amplifies the failure. One confirmed hallucination overrides everything.</div></div>
-      <div class="edge-cell"><div class="ec-type">Reasoning</div><div class="ec-head">Correct Answer, Broken Path</div><div class="ec-desc">Right conclusion reached through invalid inference. A correct answer from broken reasoning is a reasoning failure. The path is evaluated, not just the destination.</div></div>
-      <div class="edge-cell"><div class="ec-type">Ambiguity</div><div class="ec-head">Silent Assumption Injection</div><div class="ec-desc">Model resolves genuine ambiguity without flagging it. Silent assumption = failure. Explicit assumption + minimal statement = acceptable minimum.</div></div>
-      <div class="edge-cell"><div class="ec-type">Multimodal</div><div class="ec-head">Visual Grounding Failure</div><div class="ec-desc">Fluent text description of an image that misrepresents spatial relationships, entities, or attributes. Textual fluency is an unreliable quality proxy.</div></div>
-      <div class="edge-cell"><div class="ec-type">Cultural / Geographic</div><div class="ec-head">Training Data Distribution Bias</div><div class="ec-desc">Systematic quality gap between Western and non-Western knowledge domains. Invisible to US-centric rubrics. Requires parallel prompt batteries to detect.</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="work">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <div class="sec-tag" data-n="03">Case Studies</div>
-        <h2>Real evaluations.<br><em>Documented outcomes.</em></h2>
-        <p class="sec-note">Each case includes the problem, the method, the decision, and the downstream impact on model training.</p>
-      </div>
-      <a href="artifacts.html" class="cta-s">All work samples →</a>
-    </div>
-    <div class="case-grid reveal">
-
-      <div class="case">
-        <div class="case-left">
-          <div class="case-id">CASE-001 · 2025</div>
-          <div class="case-type-badge">RLHF · Adversarial</div>
-          <div class="case-name">Constraint &amp; Instruction Hierarchy Failures</div>
-          <div class="case-badges"><span class="case-badge">Adversarial Testing</span><span class="case-badge">Constraint Hierarchy</span><span class="case-badge">RLHF Ranking</span><span class="case-badge">Failure Taxonomy</span></div>
-          <div class="case-impact"><span class="ci-label">Output</span><span class="ci-val">6 failure archetypes documented</span></div>
-        </div>
-        <div class="case-right">
-          <div><div class="cr-label">Problem</div><div class="cr-text">Operator-layer constraints overridden by user-layer preferences. Surface fluency masked the failure. Standard raters were passing outputs that violated explicit exclusions buried in system context.</div></div>
-          <div><div class="cr-label">Method</div><div class="cr-text">Constraint hierarchy analysis — explicit exclusions evaluated before surrounding response quality. Cascade attribution: downstream failures traced to the first violated constraint. 6 failure archetypes documented.</div></div>
-          <div class="case-decision">Outputs failing explicit exclusion constraints are rejected regardless of response quality elsewhere. Constraint hierarchy is not negotiable.</div>
-          <div class="case-downstream">Prevented constraint-violating outputs from entering downstream preference datasets and corrupting RLHF training signal.</div>
-        </div>
-      </div>
-
-      <div class="case">
-        <div class="case-left">
-          <div class="case-id">CASE-002 · 2024</div>
-          <div class="case-type-badge">RLHF · Hallucination</div>
-          <div class="case-name">Plausible-Sounding Fabrication Detection</div>
-          <div class="case-badges"><span class="case-badge">Hallucination Detection</span><span class="case-badge">Fact Verification</span><span class="case-badge">Pattern Analysis</span></div>
-          <div class="case-impact"><span class="ci-label">Documented</span><span class="ci-val">30+ failure patterns</span></div>
-        </div>
-        <div class="case-right">
-          <div><div class="cr-label">Problem</div><div class="cr-text">Structurally convincing responses with embedded subtly fabricated citations and distorted statistics. Correct format, confident tone — surface raters scored them highly.</div></div>
-          <div><div class="cr-label">Method</div><div class="cr-text">Entailed vs compatible test: claims entailed by the task are valid; claims merely compatible with it are hallucination flags. 4-type taxonomy built. One confirmed hallucination overrides everything else.</div></div>
-          <div class="case-decision">Confident tone is not evidence. Any precise claim not directly supported by the prompt triggers explicit reality check — one confirmed hallucination is an automatic reject.</div>
-          <div class="case-downstream">Prevented hallucinated outputs from entering training datasets, protecting downstream model behaviour from corrupted preference signal.</div>
-        </div>
-      </div>
-
-      <div class="case">
-        <div class="case-left">
-          <div class="case-id">CASE-005 · 2025</div>
-          <div class="case-type-badge">Multimodal · Image-Text</div>
-          <div class="case-name">Image-Text Alignment &amp; Visual Grounding Failures</div>
-          <div class="case-badges"><span class="case-badge">Multimodal Evaluation</span><span class="case-badge">Visual Grounding</span><span class="case-badge">Hallucination Detection</span></div>
-          <div class="case-impact"><span class="ci-label">Protocol</span><span class="ci-val">Dual-layer evaluation</span></div>
-        </div>
-        <div class="case-right">
-          <div><div class="cr-label">Problem</div><div class="cr-text">Models generating fluent, contextually coherent image descriptions that misrepresented specific visual details, relationships, and spatial arrangements. Invisible to text-only reviewers.</div></div>
-          <div><div class="cr-label">Method</div><div class="cr-text">Dual-layer protocol: text coherence evaluated independently from visual grounding accuracy. Mismatch taxonomy: entity misidentification, spatial errors, attribute hallucination, confidence masking.</div></div>
-          <div class="case-decision">Textual fluency in multimodal outputs is an unreliable quality proxy. Each visual claim requires independent grounding verification.</div>
-          <div class="case-downstream">Dual-layer verification adopted across subsequent multimodal cycles, preventing visually inaccurate outputs from passing text-only evaluation.</div>
-        </div>
-      </div>
-
-      <div class="case">
-        <div class="case-left">
-          <div class="case-id">CASE-003 · 2024</div>
-          <div class="case-type-badge">Bias · Cross-Cultural QA</div>
-          <div class="case-name">Quantifying the Africa Knowledge Gap</div>
-          <div class="case-badges"><span class="case-badge">Bias Detection</span><span class="case-badge">Cross-Cultural QA</span><span class="case-badge">Parallel Prompt Design</span></div>
-          <div class="case-impact"><span class="ci-label">Measured gap</span><span class="ci-val">−3.3 pts quality delta</span></div>
-        </div>
-        <div class="case-right">
-          <div><div class="cr-label">Problem</div><div class="cr-text">Model responses about African institutions were systematically lower quality than equivalent Western responses. The gap was invisible to US-centric rubrics — a meta-bias in the evaluation itself.</div></div>
-          <div><div class="cr-label">Method</div><div class="cr-text">Parallel prompt battery matched across Western and African contexts in information density and complexity. Identical rubrics applied. Quality tracked by region and knowledge domain.</div></div>
-          <div class="case-decision">A 3.3-point gap on matched prompts is not noise — it is a systematic training data failure. Flagged as a data collection priority, not an output quality issue.</div>
-          <div class="case-downstream">Structured evidence directly informed data collection strategy for underrepresented knowledge domains, addressing the training gap at the source.</div>
-        </div>
-      </div>
-
-      <div class="case">
-        <div class="case-left">
-          <div class="case-id">CASE-004 · 2023</div>
-          <div class="case-type-badge">Data Ops · Validation</div>
-          <div class="case-name">50K-Point Schema Normalisation</div>
-          <div class="case-badges"><span class="case-badge">99%+ Accuracy</span><span class="case-badge">Schema Audit</span><span class="case-badge">Pipeline QC</span></div>
-          <div class="case-impact"><span class="ci-label">Scale</span><span class="ci-val">50,000+ entries validated</span></div>
-        </div>
-        <div class="case-right">
-          <div><div class="cr-label">Problem</div><div class="cr-text">Silent schema drift across batches from multiple annotation sources. No hard errors — inconsistent labelling conventions that would corrupt model signal downstream.</div></div>
-          <div><div class="cr-label">Method</div><div class="cr-text">Cross-batch consistency audit mapping every deviation category. Normalisation guide aligning all batches to a single standard with documented correction rules per deviation type.</div></div>
-          <div class="case-decision">Schema drift with no surface errors is still critical failure — it is silent corruption of training signal. Pass threshold requires cross-batch consistency, not just per-entry accuracy.</div>
-          <div class="case-downstream">Silent schema corruption removed before it could degrade downstream model training signal. Audit framework reused for subsequent annotation batches.</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="why-matters">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <div class="sec-tag" data-n="04">Why This Matters</div>
-        <h2>Evaluation failures<br><em>have consequences</em></h2>
-      </div>
-    </div>
-    <div class="why-cards reveal">
-      <div class="why-card">
-        <div class="wc-icon">⚠</div>
-        <div class="wc-head">Incorrect evaluations reinforce hallucinations</div>
-        <div class="wc-text">When bad outputs are scored as good, the model learns the wrong behaviour. Every missed failure is a training signal pointing in the wrong direction.</div>
-      </div>
-      <div class="why-card">
-        <div class="wc-icon">⚠</div>
-        <div class="wc-head">Biased rubrics corrupt preference data</div>
-        <div class="wc-text">Evaluation that can't see its own assumptions doesn't catch the failures it was designed to find. Rubric design is risk surface, not paperwork.</div>
-      </div>
-      <div class="why-card">
-        <div class="wc-icon">⚠</div>
-        <div class="wc-head">Silent drift degrades model performance</div>
-        <div class="wc-text">Schema inconsistency, annotation drift, and missed edge cases accumulate silently. By the time they're visible, the damage is already in the weights.</div>
-      </div>
-    </div>
-    <div class="why-highlight reveal">
-      <div class="wh-left">
-        <div class="wh-label">My work focuses on <em>preventing that.</em></div>
-      </div>
-      <div class="wh-right">
-        <div class="wh-row">Every output reviewed — no silent passes</div>
-        <div class="wh-row">Every failure documented with root cause</div>
-        <div class="wh-row">Every decision traceable to a rubric principle</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec sec-dark" id="skills">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <div class="sec-tag" data-n="05">Skills</div>
-        <h2>What I <em>actually</em> do</h2>
-      </div>
-    </div>
-    <div class="sk-grid reveal">
-      <span class="sk-tag lit">RLHF / Preference Ranking</span>
-      <span class="sk-tag lit">Hallucination Detection</span>
-      <span class="sk-tag lit">Adversarial Testing</span>
-      <span class="sk-tag lit">Multimodal Evaluation</span>
-      <span class="sk-tag">Instruction Following QA</span>
-      <span class="sk-tag">Bias Detection</span>
-      <span class="sk-tag">Cross-Cultural QA</span>
-      <span class="sk-tag">Data Pipeline QC</span>
-      <span class="sk-tag">Schema Audit &amp; Normalisation</span>
-      <span class="sk-tag">Rubric Design</span>
-      <span class="sk-tag">Annotation Quality Control</span>
-      <span class="sk-tag">Root Cause Analysis</span>
-      <span class="sk-tag">Failure Taxonomy Development</span>
-      <span class="sk-tag">Search Quality Rating</span>
-      <span class="sk-tag">E-E-A-T Evaluation</span>
-      <span class="sk-tag">Prompt Engineering</span>
-      <span class="sk-tag">NLP</span>
-      <span class="sk-tag">Python</span>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="tiers">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <div class="sec-tag" data-n="06">Working Mode</div>
-        <h2>How I calibrate<br><em>to your environment</em></h2>
-        <p class="sec-note">I operate across all three environments. Default to deep scrutiny when stakes are unclear.</p>
-      </div>
-    </div>
-    <div class="tier-grid reveal">
-      <div class="tier-block">
-        <div class="tier-label">High-Speed Environments</div>
-        <div class="tier-heading">Rapid</div>
-        <div class="tier-sub">execution</div>
-        <div class="tier-rule">Fast, consistent decisions under tight constraints and high task volume.</div>
-        <ul class="tier-items">
-          <li>Immediate judgment on clear instruction compliance</li>
-          <li>Rapid detection of obvious failures and hallucinations</li>
-          <li>Compressed output format, no loss of decision accuracy</li>
-        </ul>
-      </div>
-      <div class="tier-block">
-        <div class="tier-label">Structured Workflows</div>
-        <div class="tier-heading">Guideline</div>
-        <div class="tier-sub">aligned</div>
-        <div class="tier-rule">Catch meaningful issues. Ignore cosmetic ones.</div>
-        <ul class="tier-items">
-          <li>Guideline-aligned outputs with clear justification</li>
-          <li>Ambiguity surfaced only when it affects interpretation</li>
-          <li>Weak reasoning flagged when it affects output confidence</li>
-        </ul>
-      </div>
-      <div class="tier-block active">
-        <div class="tier-active-tag">Primary Mode</div>
-        <div class="tier-label">High-Stakes Evaluation</div>
-        <div class="tier-heading">Deep</div>
-        <div class="tier-sub">scrutiny</div>
-        <div class="tier-rule">Assume downstream impact. Small errors are real errors.</div>
-        <ul class="tier-items">
-          <li>Full failure analysis — subtle hallucinations, hidden ambiguity</li>
-          <li>Strict alignment between instruction, reasoning, and output</li>
-          <li>Root cause traced, not symptoms catalogued</li>
-          <li>Epistemic uncertainty valid — normative disagreement is not</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec sec-dark" id="credentials">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <div class="sec-tag" data-n="07">Credentials</div>
-        <h2>Who has<br><em>verified</em> this work</h2>
-      </div>
-    </div>
-    <div class="reveal">
-      <div class="micro1-block">
-        <img src="/micro1-vetted.png" alt="Micro1 platform-verified AI evaluator" class="micro1-img"/>
-        <div class="micro1-content">
-          <div class="micro1-eyebrow">Platform Verified · Mid Level</div>
-          <div class="micro1-title">Micro1.ai — AI Data Annotation Specialist</div>
-          <div class="micro1-desc">Platform-verified status across Search Quality Rating, AI Data Annotation, and Content Quality Evaluation. Micro1 tests and ranks annotators before activation.</div>
-        </div>
-      </div>
-      <div class="cred-block"><div><div class="cb-org">Micro1.ai</div><div class="cb-role">Search Quality Rating · AI Data Annotation · Content Quality Evaluation</div><div class="cb-dates">Aug 2024 – Present</div></div><div class="cb-status v">Platform-Verified · Mid Level</div></div>
-      <div class="cred-block"><div><div class="cb-org">TELUS International</div><div class="cb-role">Search Quality Rater — relevance, intent alignment, E-E-A-T</div><div class="cb-dates">Jan 2024 – Jul 2024</div></div><div class="cb-status a">Former Contractor</div></div>
-      <div class="cred-block"><div><div class="cb-org">Outlier</div><div class="cb-role">AI evaluation · RLHF tasks · Data annotation</div><div class="cb-dates">Ongoing</div></div><div class="cb-status a">Active Contractor</div></div>
-      <div class="cred-block"><div><div class="cb-org">Scale AI</div><div class="cb-role">AI evaluation · Data operations</div><div class="cb-dates">Ongoing</div></div><div class="cb-status a">Active Contractor</div></div>
-      <div class="cred-block"><div><div class="cb-org">OneForma</div><div class="cb-role">Data Operations — validation, cleaning, pipeline QC</div><div class="cb-dates">Jun 2023 – Dec 2023</div></div><div class="cb-status a">Former Contractor</div></div>
-      <div class="cred-block"><div><div class="cb-org">Mercor / Upwork</div><div class="cb-role">AI evaluation · Freelance data operations</div><div class="cb-dates">Ongoing</div></div><div class="cb-status a">Active</div></div>
-      <div class="cred-block"><div><div class="cb-org">CipherSense &amp; DataLens Africa</div><div class="cb-role">Essentials of Data Labelling &amp; Annotation for AI Development</div><div class="cb-dates">Feb 2026</div></div><div class="cb-status c">Certified</div></div>
-      <div class="cred-block"><div><div class="cb-org">Federal University of Technology Owerri (FUTO)</div><div class="cb-role">B.Tech Computer Science · Minor: Software Engineering · AI Systems focus</div><div class="cb-dates">2020 – 2025</div></div><div class="cb-status v">Degree</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="cv-section">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <div class="sec-tag" data-n="08">Curriculum Vitae</div>
-        <h2>Full <em>CV</em></h2>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-end;">
-        <a href="cv.html" class="cta-s">Open CV page →</a>
-        <a href="/Ebube_Okeke_CV.pdf" download class="cta-p">Download PDF →</a>
-      </div>
-    </div>
-    <div class="cv-embed-wrap reveal">
-      <div class="cv-embed-bar">
-        <span class="cv-embed-label">Ebube Okeke — AI Evaluation &amp; QA Specialist · CV</span>
-        <a href="cv.html" style="font-family:var(--mono);font-size:9px;color:var(--teal);text-decoration:none;letter-spacing:.06em;">Open full page ↗</a>
-      </div>
-      <iframe src="cv.html" class="cv-iframe" title="Ebube Okeke CV"></iframe>
-    </div>
-  </div>
-</section>
-
-<section class="sec sec-dark" id="ask-ai">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <div class="sec-tag" data-n="09">AI Knowledge Base</div>
-        <h2>Compare<br><em>model evaluations</em></h2>
-        <p class="sec-note">Powered by OpenRouter · Ask a question and see how Gemini Flash, Llama 3.1, and Mistral Nemo respond simultaneously based on Ebube's system prompt.</p>
-      </div>
-    </div>
-    <div class="kb-wrap reveal">
-      <div class="kb-top">
-        <div class="kb-left">
-          <div>
-            <div class="kb-prompt-label">Suggested questions</div>
-            <div class="kb-chips">
-              <button class="kb-chip" data-q="Walk me through your 8-step evaluation loop">Walk me through the 8-step eval loop</button>
-              <button class="kb-chip" data-q="How do you detect hallucinations in model outputs?">How do you detect hallucinations?</button>
-              <button class="kb-chip" data-q="Tell me about the Africa knowledge bias case study — what did you find and how?">The Africa bias case study</button>
-              <button class="kb-chip" data-q="What platforms and companies have you done AI evaluation work with?">Platforms you've worked with</button>
-              <button class="kb-chip" data-q="What is RLHF and how do you approach preference ranking tasks?">What is RLHF and how do you do it?</button>
-              <button class="kb-chip" data-q="What makes your approach to multimodal evaluation different?">Your multimodal evaluation approach</button>
-              <button class="kb-chip" data-q="What kinds of projects are a good fit for you?">What projects are a good fit?</button>
-              <button class="kb-chip" data-q="How do I hire Ebube or get in touch?">How do I hire you?</button>
+          <div class="ev-widget">
+            <div class="ev-widget-label">Hallucination taxonomy</div>
+            <div class="ev-widget-row"><span>Fabricated citation</span><span class="warn">HIGH risk</span></div>
+            <div class="ev-widget-row"><span>Numeric distortion</span><span class="warn">HIGH risk</span></div>
+            <div class="ev-widget-row"><span>False attribution</span><span class="warn">MED risk</span></div>
+            <div class="ev-widget-row"><span>Confident uncertainty masking</span><span class="warn">HIGH risk</span>
             </div>
           </div>
         </div>
-        <div class="kb-right">
-          <textarea class="kb-textarea" id="kb-input" placeholder="Ask anything about Ebube's evaluation work, methodology, credentials, or how to collaborate…"></textarea>
-          <button class="kb-submit" id="kb-submit">Ask the archive →</button>
-          <div class="kb-hint">Ctrl + Enter to submit · OpenRouter Multi-Model</div>
+        <div class="ev-cell">
+          <div class="ev-num">DIAG-02 / Bias Surface Testing</div>
+          <div class="ev-claim">The bias that damages models lives at the edge of the prompt space.</div>
+          <div class="ev-proof">Mainstream well-formed prompts never surface real alignment failures. I design prompts
+            at the boundaries: culturally specific, adversarially ambiguous, structurally conflicting. I quantify
+            quality gaps rather than guessing at them.</div>
+          <div class="ev-widget">
+            <div class="ev-widget-label">Cross-cultural gap test (sample)</div>
+            <div class="ev-widget-row"><span>Western institutions query</span><span class="ok">Score: 8.4/10</span>
+            </div>
+            <div class="ev-widget-row"><span>African institutions query</span><span class="warn">Score: 5.1/10</span>
+            </div>
+            <div class="ev-widget-row"><span>Quality delta</span><span class="warn">−3.3 pts ← documented</span></div>
+          </div>
         </div>
-      </div>
-      <div class="kb-response" id="kb-response" hidden>
-        <div class="kb-res-eyebrow">Multi-Model Response</div>
-        <div class="kb-res-content" id="kb-res-content"></div>
-        <div class="kb-res-footer">
-          <button class="kb-clear" id="kb-clear">Clear ✕</button>
+        <div class="ev-cell">
+          <div class="ev-num">DIAG-03 / Instruction Intent Audit</div>
+          <div class="ev-claim">Literal compliance is not instruction-following.</div>
+          <div class="ev-proof">A model can execute every keyword in an instruction while violating its intent entirely.
+            I evaluate against what the user <em>needed</em>, distinguishing surface compliance from genuine alignment.
+            This catches the failure mode that single-pass raters systematically miss.</div>
+          <div class="ev-widget">
+            <div class="ev-widget-label">Compliance vs intent check</div>
+            <div class="ev-widget-row"><span>Keyword match</span><span class="ok">✓ PASS</span></div>
+            <div class="ev-widget-row"><span>Format match</span><span class="ok">✓ PASS</span></div>
+            <div class="ev-widget-row"><span>Intent match</span><span class="warn">✗ FAIL</span></div>
+            <div class="ev-widget-row"><span>Verdict</span><span class="warn">REJECT</span></div>
+          </div>
+        </div>
+        <div class="ev-cell">
+          <div class="ev-num">DIAG-04 / Consistency Stress Test</div>
+          <div class="ev-claim">Peak scores hide variance. Variance kills production reliability.</div>
+          <div class="ev-proof">I run semantic equivalence batteries, same intent, different surface phrasing, to
+            surface the variance that makes models feel unreliable to real users. A model with 9/10 peak and 4/10 floor
+            is worse than one with consistent 7/10.</div>
+          <div class="ev-widget">
+            <div class="ev-widget-label">Semantic equivalence test (n=10)</div>
+            <div class="ev-widget-row"><span>Peak response</span><span class="ok">9.2/10</span></div>
+            <div class="ev-widget-row"><span>Floor response</span><span class="warn">3.8/10</span></div>
+            <div class="ev-widget-row"><span>Variance flag</span><span class="warn">UNSTABLE</span></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="sec sec-dark" id="contact">
-  <div class="wrap">
-    <div class="contact-left">
-      <div class="sec-tag" data-n="10">Contact</div>
-      <h2>Let's talk<br>about your <em>eval pipeline</em></h2>
-      <div class="contact-data">
-        <div class="contact-item"><span class="ci-icon">@</span><span class="ci-val"><a href="mailto:charlesgigz7@gmail.com">charlesgigz7@gmail.com</a></span></div>
-        <div class="contact-item"><span class="ci-icon">☎</span><span class="ci-val">+234 905 989 5558</span></div>
-        <div class="contact-item"><span class="ci-icon">⌖</span><span class="ci-val">Remote Global</span></div>
-        <div class="contact-item"><span class="ci-icon">✓</span><span class="ci-val">Available · Immediate start</span></div>
-      </div>
-      <div class="social-links">
-        <a class="social-link" href="https://www.linkedin.com/in/ebubeco" target="_blank" rel="noopener">LinkedIn ↗</a>
-        <a class="social-link" href="https://github.com/ebubeco" target="_blank" rel="noopener">GitHub ↗</a>
-      </div>
-      <div class="fit-filter">
-        <div class="ff-label">Good fit if you need</div>
-        <div class="ff-rows">
-          <div class="ff-row">RLHF / preference ranking at scale</div>
-          <div class="ff-row">Hallucination detection across domains</div>
-          <div class="ff-row">Adversarial testing &amp; red-teaming</div>
-          <div class="ff-row">Cross-cultural or multilingual QA</div>
-          <div class="ff-row">Multimodal evaluation (image-text)</div>
-          <div class="ff-row">Data pipeline audit &amp; normalisation</div>
+  <section id="work" class="sec sec-dark">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-left">
+          <div class="sec-tag" data-n="02 ─">Case Studies</div>
+          <h2>Documented <em>proof.</em></h2>
+          <p class="sec-note">Four real evaluation problems. The method used. The outcome produced. No job-description
+            language.</p>
         </div>
       </div>
+      <div class="cases">
+        <div class="case reveal">
+          <div class="c-meta">
+            <div class="c-type">RLHF · Hallucination</div>
+            <div class="c-name">Plausible-Sounding Fabrication Detection</div>
+            <div class="c-id">CASE-001 · 2024</div>
+          </div>
+          <div class="c-body">
+            <div class="c-section">
+              <div class="c-section-lbl">Problem</div>
+              <div class="c-section-txt">A model produced responses that were structurally convincing, correct format,
+                confident tone, but embedded subtly fabricated citations and distorted statistics. Surface-level raters
+                scored them highly. The error was invisible without a verification layer.</div>
+            </div>
+            <div class="c-section">
+              <div class="c-section-lbl">Method</div>
+              <div class="c-section-txt">Built a <strong>systematic fact-verification pass</strong> for all quantitative
+                responses. Cross-referenced claims against primary sources. Developed a 4-type hallucination taxonomy.
+                Documented reproducible prompt conditions that reliably triggered each failure mode.</div>
+            </div>
+            <div class="c-section">
+              <div class="c-section-lbl">Outcome</div>
+              <div class="c-section-txt">Uncovered a recurring pattern specific to quantitative + confident-tone
+                responses. Escalated with reproducible evidence for targeted fine-tuning. The failure class was entirely
+                invisible to the prior evaluation pass.</div>
+            </div>
+          </div>
+          <div class="c-right">
+            <div class="c-badge hi">Hallucination Taxonomy</div>
+            <div class="c-badge">Fact Verification</div>
+            <div class="c-badge">RLHF Ranking</div>
+            <div class="c-badge">Pattern Analysis</div>
+            <div class="c-impact">
+              <div class="c-impact-lbl">Key outcome</div>
+              <div class="c-impact-val">4 failure classes<br>identified</div>
+            </div>
+          </div>
+        </div>
+        <div class="case reveal">
+          <div class="c-meta">
+            <div class="c-type">Bias · Cross-Cultural QA</div>
+            <div class="c-name">Quantifying the Africa Knowledge Gap</div>
+            <div class="c-id">CASE-002 · 2024</div>
+          </div>
+          <div class="c-body">
+            <div class="c-section">
+              <div class="c-section-lbl">Problem</div>
+              <div class="c-section-txt">Model responses about African institutions, geography, and cultural context
+                were systematically lower quality than equivalent Western-domain responses. The gap was invisible to
+                evaluators applying US-centric scoring rubrics, a meta-bias in the evaluation itself.</div>
+            </div>
+            <div class="c-section">
+              <div class="c-section-lbl">Method</div>
+              <div class="c-section-txt">Designed a <strong>parallel prompt battery</strong>, matched across Western
+                and African contexts in information density and complexity. Applied identical rubrics to both sets.
+                Tracked quality variance by region, knowledge domain, and question type.</div>
+            </div>
+            <div class="c-section">
+              <div class="c-section-lbl">Outcome</div>
+              <div class="c-section-txt">Quantified a 3.3-point average quality gap (out of 10) correlated with training
+                data distribution. Structured evidence informed data collection prioritisation decisions for the
+                affected domain directly.</div>
+            </div>
+          </div>
+          <div class="c-right">
+            <div class="c-badge hi">Bias Detection</div>
+            <div class="c-badge">Cross-Cultural QA</div>
+            <div class="c-badge">Parallel Prompt Design</div>
+            <div class="c-impact">
+              <div class="c-impact-lbl">Measured gap</div>
+              <div class="c-impact-val">−3.3 pts<br>quality delta</div>
+            </div>
+          </div>
+        </div>
+        <div class="case reveal">
+          <div class="c-meta">
+            <div class="c-type">Data Ops · Validation</div>
+            <div class="c-name">50K-Point Schema Normalisation</div>
+            <div class="c-id">CASE-003 · 2024</div>
+          </div>
+          <div class="c-body">
+            <div class="c-section">
+              <div class="c-section-lbl">Problem</div>
+              <div class="c-section-txt">An AI training dataset accumulated silent schema drift across batches from
+                multiple annotation sources. No hard errors, just inconsistent labelling conventions that would corrupt
+                model signal if left unfixed, with no surface-level indicator that anything was wrong.</div>
+            </div>
+            <div class="c-section">
+              <div class="c-section-lbl">Method</div>
+              <div class="c-section-txt">Built a <strong>cross-batch consistency audit</strong> mapping every deviation
+                category. Identified schema drift vectors. Produced a normalisation guide aligning all batches to a
+                single standard, with documented correction rules per deviation type.</div>
+            </div>
+            <div class="c-section">
+              <div class="c-section-lbl">Outcome</div>
+              <div class="c-section-txt">99%+ accuracy across all 50,000+ entries. Audit documentation accepted without
+                revision through multiple QA cycles. Zero post-delivery escalations. Reusable normalisation framework
+                produced as a by-product.</div>
+            </div>
+          </div>
+          <div class="c-right">
+            <div class="c-badge hi">99%+ Accuracy</div>
+            <div class="c-badge">Schema Audit</div>
+            <div class="c-badge">Audit-Ready Docs</div>
+            <div class="c-badge">Pipeline QC</div>
+            <div class="c-impact">
+              <div class="c-impact-lbl">Scale</div>
+              <div class="c-impact-val">50,000+<br>entries</div>
+            </div>
+          </div>
+        </div>
+        <div class="case reveal">
+          <div class="c-meta">
+            <div class="c-type">Adversarial · Prompt Engineering</div>
+            <div class="c-name">6-Category Edge Case Library</div>
+            <div class="c-id">CASE-004 · 2024</div>
+          </div>
+          <div class="c-body">
+            <div class="c-section">
+              <div class="c-section-lbl">Problem</div>
+              <div class="c-section-txt">Standard evaluation suites used clean, well-formed prompts that don't resemble
+                real user behaviour. Instruction-following failures that surface in production were never caught during
+                evaluation because the conditions that trigger them were never tested.</div>
+            </div>
+            <div class="c-section">
+              <div class="c-section-lbl">Method</div>
+              <div class="c-section-txt">Designed a structured adversarial library across <strong>6 failure
+                  categories</strong>: conflicting constraints, implicit assumptions, format-content tension, multi-step
+                dependencies, scope creep, tone-instruction mismatch. Each entry paired with annotated expected
+                behaviour and documented failure evidence.</div>
+            </div>
+            <div class="c-section">
+              <div class="c-section-lbl">Outcome</div>
+              <div class="c-section-txt">Reusable evaluation infrastructure applicable across model versions for
+                regression tracking. Surfaced entire failure categories invisible to single-pass evaluation. Library
+                designed for team-scale use and ongoing expansion.</div>
+            </div>
+          </div>
+          <div class="c-right">
+            <div class="c-badge hi">Adversarial Design</div>
+            <div class="c-badge">Regression Infra</div>
+            <div class="c-badge">Stress Testing</div>
+            <div class="c-impact">
+              <div class="c-impact-lbl">Categories</div>
+              <div class="c-impact-val">6 failure<br>archetypes</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div>
-      <form class="contact-form" onsubmit="handleContactForm(event)">
-        <div class="form-field">
-          <label class="form-label">Name</label>
-          <input class="form-input" type="text" placeholder="Your name" required/>
-        </div>
-        <div class="form-field">
-          <label class="form-label">Email</label>
-          <input class="form-input" type="email" placeholder="your@email.com" required/>
-        </div>
-        <div class="form-field">
-          <label class="form-label">I'm looking for</label>
-          <select class="form-select">
-            <option value="">Select engagement type</option>
-            <option>RLHF / Preference Ranking</option>
-            <option>Hallucination Detection</option>
-            <option>Adversarial / Red-Team Testing</option>
-            <option>Multimodal Evaluation</option>
-            <option>Cross-Cultural QA</option>
-            <option>Data Pipeline QC / Audit</option>
-            <option>Full-time / Contract role</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label class="form-label">Message</label>
-          <textarea class="form-textarea" placeholder="Tell me about your evaluation needs, timeline, and scale..."></textarea>
-        </div>
-        <button class="form-submit" type="submit">Send message →</button>
-        <div class="form-note">Or email directly: charlesgigz7@gmail.com</div>
-      </form>
-    </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  <div class="ft-left">© 2026 Ebubechukwu Okeke · AI Evaluation &amp; QA Specialist · Remote Global</div>
-  <div class="ft-right">
-    <a href="system.html">System</a>
-    <a href="artifacts.html">Artifacts</a>
-    <a href="cv.html">CV</a>
-    <a href="https://www.linkedin.com/in/ebubeco" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://github.com/ebubeco" target="_blank" rel="noopener">GitHub</a>
-    <a href="mailto:charlesgigz7@gmail.com">Email</a>
-  </div>
-</footer>
-
-<button id="ai-chat-btn" title="Ask about Ebube's work">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-  <div class="btn-pulse"></div>
-</button>
-<div id="ai-panel">
-  <div class="ai-panel-head">
-    <div class="ai-head-id">
-      <div class="ai-head-dot"></div>
-      <div><div class="ai-head-name">EVAL ASSISTANT</div><div class="ai-head-sub">Ask about Ebube's work</div></div>
+  <section id="skills" class="sec">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-left">
+          <div class="sec-tag" data-n="03 ─">Technical Stack</div>
+          <h2>Full <em>capability set.</em></h2>
+        </div>
+      </div>
+      <div class="sk-grid reveal">
+        <div class="sk-block">
+          <div class="sk-title">Core Evaluation</div>
+          <div class="sk-tags"><span class="sk-tag">RLHF Preference Ranking</span><span class="sk-tag">Hallucination
+              Detection</span><span class="sk-tag">Bias &amp; Safety Eval</span><span class="sk-tag">E-E-A-T
+              Rating</span><span class="sk-tag">Adversarial Prompting</span><span class="sk-tag">Side-by-Side
+              Comparison</span><span class="sk-tag">Instruction-Following QA</span><span class="sk-tag">Edge Case
+              Design</span></div>
+        </div>
+        <div class="sk-block">
+          <div class="sk-title">AI Systems &amp; Platforms</div>
+          <div class="sk-tags"><span class="sk-tag">Claude</span><span class="sk-tag">GPT-4 / GPT-5</span><span
+              class="sk-tag">Gemini</span><span class="sk-tag">Labelbox</span><span class="sk-tag">Vellum /
+              Maxim</span><span class="sk-tag">Eeval (Microsoft)</span><span class="sk-tag">NotebookLM Pro</span><span
+              class="sk-tag">Metamate</span></div>
+        </div>
+        <div class="sk-block">
+          <div class="sk-title">Technical</div>
+          <div class="sk-tags"><span class="sk-tag">Python</span><span class="sk-tag">SQL</span><span
+              class="sk-tag">Excel (Advanced)</span><span class="sk-tag">Git / GitHub</span><span class="sk-tag">API
+              Testing</span><span class="sk-tag">Jupyter Notebook</span></div>
+        </div>
+        <div class="sk-block">
+          <div class="sk-title">Domain Depth</div>
+          <div class="sk-tags"><span class="sk-tag">STEM Reasoning</span><span class="sk-tag">Technical
+              Content</span><span class="sk-tag">Software Engineering QA</span><span class="sk-tag">Research
+              Validation</span><span class="sk-tag">Structured Data Analysis</span></div>
+        </div>
+        <div class="sk-block">
+          <div class="sk-title">Data Operations</div>
+          <div class="sk-tags"><span class="sk-tag">Dataset Validation</span><span class="sk-tag">Annotation
+              QA</span><span class="sk-tag">Schema Normalisation</span><span class="sk-tag">Audit
+              Documentation</span><span class="sk-tag">Pipeline QC</span><span class="sk-tag">Cross-batch
+              Consistency</span></div>
+        </div>
+        <div class="sk-block">
+          <div class="sk-title">Education</div>
+          <div class="sk-tags"><span class="sk-tag">B.Tech Computer Science</span><span class="sk-tag">FUTO ·
+              2020–2025</span><span class="sk-tag">Minor: Software Engineering</span><span class="sk-tag">AI Systems
+              Focus</span><span class="sk-tag">Data Analysis</span></div>
+        </div>
+      </div>
     </div>
-    <button class="ai-close" id="ai-close">✕</button>
-  </div>
-  <div id="ai-messages" class="ai-messages">
-    <div class="ai-msg bot" style="max-width: 100%;">
-      <div class="ai-bubble" style="background:var(--faint);color:var(--text);border:1px solid var(--border);">Hi. Ask a question and I'll route it to <strong>Gemini</strong>, <strong>Llama</strong>, and <strong>Mistral</strong> simultaneously. What would you like to know?</div>
-      <div class="ai-msg-time" style="margin-top:2px;">now</div>
-    </div>
-  </div>
-  <div id="ai-suggestions" class="ai-suggestions">
-    <button class="ai-sug">What's your evaluation method?</button>
-    <button class="ai-sug">Tell me about the Africa bias case</button>
-    <button class="ai-sug">Are you available for hire?</button>
-    <button class="ai-sug">How do you detect hallucinations?</button>
-  </div>
-  <div class="ai-input-area">
-    <textarea class="ai-input" id="ai-input" placeholder="Ask anything about Ebube's work..." rows="1"></textarea>
-    <button class="ai-send" id="ai-send">Send</button>
-  </div>
-</div>
+  </section>
 
-<script src="/main.js"></script>
-<script>
-function handleContactForm(e){
-  e.preventDefault();
-  const btn = e.target.querySelector('.form-submit');
-  btn.textContent = 'Message sent ✓';
-  btn.style.background = 'var(--green)';
-  setTimeout(() => { btn.textContent = 'Send message →'; btn.style.background = ''; }, 3000);
-}
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
-<script defer src="/_vercel/speed-insights/script.js"></script>
+  <section id="credentials" class="sec sec-dark">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-left">
+          <div class="sec-tag" data-n="04 ─">Platform Credentials</div>
+          <h2>Verified. <em>Operational.</em></h2>
+          <p class="sec-note">Green = platform-verified. Amber = active contractor. Not self-reported, these require
+            passing platform-specific screening.</p>
+        </div>
+      </div>
+      <div class="cred-row reveal">
+        <div class="cred-block">
+          <div class="cred-logo">Micro1.ai</div>
+          <div class="cred-role">Search Quality Rating · AI Data Annotation · Content Quality Evaluation</div>
+          <div class="cred-status v">
+            <div class="cred-dot"></div>Platform-Verified
+          </div>
+        </div>
+        <div class="cred-block">
+          <div class="cred-logo">Outlier</div>
+          <div class="cred-role">AI evaluation · RLHF tasks · Data annotation</div>
+          <div class="cred-status a">
+            <div class="cred-dot"></div>Active Contractor
+          </div>
+        </div>
+        <div class="cred-block">
+          <div class="cred-logo">Scale AI</div>
+          <div class="cred-role">AI evaluation · Data operations</div>
+          <div class="cred-status a">
+            <div class="cred-dot"></div>Active Contractor
+          </div>
+        </div>
+        <div class="cred-block">
+          <div class="cred-logo">Mercor</div>
+          <div class="cred-role">AI evaluation</div>
+          <div class="cred-status a">
+            <div class="cred-dot"></div>Active Contractor
+          </div>
+        </div>
+      </div>
+      <div style="height:1px;"></div>
+      <div class="cred-row reveal" style="margin-top:1px;">
+        <div class="cred-block">
+          <div class="cred-logo">OneForma</div>
+          <div class="cred-role">Data annotation · Content evaluation</div>
+          <div class="cred-status a">
+            <div class="cred-dot"></div>Active Contractor
+          </div>
+        </div>
+        <div class="cred-block">
+          <div class="cred-logo">Upwork</div>
+          <div class="cred-role">AI evaluation · Freelance data ops</div>
+          <div class="cred-status a">
+            <div class="cred-dot"></div>Active
+          </div>
+        </div>
+        <div class="cred-block">
+          <div class="cred-logo">FUTO</div>
+          <div class="cred-role">B.Tech Computer Science · Minor: Software Engineering · 2020–2025</div>
+          <div class="cred-status v">
+            <div class="cred-dot"></div>Degree
+          </div>
+        </div>
+        <div class="cred-block"
+          style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;border:1px dashed var(--border2);background:transparent;">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.08em;text-align:center;">
+            GitHub portfolio<br>link pending</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="edge" class="sec">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-left">
+          <div class="sec-tag" data-n="05 ─">Why This Profile Is Different</div>
+          <h2>What most evaluators<br><em>don't do.</em></h2>
+        </div>
+      </div>
+      <div class="edge-row reveal">
+        <div class="edge-cell">
+          <div class="edge-icon">⌖</div>
+          <div class="edge-title">I classify failures, not just flag them</div>
+          <div class="edge-text">Every error I report comes with a taxonomy label, a reproduction condition, and a
+            suggested diagnostic path. "Wrong answer" is not a useful signal for a model team. A reproducible failure
+            pattern is.</div>
+        </div>
+        <div class="edge-cell">
+          <div class="edge-icon">◈</div>
+          <div class="edge-title">I design prompts that break things deliberately</div>
+          <div class="edge-text">My adversarial prompt library isn't a list of tricky questions, it's a structured
+            stress-test battery with 6 failure archetypes, annotated expected behaviour, and regression-tracking
+            capability. Built to be reused, not just run once.</div>
+        </div>
+        <div class="edge-cell">
+          <div class="edge-icon">◯</div>
+          <div class="edge-title">I bring a geographic edge most evaluators lack</div>
+          <div class="edge-text">As a Nigerian evaluator covering a US-dominant AI ecosystem, I catch the cross-cultural
+            quality gaps that are invisible to evaluators who grew up inside the Western reference frame. I've measured
+            and documented this gap. It's real and significant.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="sec sec-dark">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-left">
+          <div class="sec-tag" data-n="06 ─">Contact</div>
+          <h2>Let's build <em>better</em> models.</h2>
+        </div>
+      </div>
+      <div class="contact-shell reveal">
+        <div class="contact-left">
+          <p>I'm open to RLHF evaluation contracts, red-teaming engagements, dataset QA projects, and full-time AI
+            evaluation roles at labs. I respond within 24 hours to every serious inquiry.</p>
+          <div class="contact-fields">
+            <div class="cf-row"><span class="cf-key">Email</span><span class="cf-val"><a
+                  href="mailto:charlesgigz7@gmail.com">charlesgigz7@gmail.com</a></span></div>
+            <div class="cf-row"><span class="cf-key">Phone</span><span class="cf-val">+234 905 989 5558</span></div>
+            <div class="cf-row"><span class="cf-key">X</span><span class="cf-val"><a href="https://x.com/ebubeco"
+                  target="_blank">@ebubeco</a></span></div>
+            <div class="cf-row"><span class="cf-key">Location</span><span class="cf-val">Lagos, Nigeria ·
+                Remote-first</span></div>
+            <div class="cf-row"><span class="cf-key">GitHub</span><span class="cf-val"><a href="https://github.com"
+                  target="_blank">Add your GitHub link here</a></span></div>
+          </div>
+        </div>
+        <div class="contact-right">
+          <div class="avail-tag">
+            <div class="avail-tag-dot"></div>Currently Available
+          </div>
+          <h3>Open to contracts<br>and <em>full-time roles.</em></h3>
+          <p>Evaluators who classify failure modes, design adversarial test batteries, quantify cross-cultural gaps, and
+            ship audit-ready documentation are not common. If you need one, I'm available.</p>
+          <div class="contact-scope">
+            <div class="cs-item">RLHF preference ranking &amp; evaluation</div>
+            <div class="cs-item">Hallucination audits &amp; classification</div>
+            <div class="cs-item">Adversarial prompt library design</div>
+            <div class="cs-item">Cross-cultural bias testing</div>
+            <div class="cs-item">Large-scale dataset QA &amp; validation</div>
+            <div class="cs-item">Full-time AI evaluation roles at labs</div>
+          </div>
+          <a href="mailto:charlesgigz7@gmail.com" class="cta-p">Send a Message ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="ft-left">© 2025 Ebubechukwu Okeke · AI Evaluation Specialist · Lagos, Nigeria</div>
+    <div class="ft-right">
+      <a href="mailto:charlesgigz7@gmail.com">Email</a>
+      <a href="https://x.com/ebubeco" target="_blank">X / Twitter</a>
+      <a href="#work">Case Studies</a>
+      <a href="#evidence">Methodology</a>
+    </div>
+  </footer>
+
+  <script>
+    const cur = document.getElementById('cur'), dot = document.getElementById('cur-dot');
+    let mx = 0, my = 0, cx = 0, cy = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx + 'px'; dot.style.top = my + 'px'; });
+    (function loop() { cx += (mx - cx) * .18; cy += (my - cy) * .18; cur.style.left = cx + 'px'; cur.style.top = cy + 'px'; requestAnimationFrame(loop); })();
+    document.querySelectorAll('a,button,.ev-cell,.case,.edge-cell,.cred-block,.sk-tag').forEach(el => {
+      el.addEventListener('mouseenter', () => cur.classList.add('hot'));
+      el.addEventListener('mouseleave', () => cur.classList.remove('hot'));
+    });
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const children = [...e.target.querySelectorAll('.ev-cell,.case,.edge-cell,.cred-block,.sk-block')];
+          if (children.length) {
+            children.forEach((c, i) => {
+              c.style.opacity = '0'; c.style.transform = 'translateY(18px)';
+              setTimeout(() => { c.style.transition = 'opacity .6s ease,transform .6s ease'; c.style.opacity = '1'; c.style.transform = 'translateY(0)'; }, i * 80);
+            });
+          }
+          e.target.classList.add('on'); obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
 </body>
-</html>
 
+</html>

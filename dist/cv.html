@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CV — Ebube Okeke · AI Evaluation &amp; QA Specialist</title>
+<meta name="description" content="Curriculum Vitae for Ebubechukwu Okeke — AI Evaluation & QA Specialist based in Lagos, Nigeria."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=IBM+Plex+Mono:wght@400;500&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/shared.css"/>
+<style>
+/* CV STYLES */
+.cv-layout{display:grid;grid-template-columns:260px 1fr;gap:0;min-height:calc(100vh - 52px);border-top:1px solid var(--border);}
+.cv-sidebar{border-right:1px solid var(--border);padding:40px 28px;background:var(--surface);}
+.cv-main{padding:48px 52px;}
+
+.cv-name{font-family:var(--serif);font-size:26px;font-weight:700;color:var(--text);line-height:1.1;margin-bottom:4px;}
+.cv-title{font-family:var(--mono);font-size:9px;color:var(--teal);letter-spacing:.15em;text-transform:uppercase;margin-bottom:20px;}
+
+.cv-contact-item{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;}
+.cci-icon{font-family:var(--mono);font-size:9px;color:var(--teal);width:12px;flex-shrink:0;margin-top:1px;}
+.cci-val{font-size:11px;color:var(--muted);line-height:1.5;}
+.cci-val a{color:var(--muted);text-decoration:none;}
+.cci-val a:hover{color:var(--teal);}
+
+.cv-s-label{font-family:var(--mono);font-size:8px;color:var(--dim);letter-spacing:.18em;text-transform:uppercase;margin:24px 0 10px;}
+.cv-avail{font-family:var(--mono);font-size:9px;color:var(--teal);border:1px solid var(--teal-mid);padding:5px 10px;background:var(--teal-dim);display:inline-block;margin-bottom:4px;}
+.cv-sidebar-sk{display:flex;flex-direction:column;gap:5px;}
+.cv-sk-tag{font-family:var(--mono);font-size:9px;color:var(--muted);padding:4px 0;border-bottom:1px solid var(--border);}
+
+.cv-main-section{margin-bottom:40px;}
+.cv-sec-label{font-family:var(--mono);font-size:8px;color:var(--teal);letter-spacing:.2em;text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.cv-sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
+
+.cv-summary{font-size:13px;color:var(--muted);line-height:1.9;margin-bottom:0;}
+.cv-summary strong{color:var(--text);font-weight:500;}
+
+.cv-job{margin-bottom:28px;}
+.cj-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:6px;flex-wrap:wrap;}
+.cj-org{font-size:14px;color:var(--text);font-weight:500;}
+.cj-dates{font-family:var(--mono);font-size:9px;color:var(--dim);}
+.cj-role{font-family:var(--mono);font-size:10px;color:var(--teal);letter-spacing:.04em;margin-bottom:8px;}
+.cj-bullets{list-style:none;display:flex;flex-direction:column;gap:5px;}
+.cj-bullets li{font-size:12px;color:var(--muted);padding-left:14px;position:relative;line-height:1.7;}
+.cj-bullets li::before{content:'—';position:absolute;left:0;color:var(--dim);font-size:10px;}
+
+.cv-metrics-row{display:flex;gap:24px;flex-wrap:wrap;padding:16px 20px;background:var(--faint);border:1px solid var(--border);margin-bottom:28px;}
+.cv-met{display:flex;flex-direction:column;gap:2px;}
+.cv-met-val{font-family:var(--mono);font-size:18px;color:var(--teal);font-weight:500;}
+.cv-met-label{font-family:var(--mono);font-size:8px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;}
+
+.cv-cred{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:12px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.cv-cred:last-child{border-bottom:none;}
+.cc-org{font-size:12px;color:var(--text);font-weight:500;margin-bottom:2px;}
+.cc-role{font-size:11px;color:var(--muted);}
+.cc-dates{font-family:var(--mono);font-size:9px;color:var(--dim);white-space:nowrap;}
+
+.cv-skill-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+.cv-skill-item{display:flex;flex-direction:column;gap:3px;}
+.cs-name{font-family:var(--mono);font-size:10px;color:var(--muted);}
+.cs-bar-wrap{height:2px;background:var(--border2);overflow:hidden;}
+.cs-bar{height:100%;background:var(--teal);width:0;animation:grow .8s ease both;}
+
+.cv-download-bar{display:flex;align-items:center;gap:12px;padding:14px 0;margin-bottom:32px;border-bottom:1px solid var(--border);}
+.cv-print-note{font-family:var(--mono);font-size:9px;color:var(--dim);}
+
+@media print{
+  #topbar,#ai-chat-btn,#ai-panel,footer,.cv-download-bar{display:none!important;}
+  .cv-layout{grid-template-columns:200px 1fr;}
+  body{background:white!important;color:#0A0A0C!important;}
+  :root{--bg:white;--surface:#f5f5f5;--text:#0A0A0C;--muted:#444;--dim:#888;--border:#ddd;--teal:#00A898;}
+}
+
+@media(max-width:900px){
+  .cv-layout{grid-template-columns:1fr;}
+  .cv-sidebar{border-right:none;border-bottom:1px solid var(--border);}
+  .cv-main{padding:32px 24px;}
+  .cv-skill-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="cur-dot"></div>
+
+<header id="topbar">
+  <a class="tb-id" href="index.html">EBO // EVAL</a>
+  <nav><ul class="tb-nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="system.html">System</a></li>
+    <li><a href="artifacts.html">Artifacts</a></li>
+    <li><a href="cv.html">CV</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul></nav>
+  <div class="tb-right">
+    <div class="tb-pill"><div class="tb-pulse"></div>Available · Remote</div>
+    <button id="theme-toggle" title="Toggle light/dark mode">☀</button>
+  </div>
+</header>
+
+<div class="cv-layout" style="margin-top:52px;">
+  <aside class="cv-sidebar">
+    <div class="cv-name">Ebubechukwu Okeke</div>
+    <div class="cv-title">AI Evaluation &amp; QA Specialist</div>
+
+    <div class="cv-contact-item"><span class="cci-icon">@</span><span class="cci-val"><a href="mailto:charlesgigz7@gmail.com">charlesgigz7@gmail.com</a></span></div>
+    <div class="cv-contact-item"><span class="cci-icon">☎</span><span class="cci-val">+234 905 989 5558</span></div>
+    <div class="cv-contact-item"><span class="cci-icon">⌖</span><span class="cci-val">Lagos, Nigeria · Remote</span></div>
+    <div class="cv-contact-item"><span class="cci-icon">in</span><span class="cci-val"><a href="https://www.linkedin.com/in/ebubeco" target="_blank" rel="noopener">linkedin.com/in/ebubeco</a></span></div>
+    <div class="cv-contact-item"><span class="cci-icon">gh</span><span class="cci-val"><a href="https://github.com/ebubeco" target="_blank" rel="noopener">github.com/ebubeco</a></span></div>
+    <div class="cv-contact-item"><span class="cci-icon">↗</span><span class="cci-val"><a href="https://ebubeco-ai-eval.vercel.app" target="_blank" rel="noopener">ebubeco-ai-eval.vercel.app</a></span></div>
+
+    <div class="cv-s-label">Availability</div>
+    <div class="cv-avail">Open · Immediate start</div>
+
+    <div class="cv-s-label">Core Skills</div>
+    <div class="cv-sidebar-sk">
+      <div class="cv-sk-tag">RLHF / Preference Ranking</div>
+      <div class="cv-sk-tag">Hallucination Detection</div>
+      <div class="cv-sk-tag">Adversarial Testing</div>
+      <div class="cv-sk-tag">Multimodal Evaluation</div>
+      <div class="cv-sk-tag">Bias Detection</div>
+      <div class="cv-sk-tag">Cross-Cultural QA</div>
+      <div class="cv-sk-tag">Data Pipeline QC</div>
+      <div class="cv-sk-tag">Schema Audit</div>
+      <div class="cv-sk-tag">Rubric Design</div>
+      <div class="cv-sk-tag">Search Quality Rating</div>
+      <div class="cv-sk-tag">E-E-A-T Evaluation</div>
+      <div class="cv-sk-tag">Python</div>
+      <div class="cv-sk-tag">NLP</div>
+    </div>
+
+    <div class="cv-s-label">Education</div>
+    <div class="cv-sk-tag" style="padding:6px 0;line-height:1.5;">B.Tech Computer Science<br><span style="color:var(--dim)">FUTO · 2020–2025</span></div>
+  </aside>
+
+  <main class="cv-main">
+    <div class="cv-download-bar">
+      <a href="/Ebube_Okeke_CV.pdf" download class="cta-p" style="font-size:9px;padding:9px 18px;">Download PDF →</a>
+      <span class="cv-print-note">Or use browser print (Ctrl/Cmd + P) to save as PDF</span>
+    </div>
+
+    <div class="cv-main-section">
+      <div class="cv-sec-label">Profile</div>
+      <p class="cv-summary">
+        AI Evaluation &amp; QA Specialist with <strong>2+ years of applied experience</strong> across RLHF ranking, hallucination detection, adversarial testing, multimodal evaluation, and large-scale data operations. Developed a reproducible <strong>8-step evaluation loop</strong> producing consistent, defensible quality decisions across task types and domains. Active on Micro1 (platform-verified Mid Level), Outlier, Scale AI, and TELUS International. <strong>1,200+ evaluation tasks completed, 50,000+ data points validated at 99%+ accuracy, 0 audit escalations.</strong>
+      </p>
+    </div>
+
+    <div class="cv-main-section">
+      <div class="cv-sec-label">Key Metrics</div>
+      <div class="cv-metrics-row">
+        <div class="cv-met"><span class="cv-met-val">1,200+</span><span class="cv-met-label">Eval Tasks</span></div>
+        <div class="cv-met"><span class="cv-met-val">50K+</span><span class="cv-met-label">Data Points</span></div>
+        <div class="cv-met"><span class="cv-met-val">99%+</span><span class="cv-met-label">Accuracy</span></div>
+        <div class="cv-met"><span class="cv-met-val">30+</span><span class="cv-met-label">Failure Patterns</span></div>
+        <div class="cv-met"><span class="cv-met-val">0</span><span class="cv-met-label">Audit Escalations</span></div>
+      </div>
+    </div>
+
+    <div class="cv-main-section">
+      <div class="cv-sec-label">Experience</div>
+
+      <div class="cv-job">
+        <div class="cj-header"><span class="cj-org">Micro1.ai</span><span class="cj-dates">Aug 2024 – Present</span></div>
+        <div class="cj-role">AI Data Annotation Specialist · Search Quality Rater · Platform-Verified Mid Level</div>
+        <ul class="cj-bullets">
+          <li>Platform-verified status across Search Quality Rating, AI Data Annotation, and Content Quality Evaluation. Micro1 tests and ranks annotators before activation.</li>
+          <li>Applied 8-step evaluation loop to RLHF ranking, instruction-following assessment, and hallucination detection tasks.</li>
+          <li>Documented adversarial failure patterns across 6 constraint-hierarchy categories with reproducible prompt conditions.</li>
+          <li>Maintained zero audit escalations across all task categories.</li>
+        </ul>
+      </div>
+
+      <div class="cv-job">
+        <div class="cj-header"><span class="cj-org">TELUS International</span><span class="cj-dates">Jan 2024 – Jul 2024</span></div>
+        <div class="cj-role">Search Quality Rater</div>
+        <ul class="cj-bullets">
+          <li>Evaluated search results for relevance, intent alignment, and E-E-A-T signals across English-language queries.</li>
+          <li>Designed parallel prompt batteries to measure systematic quality gaps between Western and African knowledge domains, identifying a 3.3-point average quality gap.</li>
+          <li>Documented rubric bias as a distinct failure mode from model bias — identified that US-centric evaluation rubrics constitute a meta-failure in the evaluation pipeline itself.</li>
+        </ul>
+      </div>
+
+      <div class="cv-job">
+        <div class="cj-header"><span class="cj-org">Outlier</span><span class="cj-dates">Ongoing</span></div>
+        <div class="cj-role">AI Evaluator · RLHF Specialist</div>
+        <ul class="cj-bullets">
+          <li>RLHF preference ranking and comparative response quality assessment across coding, reasoning, and creative tasks.</li>
+          <li>Hallucination detection using entailed vs compatible methodology — 30+ recurring failure patterns documented across evaluation workflows.</li>
+          <li>Identified multimodal evaluation gaps: developed dual-layer protocol separating text coherence from visual grounding accuracy.</li>
+        </ul>
+      </div>
+
+      <div class="cv-job">
+        <div class="cj-header"><span class="cj-org">Scale AI</span><span class="cj-dates">Ongoing</span></div>
+        <div class="cj-role">AI Evaluator · Data Operations</div>
+        <ul class="cj-bullets">
+          <li>AI evaluation and data annotation across model quality assessment tasks.</li>
+          <li>Applied constraint hierarchy analysis to adversarial prompt scenarios — operator-layer constraints evaluated before user-layer preferences.</li>
+        </ul>
+      </div>
+
+      <div class="cv-job">
+        <div class="cj-header"><span class="cj-org">OneForma</span><span class="cj-dates">Jun 2023 – Dec 2023</span></div>
+        <div class="cj-role">Data Operations Specialist</div>
+        <ul class="cj-bullets">
+          <li>Cross-batch consistency audit across 50,000+ data point annotation dataset — 99%+ accuracy maintained across all entries.</li>
+          <li>Identified silent schema drift across batches from multiple annotation sources — produced normalisation guide aligning all batches to single standard.</li>
+          <li>Audit documentation accepted without revision through multiple QA cycles. Zero post-delivery escalations.</li>
+        </ul>
+      </div>
+
+      <div class="cv-job">
+        <div class="cj-header"><span class="cj-org">Mercor / Upwork</span><span class="cj-dates">Ongoing</span></div>
+        <div class="cj-role">Freelance AI Evaluator</div>
+        <ul class="cj-bullets">
+          <li>AI evaluation and data operations on a freelance basis across multiple AI clients and projects.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cv-main-section">
+      <div class="cv-sec-label">Selected Case Studies</div>
+      <div class="cv-job" style="border:1px solid var(--border);padding:16px 18px;margin-bottom:12px;">
+        <div class="cj-role" style="margin-bottom:4px;">CASE-001 · Constraint &amp; Instruction Hierarchy Failures</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.75;">Exposed operator-layer constraint overrides invisible to standard evaluation. Built adversarial test battery across 6 failure categories. Prevented constraint-violating outputs from entering RLHF training datasets.</div>
+      </div>
+      <div class="cv-job" style="border:1px solid var(--border);padding:16px 18px;margin-bottom:12px;">
+        <div class="cj-role" style="margin-bottom:4px;">CASE-003 · Quantifying the Africa Knowledge Gap</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.75;">Designed parallel prompt battery across Western and African contexts. Identified 3.3-point systematic quality gap. Evidence directly informed data collection prioritisation for underrepresented domains.</div>
+      </div>
+      <div class="cv-job" style="border:1px solid var(--border);padding:16px 18px;margin-bottom:12px;">
+        <div class="cj-role" style="margin-bottom:4px;">CASE-004 · 50K-Point Schema Normalisation</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.75;">Cross-batch consistency audit across 50,000+ data point dataset. 99%+ accuracy, zero post-delivery escalations. Audit framework reused across subsequent annotation batches.</div>
+      </div>
+    </div>
+
+    <div class="cv-main-section">
+      <div class="cv-sec-label">Certifications &amp; Education</div>
+      <div class="cv-cred"><div><div class="cc-org">CipherSense &amp; DataLens Africa</div><div class="cc-role">Essentials of Data Labelling &amp; Annotation for AI Development</div></div><span class="cc-dates">Feb 2026</span></div>
+      <div class="cv-cred"><div><div class="cc-org">Federal University of Technology Owerri (FUTO)</div><div class="cc-role">B.Tech Computer Science · Minor: Software Engineering · AI Systems focus</div></div><span class="cc-dates">2020 – 2025</span></div>
+    </div>
+
+    <div class="cv-main-section">
+      <div class="cv-sec-label">Technical Proficiency</div>
+      <div class="cv-skill-grid">
+        <div class="cv-skill-item"><span class="cs-name">RLHF / Preference Ranking</span><div class="cs-bar-wrap"><div class="cs-bar" style="--w:95%;width:95%"></div></div></div>
+        <div class="cv-skill-item"><span class="cs-name">Hallucination Detection</span><div class="cs-bar-wrap"><div class="cs-bar" style="--w:95%;width:95%"></div></div></div>
+        <div class="cv-skill-item"><span class="cs-name">Adversarial / Red-Team Testing</span><div class="cs-bar-wrap"><div class="cs-bar" style="--w:90%;width:90%"></div></div></div>
+        <div class="cv-skill-item"><span class="cs-name">Multimodal Evaluation</span><div class="cs-bar-wrap"><div class="cs-bar" style="--w:85%;width:85%"></div></div></div>
+        <div class="cv-skill-item"><span class="cs-name">Bias Detection / Cross-Cultural QA</span><div class="cs-bar-wrap"><div class="cs-bar" style="--w:90%;width:90%"></div></div></div>
+        <div class="cv-skill-item"><span class="cs-name">Data Pipeline QC &amp; Schema Audit</span><div class="cs-bar-wrap"><div class="cs-bar" style="--w:95%;width:95%"></div></div></div>
+        <div class="cv-skill-item"><span class="cs-name">Search Quality Rating (E-E-A-T)</span><div class="cs-bar-wrap"><div class="cs-bar" style="--w:90%;width:90%"></div></div></div>
+        <div class="cv-skill-item"><span class="cs-name">Python</span><div class="cs-bar-wrap"><div class="cs-bar" style="--w:75%;width:75%"></div></div></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="ft-left">© 2026 Ebubechukwu Okeke · AI Evaluation &amp; QA Specialist · Lagos, Nigeria</div>
+  <div class="ft-right">
+    <a href="index.html">Home</a>
+    <a href="system.html">System</a>
+    <a href="artifacts.html">Artifacts</a>
+    <a href="https://www.linkedin.com/in/ebubeco" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:charlesgigz7@gmail.com">Email</a>
+  </div>
+</footer>
+
+<button id="ai-chat-btn" title="Ask about Ebube's work">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+  <div class="btn-pulse"></div>
+</button>
+<div id="ai-panel">
+  <div class="ai-panel-head">
+    <div class="ai-head-id">
+      <div class="ai-head-dot"></div>
+      <div><div class="ai-head-name">EVAL ASSISTANT</div><div class="ai-head-sub">Ask about Ebube's work</div></div>
+    </div>
+    <button class="ai-close" id="ai-close">✕</button>
+  </div>
+  <div id="ai-messages" class="ai-messages">
+    <div class="ai-msg bot"><div class="ai-bubble">You're viewing Ebube's CV. I can answer questions about his experience, skills, or availability. What would you like to know?</div><div class="ai-msg-time">now</div></div>
+  </div>
+  <div id="ai-suggestions" class="ai-suggestions">
+    <button class="ai-sug">What platforms does Ebube work on?</button>
+    <button class="ai-sug">Is Ebube available for hire?</button>
+    <button class="ai-sug">What's his accuracy rate?</button>
+  </div>
+  <div class="ai-input-area">
+    <textarea class="ai-input" id="ai-input" placeholder="Ask about Ebube's background..." rows="1"></textarea>
+    <button class="ai-send" id="ai-send">Send</button>
+  </div>
+</div>
+
+<script src="/main.js"></script>
+</body>
+</html>

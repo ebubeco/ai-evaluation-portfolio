@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Work Artifacts — Ebube Okeke · AI Evaluation &amp; QA Specialist</title>
+<meta name="description" content="Work samples, case studies, and evaluation artifacts from Ebubechukwu Okeke — AI Evaluation & QA Specialist."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=IBM+Plex+Mono:wght@400;500&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/shared.css"/>
+<style>
+/* ARTIFACTS PAGE */
+.artifact-filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;}
+.af-btn{font-family:var(--mono);font-size:9px;color:var(--muted);border:1px solid var(--border);padding:5px 13px;background:none;cursor:pointer;letter-spacing:.08em;transition:border-color .15s,color .15s,background .15s;}
+.af-btn:hover,.af-btn.active{border-color:var(--teal);color:var(--teal);background:var(--teal-dim);}
+.artifact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;}
+.artifact-card{border:1px solid var(--border);background:var(--card);display:flex;flex-direction:column;transition:border-color .2s,background .2s;}
+.artifact-card:hover{border-color:var(--teal-mid);background:var(--faint);}
+.ac-header{padding:20px 22px;border-bottom:1px solid var(--border);background:var(--surface);}
+.ac-id-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.ac-id{font-family:var(--mono);font-size:8px;color:var(--dim);letter-spacing:.12em;}
+.ac-year{font-family:var(--mono);font-size:8px;color:var(--muted);}
+.ac-type{font-family:var(--mono);font-size:8px;color:var(--teal);border:1px solid var(--teal-mid);padding:2px 9px;background:var(--teal-dim);margin-bottom:10px;display:inline-block;}
+.ac-name{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--text);line-height:1.25;}
+.ac-body{padding:18px 22px;flex:1;display:flex;flex-direction:column;gap:14px;}
+.ac-section-label{font-family:var(--mono);font-size:7px;color:var(--dim);letter-spacing:.18em;text-transform:uppercase;margin-bottom:5px;}
+.ac-text{font-size:11px;color:var(--muted);line-height:1.75;}
+.ac-text strong{color:var(--text);font-weight:500;}
+.ac-decision{font-family:var(--mono);font-size:9px;color:var(--text);background:var(--faint);border-left:2px solid var(--teal);padding:8px 11px;line-height:1.6;}
+.ac-downstream{font-family:var(--mono);font-size:8px;color:var(--muted);background:rgba(0,221,184,.04);border:1px solid var(--teal-mid);padding:6px 10px;line-height:1.6;}
+.ac-downstream::before{content:'↓ DOWNSTREAM · ';color:var(--teal);}
+.ac-tags{display:flex;flex-wrap:wrap;gap:4px;}
+.ac-tag{font-family:var(--mono);font-size:7px;color:var(--muted);border:1px solid var(--border);padding:2px 7px;}
+.ac-footer{padding:12px 22px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--surface);}
+.ac-metric{font-family:var(--mono);font-size:10px;color:var(--teal);}
+.ac-metric-label{font-family:var(--mono);font-size:8px;color:var(--dim);margin-left:4px;}
+.ac-hidden{display:none;}
+
+/* ANNOTATION SAMPLES SECTION */
+.annot-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.annot-card{border:1px solid var(--border);background:var(--card);padding:22px 24px;}
+.annot-tag{font-family:var(--mono);font-size:7px;color:var(--teal);border:1px solid var(--teal-mid);padding:2px 8px;background:var(--teal-dim);letter-spacing:.1em;margin-bottom:12px;display:inline-block;}
+.annot-prompt-label{font-family:var(--mono);font-size:7px;color:var(--dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:6px;}
+.annot-prompt{font-size:11px;color:var(--muted);background:var(--faint);border:1px solid var(--border);padding:10px 12px;line-height:1.65;margin-bottom:12px;font-style:italic;}
+.annot-response-label{font-family:var(--mono);font-size:7px;color:var(--dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:6px;}
+.annot-response{font-size:11px;color:var(--muted);line-height:1.75;margin-bottom:12px;}
+.annot-verdict{font-family:var(--mono);font-size:9px;color:var(--text);background:var(--faint);border-left:2px solid var(--teal);padding:8px 11px;line-height:1.6;}
+.annot-verdict.fail{border-left-color:var(--red);}
+
+@media(max-width:900px){
+  .artifact-grid{grid-template-columns:1fr;}
+  .annot-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="cur-dot"></div>
+
+<header id="topbar">
+  <a class="tb-id" href="index.html">EBO // EVAL</a>
+  <nav><ul class="tb-nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="system.html">System</a></li>
+    <li><a href="artifacts.html">Artifacts</a></li>
+    <li><a href="cv.html">CV</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul></nav>
+  <div class="tb-right">
+    <div class="tb-pill"><div class="tb-pulse"></div>Available · Remote</div>
+    <button id="theme-toggle" title="Toggle light/dark mode">☀</button>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <div class="page-eyebrow">Work Artifacts</div>
+    <h1 class="page-h1">Case studies &amp;<br><em>documented outcomes</em></h1>
+    <p class="page-sub">All 5 case studies with full problem–method–outcome–decision–downstream-impact documentation. Filter by evaluation type or browse all.</p>
+  </div>
+</div>
+
+<section class="sec" id="cases">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-tag" data-n="01">Case Studies</div>
+        <h2>All documented<br><em>evaluations</em></h2>
+      </div>
+    </div>
+
+    <div class="artifact-filter-bar reveal">
+      <button class="af-btn active" onclick="filterArtifacts('all', this)">All (5)</button>
+      <button class="af-btn" onclick="filterArtifacts('rlhf', this)">RLHF</button>
+      <button class="af-btn" onclick="filterArtifacts('multimodal', this)">Multimodal</button>
+      <button class="af-btn" onclick="filterArtifacts('bias', this)">Bias / Cross-Cultural</button>
+      <button class="af-btn" onclick="filterArtifacts('dataops', this)">Data Ops</button>
+    </div>
+
+    <div class="artifact-grid reveal" id="artifact-grid">
+
+      <div class="artifact-card" data-category="rlhf">
+        <div class="ac-header">
+          <div class="ac-id-row"><span class="ac-id">CASE-001</span><span class="ac-year">2025</span></div>
+          <div class="ac-type">RLHF · Adversarial Testing</div>
+          <div class="ac-name">Constraint &amp; Instruction Hierarchy Failures</div>
+        </div>
+        <div class="ac-body">
+          <div>
+            <div class="ac-section-label">Problem</div>
+            <div class="ac-text">Operator-layer constraints overridden by user-layer preferences. <strong>Surface fluency masked the failure.</strong> Standard raters passed outputs violating explicit exclusions buried in system context. Cascade attribution: downstream failures traced to the first violated constraint.</div>
+          </div>
+          <div>
+            <div class="ac-section-label">Method</div>
+            <div class="ac-text">Constraint hierarchy analysis — explicit exclusions evaluated before surrounding response quality. Documented 6 failure archetypes with reproducible prompt conditions for each. Applied cascade attribution to trace secondary failures to primary constraint violations.</div>
+          </div>
+          <div>
+            <div class="ac-section-label">Outcome</div>
+            <div class="ac-text">6 failure archetypes documented. Adversarial test battery built across all categories. Constraint violations that were invisible to prior raters identified and isolated.</div>
+          </div>
+          <div class="ac-decision">Outputs failing explicit exclusion constraints are rejected regardless of response quality elsewhere. Fluency does not rehabilitate a violated exclusion.</div>
+          <div class="ac-downstream">Prevented constraint-violating outputs from entering downstream preference datasets and corrupting RLHF training signal.</div>
+          <div class="ac-tags"><span class="ac-tag">Adversarial Testing</span><span class="ac-tag">Constraint Hierarchy</span><span class="ac-tag">RLHF Ranking</span><span class="ac-tag">Failure Taxonomy</span><span class="ac-tag">Cascade Attribution</span></div>
+        </div>
+        <div class="ac-footer">
+          <div><span class="ac-metric">6</span><span class="ac-metric-label">failure archetypes</span></div>
+          <div><span class="ac-metric" style="color:var(--red)">0</span><span class="ac-metric-label">escalations</span></div>
+        </div>
+      </div>
+
+      <div class="artifact-card" data-category="rlhf">
+        <div class="ac-header">
+          <div class="ac-id-row"><span class="ac-id">CASE-002</span><span class="ac-year">2024</span></div>
+          <div class="ac-type">RLHF · Hallucination Detection</div>
+          <div class="ac-name">Plausible-Sounding Fabrication Detection</div>
+        </div>
+        <div class="ac-body">
+          <div>
+            <div class="ac-section-label">Problem</div>
+            <div class="ac-text">Structurally convincing responses with embedded subtly fabricated citations and distorted statistics. Correct format, confident tone. <strong>Surface-level raters scored them highly.</strong> Failure entirely invisible to keyword-scan evaluation.</div>
+          </div>
+          <div>
+            <div class="ac-section-label">Method</div>
+            <div class="ac-text">Entailed vs compatible test: claims entailed by the task are valid; claims merely compatible with it are hallucination flags. Built 4-type taxonomy: statistical distortion, false attribution, entity fabrication, confident speculation. One confirmed hallucination overrides everything else.</div>
+          </div>
+          <div>
+            <div class="ac-section-label">Outcome</div>
+            <div class="ac-text">30+ recurring failure patterns documented across workflows. Failure classes entirely invisible to prior evaluation passes. Escalated with reproducible prompt conditions for targeted fine-tuning intervention.</div>
+          </div>
+          <div class="ac-decision">Confident tone is not evidence. Any precise claim not directly supported by the prompt triggers explicit reality check — one confirmed hallucination is an automatic reject.</div>
+          <div class="ac-downstream">Prevented hallucinated outputs from entering training datasets, protecting downstream model behaviour from corrupted preference signal.</div>
+          <div class="ac-tags"><span class="ac-tag">Hallucination Detection</span><span class="ac-tag">Fact Verification</span><span class="ac-tag">Pattern Analysis</span><span class="ac-tag">RLHF Ranking</span><span class="ac-tag">Failure Taxonomy</span></div>
+        </div>
+        <div class="ac-footer">
+          <div><span class="ac-metric">30+</span><span class="ac-metric-label">failure patterns</span></div>
+          <div><span class="ac-metric" style="color:var(--red)">0</span><span class="ac-metric-label">escalations</span></div>
+        </div>
+      </div>
+
+      <div class="artifact-card" data-category="multimodal">
+        <div class="ac-header">
+          <div class="ac-id-row"><span class="ac-id">CASE-005</span><span class="ac-year">2025</span></div>
+          <div class="ac-type">Multimodal · Image-Text Alignment</div>
+          <div class="ac-name">Image-Text Alignment &amp; Visual Grounding Failures</div>
+        </div>
+        <div class="ac-body">
+          <div>
+            <div class="ac-section-label">Problem</div>
+            <div class="ac-text">Models generating fluent, contextually coherent image descriptions that misrepresented specific visual details, relationships, and spatial arrangements. <strong>Invisible to text-only reviewers.</strong> Fluency-accuracy correlation is lower in multimodal outputs than text-only tasks.</div>
+          </div>
+          <div>
+            <div class="ac-section-label">Method</div>
+            <div class="ac-text">Dual-layer evaluation protocol: text coherence evaluated independently from visual grounding accuracy. Built mismatch detection taxonomy: entity misidentification, spatial relationship errors, attribute hallucination, cross-modal confidence masking.</div>
+          </div>
+          <div>
+            <div class="ac-section-label">Outcome</div>
+            <div class="ac-text">Systematic visual grounding failure patterns identified across object relationships and scene understanding. Established that text-only evaluation rubrics are insufficient for multimodal outputs. Dual-layer protocol adopted for subsequent evaluation cycles.</div>
+          </div>
+          <div class="ac-decision">Textual fluency in multimodal outputs is an unreliable quality proxy. Each visual claim requires independent grounding verification.</div>
+          <div class="ac-downstream">Dual-layer verification protocol adopted across subsequent multimodal evaluation cycles, preventing visually inaccurate outputs from passing text-only evaluation.</div>
+          <div class="ac-tags"><span class="ac-tag">Multimodal Evaluation</span><span class="ac-tag">Visual Grounding</span><span class="ac-tag">Image-Text Alignment</span><span class="ac-tag">Hallucination Detection</span><span class="ac-tag">Dual-Layer Protocol</span></div>
+        </div>
+        <div class="ac-footer">
+          <div><span class="ac-metric">Dual-layer</span><span class="ac-metric-label">protocol developed</span></div>
+          <div><span class="ac-metric" style="color:var(--red)">0</span><span class="ac-metric-label">escalations</span></div>
+        </div>
+      </div>
+
+      <div class="artifact-card" data-category="bias">
+        <div class="ac-header">
+          <div class="ac-id-row"><span class="ac-id">CASE-003</span><span class="ac-year">2024</span></div>
+          <div class="ac-type">Bias Detection · Cross-Cultural QA</div>
+          <div class="ac-name">Quantifying the Africa Knowledge Gap</div>
+        </div>
+        <div class="ac-body">
+          <div>
+            <div class="ac-section-label">Problem</div>
+            <div class="ac-text">Model responses about African institutions, geography, and cultural context were systematically lower quality than equivalent Western responses. <strong>The gap was invisible to US-centric rubrics</strong> — a meta-bias in the evaluation itself, distinct from model bias.</div>
+          </div>
+          <div>
+            <div class="ac-section-label">Method</div>
+            <div class="ac-text">Parallel prompt battery matched across Western and African contexts in information density and complexity. Applied identical rubrics to both sets. Tracked quality variance by region, knowledge domain, and question type. Documented evaluator bias as a separate failure mode.</div>
+          </div>
+          <div>
+            <div class="ac-section-label">Outcome</div>
+            <div class="ac-text">Quantified 3.3-point average quality gap (out of 10) correlated with training data distribution. First structured evidence of this gap in the evaluation pipeline. Directly informed data collection prioritisation for the affected domains.</div>
+          </div>
+          <div class="ac-decision">A 3.3-point gap on matched prompts is not noise — it is a systematic training data failure. Flagged as a data collection priority, not an output quality issue.</div>
+          <div class="ac-downstream">Structured evidence directly informed data collection strategy for underrepresented knowledge domains, addressing the training gap at the source.</div>
+          <div class="ac-tags"><span class="ac-tag">Bias Detection</span><span class="ac-tag">Cross-Cultural QA</span><span class="ac-tag">Parallel Prompt Design</span><span class="ac-tag">Rubric Design</span><span class="ac-tag">Africa Knowledge Gap</span></div>
+        </div>
+        <div class="ac-footer">
+          <div><span class="ac-metric">−3.3 pts</span><span class="ac-metric-label">measured quality gap</span></div>
+          <div><span class="ac-metric" style="color:var(--red)">0</span><span class="ac-metric-label">escalations</span></div>
+        </div>
+      </div>
+
+      <div class="artifact-card" data-category="dataops">
+        <div class="ac-header">
+          <div class="ac-id-row"><span class="ac-id">CASE-004</span><span class="ac-year">2023</span></div>
+          <div class="ac-type">Data Ops · Schema Validation</div>
+          <div class="ac-name">50K-Point Schema Normalisation</div>
+        </div>
+        <div class="ac-body">
+          <div>
+            <div class="ac-section-label">Problem</div>
+            <div class="ac-text">AI training dataset accumulated silent schema drift across batches from multiple annotation sources. No hard errors — <strong>inconsistent labelling conventions that would corrupt model signal downstream</strong>, with no surface indicator that anything was wrong.</div>
+          </div>
+          <div>
+            <div class="ac-section-label">Method</div>
+            <div class="ac-text">Cross-batch consistency audit mapping every deviation category. Identified schema drift vectors. Produced normalisation guide aligning all batches to single standard with documented correction rules per deviation type. Per-entry accuracy insufficient — cross-batch consistency required.</div>
+          </div>
+          <div>
+            <div class="ac-section-label">Outcome</div>
+            <div class="ac-text">99%+ accuracy across all 50,000+ entries. Audit documentation accepted without revision through multiple QA cycles. Zero post-delivery escalations. Reusable audit framework applied to subsequent annotation batches.</div>
+          </div>
+          <div class="ac-decision">Schema drift with no surface errors is critical failure — it is silent corruption of training signal. Pass threshold requires cross-batch consistency, not just per-entry accuracy.</div>
+          <div class="ac-downstream">Silent schema corruption removed before it could degrade downstream model training signal. Audit framework reused across subsequent annotation batches.</div>
+          <div class="ac-tags"><span class="ac-tag">99%+ Accuracy</span><span class="ac-tag">Schema Audit</span><span class="ac-tag">Audit-Ready Docs</span><span class="ac-tag">Pipeline QC</span><span class="ac-tag">Cross-Batch Validation</span></div>
+        </div>
+        <div class="ac-footer">
+          <div><span class="ac-metric">50,000+</span><span class="ac-metric-label">entries · 99%+ accuracy</span></div>
+          <div><span class="ac-metric" style="color:var(--red)">0</span><span class="ac-metric-label">post-delivery escalations</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ANNOTATION SAMPLES -->
+<section class="sec sec-dark" id="samples">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-tag" data-n="02">Annotation Samples</div>
+        <h2>Sample evaluation<br><em>outputs</em></h2>
+        <p class="sec-note">Illustrative examples of the evaluation output format. Decision visible in the lead sentence. No rubric language.</p>
+      </div>
+    </div>
+    <div class="annot-grid reveal">
+
+      <div class="annot-card">
+        <div class="annot-tag">RLHF · Preference Ranking</div>
+        <div class="annot-prompt-label">Prompt (simplified)</div>
+        <div class="annot-prompt">"Explain how neural networks learn, without using the word 'gradient' or 'backpropagation'."</div>
+        <div class="annot-response-label">Model Response Summary</div>
+        <div class="annot-response">Response explained how networks adjust weights using "gradient descent through backpropagation" in the third sentence. Otherwise well-structured and accurate.</div>
+        <div class="annot-verdict fail">Response violates explicit exclusion constraints — "backpropagation" and "gradient" appear in sentence 3. The rest of the response quality is irrelevant: explicit exclusion constraint failure is a hard reject regardless of surrounding quality.</div>
+      </div>
+
+      <div class="annot-card">
+        <div class="annot-tag">Hallucination Detection</div>
+        <div class="annot-prompt-label">Prompt (simplified)</div>
+        <div class="annot-prompt">"Summarise the key findings of recent studies on transformer attention mechanisms."</div>
+        <div class="annot-response-label">Model Response Summary</div>
+        <div class="annot-response">Response cited "Vaswani et al. (2023)" twice as a recent study, attributing specific findings to it. No 2023 paper by Vaswani et al. exists — the original Attention Is All You Need paper is from 2017.</div>
+        <div class="annot-verdict fail">Response contains a confirmed hallucination: false citation attributed to a non-existent paper. The fabricated attribution overrides all other quality signals — one confirmed hallucination is a hard reject. The correct paper date is 2017, not 2023.</div>
+      </div>
+
+      <div class="annot-card">
+        <div class="annot-tag">Instruction Following</div>
+        <div class="annot-prompt-label">Prompt (simplified)</div>
+        <div class="annot-prompt">"Write a 3-bullet executive summary of this product launch. Each bullet must be a single sentence."</div>
+        <div class="annot-response-label">Model Response Summary</div>
+        <div class="annot-response">Response produced exactly 3 bullets. Each bullet was a single sentence. Content was accurate and concise relative to the provided text.</div>
+        <div class="annot-verdict">Response satisfies all explicit constraints: bullet count, sentence-per-bullet requirement, and content accuracy. No hallucinations detected. No ambiguity introduced. Meets the pass threshold.</div>
+      </div>
+
+      <div class="annot-card">
+        <div class="annot-tag">Multimodal · Visual Grounding</div>
+        <div class="annot-prompt-label">Prompt (simplified)</div>
+        <div class="annot-prompt">"Describe what is happening in the image." [Image shows two people seated at a table with food.]</div>
+        <div class="annot-response-label">Model Response Summary</div>
+        <div class="annot-response">Response described "a person standing at a counter preparing food." The image shows two people seated at a table. The spatial relationship and number of subjects are both wrong.</div>
+        <div class="annot-verdict fail">Visual grounding failure: response misrepresents two subjects as one, seated as standing, and table as counter. Fluent and well-written, but visual accuracy is independently evaluated from text quality. This is a multimodal hard fail.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-left">© 2026 Ebubechukwu Okeke · AI Evaluation &amp; QA Specialist · Lagos, Nigeria</div>
+  <div class="ft-right">
+    <a href="index.html">Home</a>
+    <a href="system.html">System</a>
+    <a href="cv.html">CV</a>
+    <a href="https://www.linkedin.com/in/ebubeco" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:charlesgigz7@gmail.com">Email</a>
+  </div>
+</footer>
+
+<button id="ai-chat-btn" title="Ask about Ebube's work">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+  <div class="btn-pulse"></div>
+</button>
+<div id="ai-panel">
+  <div class="ai-panel-head">
+    <div class="ai-head-id">
+      <div class="ai-head-dot"></div>
+      <div><div class="ai-head-name">EVAL ASSISTANT</div><div class="ai-head-sub">Ask about work artifacts</div></div>
+    </div>
+    <button class="ai-close" id="ai-close">✕</button>
+  </div>
+  <div id="ai-messages" class="ai-messages">
+    <div class="ai-msg bot"><div class="ai-bubble">You're viewing all 5 case studies. I can explain any case in detail, or answer questions about the evaluation methods used. What would you like to know?</div><div class="ai-msg-time">now</div></div>
+  </div>
+  <div id="ai-suggestions" class="ai-suggestions">
+    <button class="ai-sug">Tell me about the Africa bias case</button>
+    <button class="ai-sug">What is visual grounding failure?</button>
+    <button class="ai-sug">How was the schema drift found?</button>
+  </div>
+  <div class="ai-input-area">
+    <textarea class="ai-input" id="ai-input" placeholder="Ask about any case study..." rows="1"></textarea>
+    <button class="ai-send" id="ai-send">Send</button>
+  </div>
+</div>
+
+<script src="/main.js"></script>
+<script>
+function filterArtifacts(cat, btn){
+  document.querySelectorAll('.af-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.artifact-card').forEach(card => {
+    if(cat==='all'||card.dataset.category===cat){
+      card.style.display='flex';
+    } else {
+      card.style.display='none';
+    }
+  });
+}
+</script>
+</body>
+</html>
