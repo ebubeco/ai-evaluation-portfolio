@@ -148,9 +148,10 @@ document.addEventListener('DOMContentLoaded', initLoop);
     group.className = 'ai-msg-group';
     group.id = 'ai-thinking-indicator';
     group.innerHTML = `
-      <div class="ai-msg bot"><div class="ai-model-label">Gemini</div><div class="ai-thinking"><span></span><span></span><span></span></div></div>
-      <div class="ai-msg bot"><div class="ai-model-label">Llama</div><div class="ai-thinking"><span></span><span></span><span></span></div></div>
-      <div class="ai-msg bot"><div class="ai-model-label">Mistral</div><div class="ai-thinking"><span></span><span></span><span></span></div></div>
+      <div class="ai-msg bot">
+        <div class="ai-model-label">Ebubeco Multi-Model</div>
+        <div class="ai-thinking"><span></span><span></span><span></span></div>
+      </div>
     `;
     msgs.appendChild(group);
     msgs.scrollTop = msgs.scrollHeight;
@@ -161,22 +162,20 @@ document.addEventListener('DOMContentLoaded', initLoop);
     if(t) t.remove();
   }
 
-  function addBotGroup(replies) {
+  function addBotReply(text) {
     const group = document.createElement('div');
     group.className = 'ai-msg-group';
     
-    replies.forEach(r => {
-      const col = document.createElement('div');
-      col.className = 'ai-msg bot';
-      const now = new Date();
-      const t = now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
-      col.innerHTML = `
-        <div class="ai-model-label">${r.model}</div>
-        <div class="ai-bubble">${r.text}</div>
-        <div class="ai-msg-time">${t}</div>
-      `;
-      group.appendChild(col);
-    });
+    const col = document.createElement('div');
+    col.className = 'ai-msg bot';
+    const now = new Date();
+    const t = now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
+    col.innerHTML = `
+      <div class="ai-model-label">Ebubeco Multi-Model</div>
+      <div class="ai-bubble">${text}</div>
+      <div class="ai-msg-time">${t}</div>
+    `;
+    group.appendChild(col);
     
     msgs.appendChild(group);
     msgs.scrollTop = msgs.scrollHeight;
@@ -200,10 +199,10 @@ document.addEventListener('DOMContentLoaded', initLoop);
       hideThinking();
       if(!res.ok) throw new Error('API unavailable');
       const data = await res.json();
-      if (data.replies && Array.isArray(data.replies)) {
-        addBotGroup(data.replies);
+      if (data.reply) {
+        addBotReply(data.reply);
       } else {
-        addMsg('The assistant returned an invalid response format.', 'bot');
+        addMsg('The assistant is temporarily at capacity. Please try again.', 'bot');
       }
     } catch(err){
       hideThinking();
@@ -246,9 +245,10 @@ document.addEventListener('DOMContentLoaded', initLoop);
   function showThinking(){
     response.hidden = false;
     resContent.innerHTML = `
-      <div class="kb-res-card"><div class="kb-res-model">Gemini</div><div class="kb-thinking"><span></span><span></span><span></span></div></div>
-      <div class="kb-res-card"><div class="kb-res-model">Llama</div><div class="kb-thinking"><span></span><span></span><span></span></div></div>
-      <div class="kb-res-card"><div class="kb-res-model">Mistral</div><div class="kb-thinking"><span></span><span></span><span></span></div></div>
+      <div class="kb-res-card">
+        <div class="kb-res-model">Ebubeco Multi-Model</div>
+        <div class="kb-thinking"><span></span><span></span><span></span></div>
+      </div>
     `;
   }
 
@@ -268,15 +268,15 @@ document.addEventListener('DOMContentLoaded', initLoop);
       });
       if(!res.ok) throw new Error('API error');
       const data = await res.json();
-      if (data.replies && Array.isArray(data.replies)) {
-        resContent.innerHTML = data.replies.map(r => `
+      if (data.reply) {
+        resContent.innerHTML = `
           <div class="kb-res-card">
-            <div class="kb-res-model">${r.model}</div>
-            <div>${r.text}</div>
+            <div class="kb-res-model">Ebubeco Multi-Model</div>
+            <div>${data.reply}</div>
           </div>
-        `).join('');
+        `;
       } else {
-        resContent.textContent = 'No multi-model response generated. Please try again.';
+        resContent.textContent = 'Unable to generate response. Please try again.';
       }
     } catch(err) {
       resContent.innerHTML = '<div style="grid-column: 1 / -1;">The assistant is currently offline. Please <a href="mailto:charlesgigz7@gmail.com" style="color:var(--teal)">reach out directly</a> — Ebube responds within 24 hours.</div>';
@@ -317,4 +317,39 @@ document.addEventListener('DOMContentLoaded', initLoop);
     });
   });
   obs.observe(el);
+})();
+// MICRO1 IMAGE POPUP
+(function(){
+  const img = document.querySelector('.micro1-img');
+  if(!img) return;
+
+  // Create modal elements
+  const modal = document.createElement('div');
+  modal.id = 'img-modal';
+  modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:10000;cursor:zoom-out;backdrop-filter:blur(8px);opacity:0;transition:opacity 0.3s ease;';
+  
+  const clone = document.createElement('img');
+  clone.src = img.src;
+  clone.style.cssText = 'max-width:90%;max-height:90%;object-fit:contain;transform:scale(0.8);transition:transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);';
+  
+  modal.appendChild(clone);
+  document.body.appendChild(modal);
+
+  img.style.cursor = 'zoom-in';
+  img.addEventListener('click', (e) => {
+    e.stopPropagation();
+    modal.style.display = 'flex';
+    setTimeout(() => {
+      modal.style.opacity = '1';
+      clone.style.transform = 'scale(1)';
+    }, 10);
+  });
+
+  modal.addEventListener('click', () => {
+    modal.style.opacity = '0';
+    clone.style.transform = 'scale(0.8)';
+    setTimeout(() => {
+      modal.style.display = 'none';
+    }, 300);
+  });
 })();

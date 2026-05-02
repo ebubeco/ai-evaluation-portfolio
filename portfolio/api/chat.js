@@ -31,39 +31,6 @@ const MODELS = [
   { id: "mistralai/mistral-nemo:free", name: "Mistral Nemo" }
 ];
 
-async function fetchModelResponse(model, message, apiKey) {
-  try {
-    const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: model.id,
-        messages: [
-          { role: "system", content: SYSTEM_PROMPT },
-          { role: "user", content: message.trim() }
-        ],
-        max_tokens: 1024,
-      })
-    });
-
-    if (!res.ok) throw new Error(`API Error: ${res.status}`);
-    const data = await res.json();
-    return {
-      model: model.name,
-      text: data.choices?.[0]?.message?.content || "No response generated."
-    };
-  } catch (err) {
-    console.error(`Error with ${model.name}:`, err);
-    return {
-      model: model.name,
-      text: "Model temporarily unavailable."
-    };
-  }
-}
-
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
@@ -75,35 +42,58 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Message is required" });
   }
 
-  if (message.length > 2000) {
-    return res.status(400).json({ error: "Message too long" });
-  }
-
-  // Fallback to ANTHROPIC_API_KEY if OPENROUTER_API_KEY is not set yet, so it won't break if they rename it later
   const apiKey = process.env.OPENROUTER_API_KEY || process.env.ANTHROPIC_API_KEY;
+  const baseURL = "https://openrouter.ai/api/v1";
 
   if (!apiKey) {
-    return res.status(503).json({
-      replies: MODELS.map(m => ({
-        model: m.name,
-        text: "The assistant is currently offline (API key missing). Please reach out directly at charlesgigz7@gmail.com."
-      }))
+    return res.status(200).json({
+      reply: "The assistant is currently offline (API key missing). Please reach out directly at charlesgigz7@gmail.com.",
+      type: "ebubeco-multi-model"
     });
   }
 
   try {
-    const replies = await Promise.all(
-      MODELS.map(m => fetchModelResponse(m, message, apiKey))
-    );
+    const results = await Promise.all(MODELS.map(async (model) => {
+      try {
+        const response = await fetch(`${baseURL}/chat/completions`, {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: model.id,
+            messages: [
+              { role: "system", content: SYSTEM_PROMPT },
+              { role: "user", content: message.trim() }
+            ],
+            max_tokens: 1024,
+          })
+        });
 
-    return res.status(200).json({ replies });
+        if (!response.ok) return { name: model.name, text: "" };
+        const data = await response.json();
+        return { 
+          name: model.name, 
+          text: data.choices?.[0]?.message?.content || "" 
+        };
+      } catch (err) {
+        return { name: model.name, text: "" };
+      }
+    }));
+
+    // Selection Logic: Pick Gemini if it succeeded, otherwise pick the longest non-empty response
+    const gemini = results.find(r => r.name === "Gemini 2.0 Flash" && r.text);
+    const fallback = results.sort((a, b) => b.text.length - a.text.length)[0];
+    
+    const finalReply = gemini?.text || fallback?.text || "I am currently processing high volume. Please try again or contact Ebube directly.";
+
+    return res.status(200).json({ 
+      reply: finalReply,
+      type: "ebubeco-multi-model"
+    });
   } catch (err) {
     console.error("Global API error:", err);
-    return res.status(503).json({
-      replies: MODELS.map(m => ({
-        model: m.name,
-        text: "The assistant is temporarily unavailable."
-      }))
-    });
+    return res.status(503).json({ error: "Service unavailable" });
   }
 }
