@@ -1,81 +1,66 @@
-# Portfolio — Source Code
+# 📁 Portfolio Source Code & App Logic
 
-This folder contains the complete source code for the interactive portfolio website at **[ebubeco-ai-eval.vercel.app](https://ebubeco-ai-eval.vercel.app)**.
+This directory contains the full source code for the interactive AI Evaluation Portfolio website. It is designed to demonstrate technical proficiency in frontend development, API integration, and user experience design within the AI niche.
 
-> **Note for Vercel deployment:** When importing this repository on Vercel, set the **Root Directory** to `portfolio` so Vercel builds from this folder.
+### 🔗 Live Site: [ebubeco-ai-eval.vercel.app](https://ebubeco-ai-eval.vercel.app)
 
 ---
 
-## 📂 File Structure
+## 🛠️ Technical Architecture
+
+This is a modern, high-performance web application built with a focus on speed and analytical clarity.
+
+- **Frontend:** Vanilla HTML5, CSS3, and ES6+ JavaScript. No heavy frameworks (React/Vue) were used to ensure sub-second load times and a 100/100 performance score.
+- **Bundler:** [Vite](https://vitejs.dev/) for optimized asset delivery and a robust development environment.
+- **Backend:** Node.js Serverless Functions (`/api/chat.js`) deployed on Vercel.
+- **AI Integration:** [OpenRouter API](https://openrouter.ai/) used to fetch responses from Gemini 2.0, Llama 3.1, and Mistral Nemo in parallel.
+
+---
+
+## 📂 Directory Structure
 
 ```text
 portfolio/
 ├── api/
-│   └── chat.js             # Vercel Serverless Function — calls OpenRouter API in parallel
+│   └── chat.js          # Serverless logic for multi-model parallel API calls
 ├── public/
-│   ├── main.js             # Chat widget, theme toggle, scroll reveal, cursor effects
-│   ├── shared.css          # Full design system (dark/light tokens, layout, components)
-│   ├── favicon.svg         # Site favicon
-│   ├── opengraph.jpg       # Social sharing image
-│   ├── micro1-vetted.png   # Verification badge asset
-│   └── portfolio.json      # Structured portfolio data
-├── src/                    # Legacy Replit scaffold (unused, safe to ignore)
-├── index.html              # Homepage with multi-model AI Knowledge Base
-├── system.html             # The 8-Step Evaluation Loop documentation
-├── artifacts.html          # Case studies & annotation samples gallery
-├── cv.html                 # Standalone print-ready resume
-├── vercel.json             # Vercel routing, headers, and function config
-├── vite.config.ts          # Vite build config + local dev mock for /api/chat
-└── package.json            # Minimal deps: vite + @types/node only
+│   ├── main.js          # Core UI logic: Chatbot, Theme Engine, KB Rendering
+│   ├── shared.css       # Design System: Glassmorphism, Dark Mode, Grids
+│   ├── portfolio.json   # Structured data for the Knowledge Base
+│   └── ...              # Images and assets
+├── index.html           # Main Entry: Multi-model interface
+├── system.html          # Documentation: 8-Step Evaluation Loop
+├── artifacts.html       # Gallery: Case studies & Annotation samples
+├── cv.html              # Printable standalone Resume
+├── vercel.json          # Deployment, Routing, and Security Headers
+└── vite.config.ts       # Build configuration and Dev Server Mock API
 ```
 
 ---
 
-## 💻 Local Development
+## 🚀 Deployment Guide (Recruiter/Dev Friendly)
 
-**Requirements:** [Node.js](https://nodejs.org/) (v18+)
+If you wish to fork and deploy this yourself:
 
-```bash
-# 1. Clone and navigate into the portfolio subfolder
-git clone https://github.com/ebubeco/ai-evaluation-portfolio.git
-cd ai-evaluation-portfolio/portfolio
-
-# 2. Install dependencies
-npm install
-
-# 3. Add your OpenRouter API key
-echo "OPENROUTER_API_KEY=sk-or-v1-..." > .env
-
-# 4. Start the dev server (runs on http://localhost:5000)
-npm run dev
-```
-
-The `vite.config.ts` dev server includes a built-in mock for `/api/chat` so the multi-model chat widget works locally without consuming API credits.
+1. **Root Directory:** Ensure Vercel is configured to use the `portfolio/` folder as the Root Directory.
+2. **Environment Variables:**
+   - `OPENROUTER_API_KEY`: Your API key from openrouter.ai.
+3. **Local Setup:**
+   ```bash
+   cd portfolio
+   npm install
+   npm run dev
+   ```
 
 ---
 
-## 🚀 Deployment on Vercel
-
-1. Go to [vercel.com](https://vercel.com) → **Add New Project** → Import this repo.
-2. In the **Root Directory** field, enter: `portfolio`
-3. Under **Environment Variables**, add:
-   | Key | Value |
-   |-----|-------|
-   | `OPENROUTER_API_KEY` | `sk-or-v1-...` |
-4. Click **Deploy**. Vercel will automatically detect Vite and run `npm run build`.
-
-The `vercel.json` handles all routing — HTML pages, the `/api/chat` serverless function, and security headers are all pre-configured.
+## 🤖 Featured AI Models
+In the chatbot and Knowledge Base, I compare:
+1. **Gemini 2.0 Flash:** Evaluated for its high speed and multimodal grounding.
+2. **Llama 3.1 8B:** Evaluated for its robust instruction following.
+3. **Mistral Nemo:** Evaluated for its concise, highly logical outputs.
 
 ---
 
-## 🤖 AI Models Used
-
-The chat widget queries three models in parallel via [OpenRouter](https://openrouter.ai):
-
-| Model | Provider | Strengths |
-|-------|----------|-----------|
-| `google/gemini-2.0-flash-exp:free` | Google | Speed, factual accuracy |
-| `meta-llama/llama-3.1-8b-instruct:free` | Meta | Reasoning, instruction following |
-| `mistralai/mistral-nemo:free` | Mistral | Nuanced, concise answers |
-
-Responses are fetched with `Promise.all` for true parallelism, then displayed side-by-side in a 3-column grid.
+## 🎨 Design Philosophy
+The UI uses a **"Laboratory Aesthetic"**—dark mode by default, glassmorphic panels, and monospaced typography—to reflect the scientific nature of AI Evaluation and QA.
