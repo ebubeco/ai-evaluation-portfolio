@@ -47,12 +47,13 @@ export default async function handler(req, res) {
 
   if (!apiKey) {
     return res.status(200).json({
-      reply: "The assistant is currently offline (API key missing). Please reach out directly at charlesgigz7@gmail.com.",
+      reply: "The assistant is offline because the API key is not configured in Vercel. Please add OPENROUTER_API_KEY to your project settings.",
       type: "ebubeco-multi-model"
     });
   }
 
   try {
+    let lastError = "";
     const results = await Promise.all(MODELS.map(async (model) => {
       try {
         const response = await fetch(`${baseURL}/chat/completions`, {
@@ -60,6 +61,8 @@ export default async function handler(req, res) {
           headers: {
             "Authorization": `Bearer ${apiKey}`,
             "Content-Type": "application/json",
+            "HTTP-Referer": "https://ebubeco-ai-eval.vercel.app",
+            "X-Title": "Ebube Portfolio"
           },
           body: JSON.stringify({
             model: model.id,
@@ -71,27 +74,38 @@ export default async function handler(req, res) {
           })
         });
 
-        if (!response.ok) return { name: model.name, text: "" };
+        if (!response.ok) {
+          const errData = await response.json().catch(() => ({}));
+          lastError = errData.error?.message || `API Status ${response.status}`;
+          return { name: model.name, text: "" };
+        }
         const data = await response.json();
         return { 
           name: model.name, 
           text: data.choices?.[0]?.message?.content || "" 
         };
       } catch (err) {
+        lastError = err.message;
         return { name: model.name, text: "" };
       }
     }));
 
-    // Selection Logic: Pick Gemini if it succeeded, otherwise pick the longest non-empty response
     const gemini = results.find(r => r.name === "Gemini 2.0 Flash" && r.text);
     const fallback = results.sort((a, b) => b.text.length - a.text.length)[0];
     
-    const finalReply = gemini?.text || fallback?.text || "I am currently processing high volume. Please try again or contact Ebube directly.";
+    if (gemini?.text || (fallback && fallback.text)) {
+      return res.status(200).json({ 
+        reply: gemini?.text || fallback.text,
+        type: "ebubeco-multi-model"
+      });
+    }
 
+    // If no text was returned, provide the specific error message to help debug
     return res.status(200).json({ 
-      reply: finalReply,
+      reply: `Connection error: ${lastError || "Unknown error"}. This usually means the API key is invalid or your OpenRouter credit balance is $0.`,
       type: "ebubeco-multi-model"
     });
+
   } catch (err) {
     console.error("Global API error:", err);
     return res.status(503).json({ error: "Service unavailable" });
