@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>CV — Ebube Okeke · AI Evaluation &amp; QA Specialist</title>
+  <meta name="description"
+    content="Curriculum Vitae for Ebubechukwu Okeke — AI Evaluation &amp; QA Specialist. Remote Global." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=IBM+Plex+Mono:wght@400;500&family=Epilogue:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0A0A0C;
+      --surface: #121214;
+      --text: #F2F2F2;
+      --muted: #A1A1AA;
+      --dim: #52525B;
+      --border: #27272A;
+      --border2: #3F3F46;
+      --teal: #14B8A6;
+      --teal-dim: rgba(20, 184, 166, 0.1);
+      --teal-mid: rgba(20, 184, 166, 0.3);
+      --faint: #18181B;
+      --serif: 'Playfair Display', serif;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'Epilogue', sans-serif;
+    }
+
+    [data-theme="light"] {
+      --bg: #F9FAFB;
+      --surface: #FFFFFF;
+      --text: #111827;
+      --muted: #4B5563;
+      --dim: #9CA3AF;
+      --border: #E5E7EB;
+      --border2: #D1D5DB;
+      --teal: #0D9488;
+      --teal-dim: rgba(13, 148, 136, 0.1);
+      --teal-mid: rgba(13, 148, 136, 0.3);
+      --faint: #F3F4F6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+    }
+
+    /* CV STYLES */
+    .cv-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 0;
+      min-height: calc(100vh - 52px);
+      border-top: 1px solid var(--border);
+    }
+
+    .cv-sidebar {
+      border-right: 1px solid var(--border);
+      padding: 40px 28px;
+      background: var(--surface);
+    }
+
+    .cv-main {
+      padding: 48px 52px;
+    }
+
+    .cv-name {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .cv-title {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--teal);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .cv-contact-item {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .cci-icon {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--teal);
+      width: 12px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .cci-val {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .cci-val a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .cci-val a:hover {
+      color: var(--teal);
+    }
+
+    .cv-s-label {
+      font-family: var(--mono);
+      font-size: 8px;
+      color: var(--dim);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin: 24px 0 10px;
+    }
+
+    .cv-avail {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--teal);
+      border: 1px solid var(--teal-mid);
+      padding: 5px 10px;
+      background: var(--teal-dim);
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+
+    .cv-sidebar-sk {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .cv-sk-tag {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--muted);
+      padding: 4px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cv-main-section {
+      margin-bottom: 40px;
+    }
+
+    .cv-sec-label {
+      font-family: var(--mono);
+      font-size: 8px;
+      color: var(--teal);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cv-sec-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .cv-summary {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 0;
+    }
+
+    .cv-summary p {
+      margin-bottom: 12px;
+    }
+
+    .cv-summary strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .cv-job {
+      margin-bottom: 28px;
+    }
+
+    .cj-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+
+    .cj-org {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .cj-dates {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--dim);
+    }
+
+    .cj-role {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--teal);
+      letter-spacing: .04em;
+      margin-bottom: 8px;
+    }
+
+    .cj-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .cj-bullets li {
+      font-size: 12px;
+      color: var(--muted);
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.7;
+    }
+
+    .cj-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--dim);
+      font-size: 10px;
+    }
+
+    .cv-metrics-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      padding: 16px 20px;
+      background: var(--faint);
+      border: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+
+    .cv-met {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .cv-met-val {
+      font-family: var(--mono);
+      font-size: 18px;
+      color: var(--teal);
+      font-weight: 500;
+    }
+
+    .cv-met-label {
+      font-family: var(--mono);
+      font-size: 8px;
+      color: var(--dim);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .cv-cred {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .cv-cred:last-child {
+      border-bottom: none;
+    }
+
+    .cc-org {
+      font-size: 12px;
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .cc-role {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .cc-dates {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--dim);
+      white-space: nowrap;
+    }
+
+    .cv-skill-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .cv-skill-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .cs-name {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .cs-bar-wrap {
+      height: 2px;
+      background: var(--border2);
+      overflow: hidden;
+    }
+
+    .cs-bar {
+      height: 100%;
+      background: var(--teal);
+      width: 0;
+      animation: grow .8s ease both;
+    }
+
+    .cv-download-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 0;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cv-print-note {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--dim);
+    }
+
+    .cta-p {
+      color: var(--bg);
+      background: var(--teal);
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    @keyframes grow {
+      from {
+        width: 0;
+      }
+    }
+
+    @media print {
+      .cv-download-bar {
+        display: none !important;
+      }
+
+      .cv-layout {
+        grid-template-columns: 200px 1fr;
+        border: none;
+      }
+
+      body {
+        background: white !important;
+        color: #0A0A0C !important;
+      }
+
+      :root {
+        --bg: white;
+        --surface: #f5f5f5;
+        --text: #0A0A0C;
+        --muted: #444;
+        --dim: #888;
+        --border: #ddd;
+        --teal: #00A898;
+      }
+    }
+
+    @media(max-width:900px) {
+      .cv-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .cv-sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .cv-main {
+        padding: 32px 24px;
+      }
+
+      .cv-skill-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cv-layout">
+    <aside class="cv-sidebar">
+      <div class="cv-name">Ebubechukwu Okeke</div>
+      <div class="cv-title">AI Evaluation &amp; QA Specialist</div>
+
+      <div class="cv-contact-item"><span class="cci-icon">@</span><span class="cci-val"><a
+            href="mailto:charlesgigz7@gmail.com">charlesgigz7@gmail.com</a></span></div>
+      <div class="cv-contact-item"><span class="cci-icon">☎</span><span class="cci-val">+234 905 989 5558</span>
+      </div>
+      <div class="cv-contact-item"><span class="cci-icon">⌖</span><span class="cci-val">Remote Global</span></div>
+      <div class="cv-contact-item"><span class="cci-icon">in</span><span class="cci-val"><a
+            href="https://www.linkedin.com/in/ebubeco" target="_blank" rel="noopener">linkedin.com/in/ebubeco</a></span>
+      </div>
+      <div class="cv-contact-item"><span class="cci-icon">gh</span><span class="cci-val"><a
+            href="https://github.com/ebubeco" target="_blank" rel="noopener">github.com/ebubeco</a></span>
+      </div>
+      <div class="cv-contact-item"><span class="cci-icon">↗</span><span class="cci-val"><a
+            href="https://ebubeco-ai-eval.vercel.app" target="_blank"
+            rel="noopener">ebubeco-ai-eval.vercel.app</a></span></div>
+
+      <div class="cv-s-label">Availability</div>
+      <div class="cv-avail">Immediate Remote Start</div>
+      <div class="cv-sk-tag" style="border:none; line-height: 1.5; margin-bottom: 8px;">Open to Contract / Freelance
+        /<br>Long-term AI Evaluation Roles</div>
+
+      <div class="cv-s-label">Core Skills</div>
+      <div class="cv-sidebar-sk">
+        <div class="cv-sk-tag">RLHF Evaluation</div>
+        <div class="cv-sk-tag">Hallucination Detection</div>
+        <div class="cv-sk-tag">Adversarial Testing</div>
+        <div class="cv-sk-tag">Instruction Adherence</div>
+        <div class="cv-sk-tag">Model Failure Detection</div>
+        <div class="cv-sk-tag">Red Teaming</div>
+        <div class="cv-sk-tag">Safety Evaluation</div>
+        <div class="cv-sk-tag">Search Quality Rating</div>
+        <div class="cv-sk-tag">E-E-A-T</div>
+        <div class="cv-sk-tag">Python</div>
+        <div class="cv-sk-tag">Data Pipeline QC</div>
+      </div>
+
+      <div class="cv-s-label">Education</div>
+      <div class="cv-sk-tag" style="padding:6px 0;line-height:1.5;">B.Tech Computer Science<br><span
+          style="color:var(--dim)">FUTO · 2020–2025</span></div>
+    </aside>
+
+    <main class="cv-main">
+      <div class="cv-download-bar">
+        <a href="/Ebube_Okeke_CV.pdf" download class="cta-p"
+          style="font-size:9px;padding:9px 18px;font-weight:700;">Download
+          PDF &rarr;</a>
+        <span class="cv-print-note">Or use browser print (Ctrl/Cmd + P) to save as PDF</span>
+      </div>
+
+      <div class="cv-main-section">
+        <div class="cv-sec-label">About</div>
+        <div class="cv-summary">
+          <p>I evaluate AI systems by finding where they break, especially when instructions are unclear, conflicting,
+            or easy to misinterpret. My focus is on hallucinations, reasoning errors, and adversarial edge cases in LLM
+            outputs where there is no obvious correct answer.</p>
+          <p>I make fast, consistent judgment calls under ambiguity. When evidence is weak or conflicting, I treat cases
+            as uncertain rather than forcing decisions, and I validate consistency across outputs before finalizing
+            judgments.</p>
+        </div>
+      </div>
+
+      <div class="cv-main-section">
+        <div class="cv-sec-label">Key Achievements</div>
+        <ul class="cj-bullets">
+          <li>Completed 1,200+ AI evaluation and RLHF ranking tasks across production annotation platforms</li>
+          <li>Maintained 99%+ accuracy across 50,000+ validated data points in QA and dataset workflows</li>
+          <li>Identified 30+ recurring hallucination and reasoning failure patterns across RLHF evaluation workflows,
+            supporting downstream dataset corrections and improved annotation consistency</li>
+          <li>Designed and applied structured evaluation rubrics across instruction adherence, reasoning quality, and
+            hallucination detection dimensions</li>
+          <li>Exposed prompt injection and instruction bypass vulnerabilities through adversarial testing</li>
+          <li>Applied consistent evaluation standards across Micro1 workflows under changing guidelines</li>
+          <li>Vetted by Micro1 across Search Quality Rating, AI Data Annotation, and Content Evaluation pipelines</li>
+        </ul>
+      </div>
+
+      <div class="cv-main-section">
+        <div class="cv-sec-label">Work Experience</div>
+
+        <div class="cv-job">
+          <div class="cj-header"><span class="cj-org">Independent Contract</span><span class="cj-dates">Jan 2025 –
+              Present</span></div>
+          <div class="cj-role">AI Evaluation &amp; QA Specialist (Adversarial Testing &amp; Failure Analysis)</div>
+          <ul class="cj-bullets">
+            <li>Evaluate LLM outputs under ambiguous, multi-constraint, and adversarial prompt conditions</li>
+            <li>Conduct structured cross-model evaluations (GPT-4, Claude, Gemini) using defined scoring dimensions to
+              identify model-specific failure patterns and reasoning inconsistencies</li>
+            <li>Identify hallucination, reasoning breakdown, and instruction hierarchy failures in model outputs</li>
+            <li>Design adversarial test cases to surface edge-case vulnerabilities and failure patterns</li>
+            <li>Apply pattern-based evaluation to detect consistent failure modes across outputs</li>
+            <li>Mark outputs as uncertain when evidence is insufficient rather than forcing decisions</li>
+            <li>Maintain consistent evaluation decisions across varying model behaviors and task definitions</li>
+          </ul>
+        </div>
+
+        <div class="cv-job">
+          <div class="cj-header"><span class="cj-org">Micro1</span><span class="cj-dates">Aug 2024 – Present</span>
+          </div>
+          <div class="cj-role">AI Evaluation Specialist</div>
+          <ul class="cj-bullets">
+            <li>Rank model responses based on instruction adherence, factual accuracy, and usefulness</li>
+            <li>Detect subtle reasoning inconsistencies and constraint violations in RLHF workflows</li>
+            <li>Contribute to preference modeling datasets used in model alignment and training</li>
+            <li>Execute high-volume evaluation tasks under strict guidelines and time constraints</li>
+          </ul>
+        </div>
+
+        <div class="cv-job">
+          <div class="cj-header"><span class="cj-org">TELUS International</span><span class="cj-dates">Jan 2024 – Jul
+              2024</span></div>
+          <div class="cj-role">Search Quality Rater (SQR)</div>
+          <ul class="cj-bullets">
+            <li>Evaluated search results for relevance, intent alignment, and trustworthiness using E-E-A-T</li>
+            <li>Flagged misleading or low-quality content impacting ranking systems</li>
+            <li>Delivered consistent judgment decisions across large-scale evaluation datasets</li>
+          </ul>
+        </div>
+
+        <div class="cv-job">
+          <div class="cj-header"><span class="cj-org">OneForma</span><span class="cj-dates">Jun 2023 – Dec 2023</span>
+          </div>
+          <div class="cj-role">Data Operations Specialist</div>
+          <ul class="cj-bullets">
+            <li>Validated and cleaned datasets used in AI training and evaluation pipelines</li>
+            <li>Maintained 99%+ accuracy across high-volume structured data workflows</li>
+            <li>Delivered audit-ready outputs under strict deadlines</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cv-main-section">
+        <div class="cv-sec-label">Selected Evaluation Work</div>
+        <div class="cv-job">
+          <div class="cj-org" style="margin-bottom: 4px;">RLHF Constraint &amp; Adversarial Evaluation</div>
+          <ul class="cj-bullets">
+            <li>Evaluated outputs under conflicting instructions and layered constraints</li>
+            <li>Identified hallucinated vs grounded responses in fluent model outputs</li>
+            <li>Detected instruction hierarchy failures affecting final response correctness</li>
+            <li>Prioritized constraint adherence over perceived fluency in final judgments</li>
+            <li>Flagged high-confidence hallucinations and prevented downstream propagation</li>
+            <li>Documented failure taxonomy covering hallucination patterns, ambiguity traps, and reasoning failure
+              modes across RLHF evaluation workflows</li>
+            <li>Built structured comparison dataset for cross-model evaluation and failure pattern analysis</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cv-main-section">
+        <div class="cv-sec-label">Certifications</div>
+        <div class="cv-cred">
+          <div>
+            <div class="cc-org">CipherSense &amp; DataLens Africa</div>
+            <div class="cc-role">Essentials of Data Labelling &amp; Annotation for AI Development</div>
+          </div><span class="cc-dates">Feb 2026</span>
+        </div>
+      </div>
+
+      <div class="cv-main-section">
+        <div class="cv-sec-label">Technical Proficiency</div>
+        <div class="cv-skill-grid">
+          <div class="cv-skill-item"><span class="cs-name">RLHF Evaluation</span>
+            <div class="cs-bar-wrap">
+              <div class="cs-bar" style="--w:95%;width:95%"></div>
+            </div>
+          </div>
+          <div class="cv-skill-item"><span class="cs-name">Hallucination Detection</span>
+            <div class="cs-bar-wrap">
+              <div class="cs-bar" style="--w:95%;width:95%"></div>
+            </div>
+          </div>
+          <div class="cv-skill-item"><span class="cs-name">Adversarial Testing</span>
+            <div class="cs-bar-wrap">
+              <div class="cs-bar" style="--w:90%;width:90%"></div>
+            </div>
+          </div>
+          <div class="cv-skill-item"><span class="cs-name">Model Response Analysis</span>
+            <div class="cs-bar-wrap">
+              <div class="cs-bar" style="--w:90%;width:90%"></div>
+            </div>
+          </div>
+          <div class="cv-skill-item"><span class="cs-name">Safety Evaluation</span>
+            <div class="cs-bar-wrap">
+              <div class="cs-bar" style="--w:85%;width:85%"></div>
+            </div>
+          </div>
+          <div class="cv-skill-item"><span class="cs-name">Data Pipeline QC</span>
+            <div class="cs-bar-wrap">
+              <div class="cs-bar" style="--w:95%;width:95%"></div>
+            </div>
+          </div>
+          <div class="cv-skill-item"><span class="cs-name">Search Quality Rating (E-E-A-T)</span>
+            <div class="cs-bar-wrap">
+              <div class="cs-bar" style="--w:90%;width:90%"></div>
+            </div>
+          </div>
+          <div class="cv-skill-item"><span class="cs-name">Python</span>
+            <div class="cs-bar-wrap">
+              <div class="cs-bar" style="--w:75%;width:75%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+<script>
+// Sync theme with rest of site (reads from localStorage set by main.js on other pages)
+(function(){
+  const saved = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+})();
+</script>
+</body>
+
+</html>

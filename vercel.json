@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "name": "ebube-okeke-portfolio",
+  "outputDirectory": "dist/public",
+  "functions": {
+    "api/chat.js": {
+      "memory": 256,
+      "maxDuration": 30
+    }
+  },
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/system", "dest": "/system.html" },
+    { "src": "/system.html", "dest": "/system.html" },
+    { "src": "/artifacts", "dest": "/artifacts.html" },
+    { "src": "/artifacts.html", "dest": "/artifacts.html" },
+    { "src": "/cv", "dest": "/cv.html" },
+    { "src": "/cv.html", "dest": "/cv.html" },
+    { "src": "/", "dest": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Evaluation System — Ebube Okeke · AI Evaluation &amp; QA Specialist</title>
+<meta name="description" content="The 8-step evaluation loop and complete methodology documentation for AI output evaluation by Ebubechukwu Okeke."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=IBM+Plex+Mono:wght@400;500&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/shared.css"/>
+<style>
+/* SYSTEM PAGE */
+.step-grid{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);}
+.step-row{display:grid;grid-template-columns:60px 1fr 1fr;gap:0;border-bottom:1px solid var(--border);transition:background .2s;}
+.step-row:last-child{border-bottom:none;}
+.step-row:hover{background:var(--faint);}
+.step-num-cell{padding:28px 16px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;border-right:1px solid var(--border);background:var(--surface);}
+.step-num{font-family:var(--mono);font-size:11px;color:var(--dim);}
+.step-teal-dot{width:4px;height:4px;border-radius:50%;background:var(--teal);margin-top:8px;}
+.step-left{padding:28px 32px;border-right:1px solid var(--border);}
+.step-right{padding:28px 32px;}
+.step-name{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--text);margin-bottom:6px;}
+.step-badge-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;}
+.step-badge{font-family:var(--mono);font-size:7px;color:var(--teal);border:1px solid var(--teal-mid);padding:2px 8px;background:var(--teal-dim);letter-spacing:.1em;text-transform:uppercase;}
+.step-trigger-badge{font-family:var(--mono);font-size:7px;color:var(--amber);border:1px solid rgba(240,160,32,.2);padding:2px 8px;background:rgba(240,160,32,.05);letter-spacing:.1em;}
+.step-rule-box{font-family:var(--mono);font-size:10px;color:var(--text);background:var(--faint);border-left:2px solid var(--teal);padding:10px 14px;line-height:1.65;margin-bottom:0;}
+.step-rule-box em{color:var(--teal);font-style:normal;}
+.step-desc{font-size:12px;color:var(--muted);line-height:1.85;margin-bottom:14px;}
+.step-desc strong{color:var(--text);font-weight:500;}
+.step-signals{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px;}
+.step-signal{font-family:var(--mono);font-size:8px;color:var(--muted);border:1px solid var(--border);padding:2px 7px;background:var(--faint);}
+
+/* PRINCIPLES */
+.principle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
+.principle{padding:24px;border:1px solid var(--border);background:var(--card);transition:border-color .2s;}
+.principle:hover{border-color:var(--teal-mid);}
+.p-num{font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.1em;margin-bottom:10px;}
+.p-head{font-size:14px;color:var(--text);font-weight:500;margin-bottom:8px;}
+.p-desc{font-size:12px;color:var(--muted);line-height:1.75;}
+.p-rule{font-family:var(--mono);font-size:9px;color:var(--teal);border-top:1px solid var(--border);padding-top:10px;margin-top:12px;line-height:1.5;}
+
+/* FAILURE TAXONOMY */
+.tax-table{border:1px solid var(--border);overflow:hidden;}
+.tax-head{display:grid;grid-template-columns:180px 1fr 1fr 120px;gap:0;background:var(--surface);border-bottom:1px solid var(--border);}
+.tax-head-cell{font-family:var(--mono);font-size:8px;color:var(--dim);letter-spacing:.15em;text-transform:uppercase;padding:10px 14px;border-right:1px solid var(--border);}
+.tax-head-cell:last-child{border-right:none;}
+.tax-row{display:grid;grid-template-columns:180px 1fr 1fr 120px;gap:0;border-bottom:1px solid var(--border);transition:background .2s;}
+.tax-row:last-child{border-bottom:none;}
+.tax-row:hover{background:var(--faint);}
+.tax-cell{padding:14px;border-right:1px solid var(--border);font-size:11px;color:var(--muted);line-height:1.6;}
+.tax-cell:first-child{font-family:var(--mono);font-size:9px;color:var(--text);font-weight:500;}
+.tax-cell:last-child{border-right:none;}
+.tax-sev{font-family:var(--mono);font-size:8px;padding:2px 8px;letter-spacing:.08em;}
+.tax-sev.hard{color:var(--red);border:1px solid rgba(240,64,96,.2);background:rgba(240,64,96,.06);}
+.tax-sev.warn{color:var(--amber);border:1px solid rgba(240,160,32,.2);background:rgba(240,160,32,.05);}
+
+/* MODE BLOCKS */
+.mode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.mode-block{background:var(--bg);padding:28px 24px;transition:background .2s;}
+.mode-block:hover{background:var(--faint);}
+.mode-label{font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;}
+.mode-heading{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.mode-sub{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--muted);font-style:italic;margin-bottom:14px;}
+.mode-rule{font-size:12px;color:var(--muted);line-height:1.75;padding-top:14px;border-top:1px solid var(--border);}
+
+@media(max-width:900px){
+  .step-row{grid-template-columns:40px 1fr;}
+  .step-right{display:none;}
+  .tax-head,.tax-row{grid-template-columns:140px 1fr 80px;}
+  .tax-head-cell:nth-child(3),.tax-cell:nth-child(3){display:none;}
+  .mode-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="cur-dot"></div>
+
+<header id="topbar">
+  <a class="tb-id" href="index.html">EBO // EVAL</a>
+  <nav><ul class="tb-nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="system.html">System</a></li>
+    <li><a href="artifacts.html">Artifacts</a></li>
+    <li><a href="cv.html">CV</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul></nav>
+  <div class="tb-right">
+    <div class="tb-pill"><div class="tb-pulse"></div>Available · Remote</div>
+    <button id="theme-toggle" title="Toggle light/dark mode">☀</button>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <div class="page-eyebrow">Evaluation System</div>
+    <h1 class="page-h1">The 8-step<br><em>evaluation loop</em></h1>
+    <p class="page-sub">Every AI output evaluated through the same reproducible system. No impressionism. No anchor bias. No rubric theatre. Decision visible in the first sentence of every output.</p>
+  </div>
+</div>
+
+<!-- 8-STEP LOOP -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-tag" data-n="01">Methodology</div>
+        <h2>Step-by-step<br><em>evaluation protocol</em></h2>
+      </div>
+    </div>
+    <div class="step-grid reveal">
+
+      <div class="step-row">
+        <div class="step-num-cell"><span class="step-num">01</span><div class="step-teal-dot"></div></div>
+        <div class="step-left">
+          <div class="step-name">Anchor</div>
+          <div class="step-badge-row"><span class="step-badge">Always Run</span></div>
+          <div class="step-rule-box"><em>Rule →</em> If the anchor is wrong, everything downstream is wrong.</div>
+        </div>
+        <div class="step-right">
+          <div class="step-desc">Strip the prompt to what must be true. Extract the core requirement, constraints, format, exclusions, and failure boundary before evaluating anything.<br><br><strong>This is not a skim.</strong> Missing a constraint at this stage means the entire evaluation is built on a wrong foundation.</div>
+          <div class="step-signals"><span class="step-signal">Core requirement</span><span class="step-signal">Explicit constraints</span><span class="step-signal">Format requirements</span><span class="step-signal">Exclusions</span><span class="step-signal">Failure boundary</span></div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-cell"><span class="step-num">02</span><div class="step-teal-dot"></div></div>
+        <div class="step-left">
+          <div class="step-name">Instruction Check</div>
+          <div class="step-badge-row"><span class="step-badge">Always Run</span></div>
+          <div class="step-rule-box"><em>Rule →</em> Clear instruction miss = failure. No rehabilitation.</div>
+        </div>
+        <div class="step-right">
+          <div class="step-desc">Did the response do exactly that? Scan for missed constraints, wrong format, added assumptions, violated exclusions.<br><br>A response that executes every keyword while violating the instruction's intent is still a failure. The test is not "did it try?" — it's "did it do the thing?"</div>
+          <div class="step-signals"><span class="step-signal">Missed constraints</span><span class="step-signal">Wrong format</span><span class="step-signal">Added assumptions</span><span class="step-signal">Violated exclusions</span><span class="step-signal">Intent vs literal</span></div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-cell"><span class="step-num">03</span><div class="step-teal-dot"></div></div>
+        <div class="step-left">
+          <div class="step-name">Reality Check</div>
+          <div class="step-badge-row"><span class="step-badge">Conditional</span><span class="step-trigger-badge">Trigger: precise claims</span></div>
+          <div class="step-rule-box"><em>Rule →</em> One confirmed hallucination overrides everything else.</div>
+        </div>
+        <div class="step-right">
+          <div class="step-desc">Test every factual claim: entailed by the task = valid. Merely compatible with the task = hallucination flag.<br><br>Confident framing is not evidence. Suspicious specificity always triggers this step.</div>
+          <div class="step-signals"><span class="step-signal">False precision</span><span class="step-signal">Plausible but ungrounded</span><span class="step-signal">Confident framing</span><span class="step-signal">Named entity claims</span><span class="step-signal">Numeric distortion</span></div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-cell"><span class="step-num">04</span><div class="step-teal-dot"></div></div>
+        <div class="step-left">
+          <div class="step-name">Logic Check</div>
+          <div class="step-badge-row"><span class="step-badge">Conditional</span><span class="step-trigger-badge">After Step 3</span></div>
+          <div class="step-rule-box"><em>Rule →</em> Correct answer + broken reasoning = reasoning failure.</div>
+        </div>
+        <div class="step-right">
+          <div class="step-desc">Evaluate reasoning only on facts that pass Step 3. A correct answer produced by broken reasoning is a <strong>reasoning failure</strong>. A wrong answer from valid reasoning is a <strong>factual failure</strong>.<br><br>If Step 3 fails, Step 4 only documents downstream damage.</div>
+          <div class="step-signals"><span class="step-signal">Premise validity</span><span class="step-signal">Inference chain</span><span class="step-signal">Conclusion alignment</span><span class="step-signal">Step 3 dependency</span></div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-cell"><span class="step-num">05</span><div class="step-teal-dot"></div></div>
+        <div class="step-left">
+          <div class="step-name">Ambiguity Check</div>
+          <div class="step-badge-row"><span class="step-badge">Conditional</span><span class="step-trigger-badge">Trigger: conflicting constraints</span></div>
+          <div class="step-rule-box"><em>Rule →</em> Silent assumption = failure. Explicit assumption = acceptable minimum.</div>
+        </div>
+        <div class="step-right">
+          <div class="step-desc">Would another annotator read this the same way? Classify ambiguity as prompt-level or interpretation-level.<br><br><strong>No ambiguity → don't invent it. Silent assumption → failure. Explicit assumption → acceptable minimum.</strong></div>
+          <div class="step-signals"><span class="step-signal">Prompt-level ambiguity</span><span class="step-signal">Interpretation-level</span><span class="step-signal">Silent assumptions</span><span class="step-signal">Conflicting constraints</span><span class="step-signal">Defensible interpretation</span></div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-cell"><span class="step-num">06</span><div class="step-teal-dot"></div></div>
+        <div class="step-left">
+          <div class="step-name">Root Cause</div>
+          <div class="step-badge-row"><span class="step-badge">Conditional</span><span class="step-trigger-badge">Trigger: multiple failures</span></div>
+          <div class="step-rule-box"><em>Rule →</em> The root cause is the earliest failure in the loop. One fix.</div>
+        </div>
+        <div class="step-right">
+          <div class="step-desc">When multiple failures are present, the root cause is the earliest failure in the evaluation loop.<br><br><strong>Do not list symptoms. Name the cause.</strong> If your root cause cannot be expressed as a single fix, it is not the root cause — keep tracing upstream.</div>
+          <div class="step-signals"><span class="step-signal">First failure point</span><span class="step-signal">Cascade attribution</span><span class="step-signal">Single-fix test</span><span class="step-signal">Primary vs secondary cause</span></div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-cell"><span class="step-num">07</span><div class="step-teal-dot"></div></div>
+        <div class="step-left">
+          <div class="step-name">The Call</div>
+          <div class="step-badge-row"><span class="step-badge">Always Run</span></div>
+          <div class="step-rule-box"><em>Rule →</em> Partial fulfillment of core requirement = task failure.</div>
+        </div>
+        <div class="step-right">
+          <div class="step-desc">Make a single, decisive judgment. Classify internally: reliable / usable with weakness / unreliable.<br><br>Do not expose the classification in output. Partial fulfillment of the core requirement is task failure unless the remaining gap doesn't affect usability.<br><br>Epistemic and semantic uncertainty are valid. Normative disagreement is not.</div>
+          <div class="step-signals"><span class="step-signal">Reliable</span><span class="step-signal">Usable with weakness</span><span class="step-signal">Unreliable</span><span class="step-signal">Usability gap test</span></div>
+        </div>
+      </div>
+
+      <div class="step-row">
+        <div class="step-num-cell"><span class="step-num">08</span><div class="step-teal-dot"></div></div>
+        <div class="step-left">
+          <div class="step-name">Write It</div>
+          <div class="step-badge-row"><span class="step-badge">Always Run</span></div>
+          <div class="step-rule-box"><em>Rule →</em> Decision visible in lead sentence. No rubric language.</div>
+        </div>
+        <div class="step-right">
+          <div class="step-desc">One paragraph. Decision visible in the lead sentence. Include what the response did, the root issue if any, and why it matters.<br><br><strong>1–2 core judgments only. No cataloging.</strong> No rubric language. No visible scoring structure. The decision must be instantly verifiable from the first sentence.</div>
+          <div class="step-signals"><span class="step-signal">Decision-first</span><span class="step-signal">Root issue if any</span><span class="step-signal">Why it matters</span><span class="step-signal">No structure exposed</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CORE PRINCIPLES -->
+<section class="sec sec-dark" id="principles">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-tag" data-n="02">Core Principles</div>
+        <h2>What the system<br><em>is built on</em></h2>
+      </div>
+    </div>
+    <div class="principle-grid reveal">
+      <div class="principle">
+        <div class="p-num">P-01</div>
+        <div class="p-head">Decision First</div>
+        <div class="p-desc">The most important judgment appears in the first sentence. Everything after is support. Readers should never have to hunt for the verdict.</div>
+        <div class="p-rule">Burying the decision is itself a quality failure.</div>
+      </div>
+      <div class="principle">
+        <div class="p-num">P-02</div>
+        <div class="p-head">Constraint Hierarchy Is Not Negotiable</div>
+        <div class="p-desc">Explicit constraints evaluated before response quality. A fluent, helpful response that violates an explicit exclusion is rejected. Fluency does not rehabilitate a constraint violation.</div>
+        <div class="p-rule">Operator-layer constraints > user-layer preferences.</div>
+      </div>
+      <div class="principle">
+        <div class="p-num">P-03</div>
+        <div class="p-head">One Confirmed Hallucination Overrides Everything</div>
+        <div class="p-desc">A single verified fabrication — regardless of the quality of the rest — is an automatic reject. Confident framing is not evidence. Suspicious specificity triggers explicit verification.</div>
+        <div class="p-rule">Entailed by the task ≠ merely compatible with it.</div>
+      </div>
+      <div class="principle">
+        <div class="p-num">P-04</div>
+        <div class="p-head">Root Cause, Not Symptom Catalogue</div>
+        <div class="p-desc">When multiple failures are present, the root cause is the earliest failure in the loop. Downstream failures are consequences, not co-equal failures. One fix traces to one cause.</div>
+        <div class="p-rule">If it needs multiple fixes, it's not the root cause.</div>
+      </div>
+      <div class="principle">
+        <div class="p-num">P-05</div>
+        <div class="p-head">Path Evaluated, Not Just Destination</div>
+        <div class="p-desc">A correct answer produced by invalid reasoning is a reasoning failure. A wrong answer from valid reasoning is a factual failure. The distinction matters for downstream model training.</div>
+        <div class="p-rule">Correct output + broken reasoning = reasoning failure.</div>
+      </div>
+      <div class="principle">
+        <div class="p-num">P-06</div>
+        <div class="p-head">Downstream Impact Is the Standard</div>
+        <div class="p-desc">Evaluation decisions are made with their downstream effect in mind. A small error that corrupts RLHF training signal is not a small error. The training impact is part of the severity assessment.</div>
+        <div class="p-rule">Assume downstream impact. Small errors are real errors.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAILURE TAXONOMY -->
+<section class="sec" id="taxonomy">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-tag" data-n="03">Failure Taxonomy</div>
+        <h2>Documented<br><em>failure classes</em></h2>
+        <p class="sec-note">30+ recurring failure patterns documented across 1,200+ evaluation tasks.</p>
+      </div>
+    </div>
+    <div class="tax-table reveal">
+      <div class="tax-head">
+        <div class="tax-head-cell">Failure Class</div>
+        <div class="tax-head-cell">What It Looks Like</div>
+        <div class="tax-head-cell">Detection Method</div>
+        <div class="tax-head-cell">Severity</div>
+      </div>
+      <div class="tax-row">
+        <div class="tax-cell">Explicit Constraint Override</div>
+        <div class="tax-cell">Operator-layer rule clearly stated in system context — user-turn response violates it. Often fluent and otherwise high-quality.</div>
+        <div class="tax-cell">Step 1 anchor captures constraint. Step 2 checks for it before quality evaluation begins.</div>
+        <div class="tax-cell"><span class="tax-sev hard">Hard Fail</span></div>
+      </div>
+      <div class="tax-row">
+        <div class="tax-cell">Entailment-Gap Hallucination</div>
+        <div class="tax-cell">Claim contextually plausible, specific, and confidently stated — but not grounded in prompt. Classic "confident fabrication."</div>
+        <div class="tax-cell">Step 3: is this claim entailed by the task? Or merely compatible with it?</div>
+        <div class="tax-cell"><span class="tax-sev hard">Hard Fail</span></div>
+      </div>
+      <div class="tax-row">
+        <div class="tax-cell">Premise-Level Reasoning Error</div>
+        <div class="tax-cell">Reasoning chain begins from a flawed or unverified premise. Conclusion may appear correct. The error is upstream.</div>
+        <div class="tax-cell">Step 4 only after Step 3 passes. Evaluate the inference chain independently of the destination.</div>
+        <div class="tax-cell"><span class="tax-sev hard">Hard Fail</span></div>
+      </div>
+      <div class="tax-row">
+        <div class="tax-cell">Silent Assumption Injection</div>
+        <div class="tax-cell">Genuine ambiguity in prompt — model resolves it by choosing an interpretation without flagging it. The assumption is never stated.</div>
+        <div class="tax-cell">Step 5: would another annotator read this the same way? If no, was the assumption stated?</div>
+        <div class="tax-cell"><span class="tax-sev hard">Hard Fail</span></div>
+      </div>
+      <div class="tax-row">
+        <div class="tax-cell">Instruction-Intent Gap</div>
+        <div class="tax-cell">All keywords technically executed. Core intent of the instruction violated. Passes a keyword-scan; fails an intent-scan.</div>
+        <div class="tax-cell">Step 2: literal vs intent evaluation. "Did it do the thing?" not "did it try?"</div>
+        <div class="tax-cell"><span class="tax-sev hard">Hard Fail</span></div>
+      </div>
+      <div class="tax-row">
+        <div class="tax-cell">Visual Grounding Failure (Multimodal)</div>
+        <div class="tax-cell">Fluent, coherent image description that misrepresents entities, spatial relationships, or attributes. Invisible to text-only evaluation.</div>
+        <div class="tax-cell">Dual-layer protocol: text coherence evaluated independently from visual grounding accuracy.</div>
+        <div class="tax-cell"><span class="tax-sev hard">Hard Fail</span></div>
+      </div>
+      <div class="tax-row">
+        <div class="tax-cell">Training Data Distribution Bias</div>
+        <div class="tax-cell">Systematic quality gap between knowledge domains — Western domains scoring significantly higher than matched non-Western prompts.</div>
+        <div class="tax-cell">Parallel prompt battery: matched prompts across regions with identical rubrics. Track quality variance by domain.</div>
+        <div class="tax-cell"><span class="tax-sev warn">Systemic Flag</span></div>
+      </div>
+      <div class="tax-row">
+        <div class="tax-cell">Schema Drift (Data Ops)</div>
+        <div class="tax-cell">Cross-batch labelling inconsistency with no hard errors. Passes per-entry quality checks. Fails cross-batch consistency audit.</div>
+        <div class="tax-cell">Cross-batch consistency mapping. Per-entry accuracy is insufficient — cross-batch standard required.</div>
+        <div class="tax-cell"><span class="tax-sev warn">Silent Corruption</span></div>
+      </div>
+      <div class="tax-row">
+        <div class="tax-cell">Weak Reasoning (Recoverable)</div>
+        <div class="tax-cell">Reasoning path is weaker than it needs to be but conclusion is still defensible. Not a reasoning failure — a confidence qualifier.</div>
+        <div class="tax-cell">Step 4: is the conclusion still defensible given the reasoning quality? Affects confidence rating only.</div>
+        <div class="tax-cell"><span class="tax-sev warn">Confidence Qualifier</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALIBRATION MODES -->
+<section class="sec sec-dark" id="modes">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-tag" data-n="04">Calibration</div>
+        <h2>Evaluation modes<br><em>by environment</em></h2>
+      </div>
+    </div>
+    <div class="mode-grid reveal">
+      <div class="mode-block">
+        <div class="mode-label">High-Speed Environments</div>
+        <div class="mode-heading">Rapid</div>
+        <div class="mode-sub">execution</div>
+        <div class="mode-rule">Fast, consistent decisions. Obvious failures caught immediately. Ambiguous cases escalated, not guessed. Compressed output format — decision always in first sentence.</div>
+      </div>
+      <div class="mode-block">
+        <div class="mode-label">Structured Workflows</div>
+        <div class="mode-heading">Guideline</div>
+        <div class="mode-sub">aligned</div>
+        <div class="mode-rule">Guideline-aligned outputs with clear justification traceable to specific rubric criteria. Ambiguity surfaced only when it affects interpretation. Weak reasoning flagged when it affects output confidence rating.</div>
+      </div>
+      <div class="mode-block" style="background:var(--faint);">
+        <div class="mode-label" style="color:var(--teal);">High-Stakes · Primary Mode</div>
+        <div class="mode-heading">Deep</div>
+        <div class="mode-sub">scrutiny</div>
+        <div class="mode-rule">Full 8-step loop. All failure classes tested. Root cause traced, not symptoms listed. Downstream training impact assessed for every decision. No rubric language in output. Decision visible in first sentence.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-left">© 2026 Ebubechukwu Okeke · AI Evaluation &amp; QA Specialist · Remote Global</div>
+  <div class="ft-right">
+    <a href="index.html">Home</a>
+    <a href="artifacts.html">Artifacts</a>
+    <a href="cv.html">CV</a>
+    <a href="https://www.linkedin.com/in/ebubeco" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:charlesgigz7@gmail.com">Email</a>
+  </div>
+</footer>
+
+<button id="ai-chat-btn" title="Ask about Ebube's work">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+  <div class="btn-pulse"></div>
+</button>
+<div id="ai-panel">
+  <div class="ai-panel-head">
+    <div class="ai-head-id">
+      <div class="ai-head-dot"></div>
+      <div><div class="ai-head-name">EVAL ASSISTANT</div><div class="ai-head-sub">Ask about the evaluation system</div></div>
+    </div>
+    <button class="ai-close" id="ai-close">✕</button>
+  </div>
+  <div id="ai-messages" class="ai-messages">
+    <div class="ai-msg bot"><div class="ai-bubble">You're viewing the evaluation system documentation. Ask me about any step, principle, or failure class. What would you like to know?</div><div class="ai-msg-time">now</div></div>
+  </div>
+  <div id="ai-suggestions" class="ai-suggestions">
+    <button class="ai-sug">What is the anchor step?</button>
+    <button class="ai-sug">How are hallucinations detected?</button>
+    <button class="ai-sug">What triggers the ambiguity check?</button>
+  </div>
+  <div class="ai-input-area">
+    <textarea class="ai-input" id="ai-input" placeholder="Ask about the evaluation methodology..." rows="1"></textarea>
+    <button class="ai-send" id="ai-send">Send</button>
+  </div>
+</div>
+
+<script src="/main.js"></script>
+</body>
+</html>
